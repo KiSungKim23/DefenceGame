@@ -14,6 +14,7 @@ namespace Logic
         [Key(1)] public int buffUID;
         [Key(2)] public int buffLevel;
         [Key(3)] public long durationTick;
-        [Key(4)] public float value;
+        [Key(4)] public float value1;
+        [Key(5)] public float value2;
     }
 }
