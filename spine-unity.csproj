@@ -73,8 +73,8 @@
     <Compile Include="Assets\Spine\Runtime\spine-csharp\Skin.cs" />
     <Compile Include="Assets\Spine\Runtime\spine-unity\Utility\SkeletonExtensions.cs" />
     <Compile Include="Assets\Spine\Runtime\spine-unity\Mesh Generation\MeshGenerator.cs" />
-    <Compile Include="Assets\Spine\Runtime\spine-csharp\AnimationState.cs" />
     <Compile Include="Assets\Spine\Runtime\spine-csharp\BoneData.cs" />
+    <Compile Include="Assets\Spine\Runtime\spine-csharp\AnimationState.cs" />
     <Compile Include="Assets\Spine\Runtime\spine-unity\Components\RootMotion\SkeletonMecanimRootMotion.cs" />
     <Compile Include="Assets\Spine\Runtime\spine-unity\Components\SkeletonMecanim.cs" />
     <Compile Include="Assets\Spine\Runtime\spine-unity\Components\RootMotion\SkeletonRootMotionBase.cs" />
