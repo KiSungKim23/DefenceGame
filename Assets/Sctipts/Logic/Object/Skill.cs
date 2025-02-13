@@ -8,7 +8,6 @@ namespace Logic
         SkillInfoData _skillInfo;
 
         long _activeTick;
-        long _createTick;
 
         List<BuffInfo> buffInfoList = new List<BuffInfo>();
 

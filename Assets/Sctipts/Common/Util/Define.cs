@@ -31,6 +31,14 @@ public class Define
         GameScene,
     }
 
+    public  enum UnitGrade
+    {
+        Normal,
+        Hero,
+        Unique,
+        Legend
+    }
+
     public enum MonsterState
     {
         wait = 0,
@@ -60,7 +68,8 @@ public class Define
 
     public enum SkillType
     {
-        Attack = 1, //이건 나중에 스킬 하나 하나 만든것들 전부 넣으면 될듯 ex) FireBall 뭐 이런 느낌
+        None = 0, //이건 나중에 스킬 하나 하나 만든것들 전부 넣으면 될듯 ex) FireBall 뭐 이런 느낌
+        Attack = 1, 
         Slow = 2,
         Stun = 3, 
     }

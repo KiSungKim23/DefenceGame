@@ -60,6 +60,7 @@
     <Analyzer Include="C:\Program Files\2022.3.31f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Sctipts\Logic\Core\DataManager\ScriptClass\SkillBuffInfoScript.cs" />
     <Compile Include="Assets\Sctipts\Logic\Manager\UnitManager.cs" />
     <Compile Include="Assets\LINQtoGameObject\Examples\SampleSceneScript.cs" />
     <Compile Include="Assets\Sctipts\Unity\Util\Utils.cs" />
@@ -76,6 +77,7 @@
     <Compile Include="Assets\Sctipts\Unity\Scene\BaseScene.cs" />
     <Compile Include="Assets\Sctipts\Logic\Object\Monster.cs" />
     <Compile Include="Assets\Sctipts\Unity\Scene\StartScene.cs" />
+    <Compile Include="Assets\Sctipts\Logic\Core\DataManager\ScriptClass\SkillInfoScript.cs" />
     <Compile Include="Assets\Sctipts\Logic\Section.cs" />
     <Compile Include="Assets\Sctipts\Common\Util\Define.cs" />
     <Compile Include="Assets\Sctipts\Unity\Object\MonsterObject.cs" />
@@ -87,6 +89,7 @@
     <Compile Include="Assets\Sctipts\Logic\Object\Buff.cs" />
     <Compile Include="Assets\Sctipts\Unity\Object\SectionObject.cs" />
     <Compile Include="Assets\LINQtoGameObject\Scripts\GameObjectExtensions.Enumerable.cs" />
+    <Compile Include="Assets\Sctipts\Logic\Core\DataManager\ScriptClass\UnitInfoScript.cs" />
     <Compile Include="Assets\Sctipts\Logic\SkillInfoData.cs" />
     <Compile Include="Assets\Sctipts\Unity\Managers\DataManagers\DataManager.Core.cs" />
     <Compile Include="Assets\Sctipts\Unity\UI\UniIcon.cs" />
