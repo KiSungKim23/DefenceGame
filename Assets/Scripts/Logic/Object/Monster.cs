@@ -262,7 +262,7 @@ namespace Logic
         private float GetMonsterMovingDistance(long updateTick)
         {
 
-            float currentBuffValue = _buffList.Where(_ => _.GetEndTick() > _currentTick).Sum(_ => _.GetValue());
+            float currentBuffValue = _buffList.Where(_ => _.GetEndTick() > _currentTick).Sum(_ => _.GetValue1());
             var buffList = _buffList.OrderBy(_ => _.GetEndTick()).Where(_ => _.GetEndTick() > _currentTick).ToList();
 
             long buffEndTick = 0;
@@ -283,7 +283,7 @@ namespace Logic
 
                 ret += (buffEndTick - tempTick) * speed * Define.SpeedScaleFactor;
                 tempTick = buffEndTick;
-                currentBuffValue -= buff.GetValue();
+                currentBuffValue -= buff.GetValue1();
             }
 
             return ret == 0 ? (updateTick - _currentTick) * _speed * Define.SpeedScaleFactor : ret;
@@ -295,7 +295,7 @@ namespace Logic
             long currentTick = startTick;
             float distanceTemp = distance;
 
-            float currentBuffValue = _buffList.Where(_ => _.GetEndTick() > startTick).Sum(_ => _.GetValue());
+            float currentBuffValue = _buffList.Where(_ => _.GetEndTick() > startTick).Sum(_ => _.GetValue1());
             List<Buff> buffList = _buffList.Where(_ => _.GetEndTick() > startTick).OrderBy(_ => _.GetEndTick()).ToList();
 
             if (buffList.Count == 0)
@@ -326,7 +326,7 @@ namespace Logic
                     distanceTemp -= MovementDistance ;
                     currentTick = buffEndTick;
 
-                    currentBuffValue -= buff.GetValue();
+                    currentBuffValue -= buff.GetValue1();
                 }
             }
 

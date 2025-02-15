@@ -17,7 +17,7 @@ namespace Client
         public RectTransform rectTransform;
         private bool isHolding = false;
 
-        private Logic.UnitInfoData _unitInfo;
+        private Logic.UnitData _unitInfo;
         private SectionButton _activeUnitButton;
 
         // Start is called before the first frame update
@@ -42,7 +42,7 @@ namespace Client
                 }).AddTo(this);
         }
 
-        public void SetData(UnitOptionButton parent, Logic.UnitInfoData unitInfo, SectionButton activeUnitData = null)
+        public void SetData(UnitOptionButton parent, Logic.UnitData unitInfo, SectionButton activeUnitData = null)
         {
             _parent = parent;
             _unitInfo = unitInfo;

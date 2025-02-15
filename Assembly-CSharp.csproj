@@ -73,10 +73,10 @@
     <Compile Include="Assets\Scripts\Logic\Object\Monster.cs" />
     <Compile Include="Assets\Scripts\Logic\Object\Buff.cs" />
     <Compile Include="Assets\Scripts\Unity\Scene\StartScene.cs" />
+    <Compile Include="Assets\Scripts\Logic\UnitData.cs" />
     <Compile Include="Assets\Scripts\Unity\Managers\DataManagers\DataManager.Core.cs" />
     <Compile Include="Assets\Scripts\Unity\Managers\DataManagers\DataManager.MonsterInfo.cs" />
     <Compile Include="Assets\Scripts\Logic\Object\Object.cs" />
-    <Compile Include="Assets\Scripts\Logic\SkillInfoData.cs" />
     <Compile Include="Assets\Scripts\Logic\Core\DataManager\IDataManager.cs" />
     <Compile Include="Assets\Scripts\Logic\Object\Skill.cs" />
     <Compile Include="Assets\Scripts\Unity\UI\ScrollViewBase.cs" />
@@ -86,7 +86,6 @@
     <Compile Include="Assets\Scripts\Unity\Scene\ResourceReleaseSceneInit.cs" />
     <Compile Include="Assets\Scripts\Common\Util\Define.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
-    <Compile Include="Assets\Scripts\Logic\BuffInfo.cs" />
     <Compile Include="Assets\Scripts\Unity\Object\MonsterObject.cs" />
     <Compile Include="Assets\Scripts\Logic\Core\BaseRandomProbabiltty.cs" />
     <Compile Include="Assets\Scripts\Logic\Core\DataManager\ScriptClass\MonsterInfoScript.cs" />
@@ -109,7 +108,6 @@
     <Compile Include="Assets\Scripts\Unity\Managers\DataManagers\DataManager.SkillBuffInfo.cs" />
     <Compile Include="Assets\Scripts\Unity\UI\GamePannal.cs" />
     <Compile Include="Assets\Scripts\Logic\Core\DataManager\ScriptClass\UnitUnionInfoScript.cs" />
-    <Compile Include="Assets\Scripts\Logic\UnitIInfoData.cs" />
     <Compile Include="Assets\Scripts\Unity\UI\UniIcon.cs" />
     <Compile Include="Assets\Scripts\Logic\Core\DataManager\ScriptClass\UnitInfoScript.cs" />
   </ItemGroup>

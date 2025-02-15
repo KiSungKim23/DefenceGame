@@ -9,7 +9,7 @@ namespace Client
 {
     public class UnitIcon : MonoBehaviour
     {
-        private Logic.UnitInfoData _unitData;
+        private Logic.UnitData _unitData;
 
         public Button optionActiveBtn;
         public TextMeshProUGUI countText;
@@ -44,7 +44,7 @@ namespace Client
             }
         }
 
-        public void SetUnitInfo(Logic.UnitInfoData data)
+        public void SetUnitInfo(Logic.UnitData data)
         {
             _unitData = data;
 

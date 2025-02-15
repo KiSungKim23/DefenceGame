@@ -7,10 +7,10 @@ namespace Logic
     {
         long _tick = 0;
 
-        public Dictionary<int, UnitInfoData> _allUnit = new Dictionary<int, UnitInfoData>();
+        public Dictionary<int, UnitData> _allUnit = new Dictionary<int, UnitData>();
         public List<Unit> _activeUnit = new List<Unit>();
 
-        public Dictionary<int, UnitInfoData> AllUnit { get { return _allUnit; } }
+        public Dictionary<int, UnitData> AllUnit { get { return _allUnit; } }
         public List<Unit> ActiveUnit { get { return _activeUnit; } }
 
         private int _objectIndex = 0;
@@ -32,7 +32,7 @@ namespace Logic
             _tick = Tick;
         }
 
-        public Unit SetUnitActive(UnitInfoData unitInfo, (int, int) section, long createTime)
+        public Unit SetUnitActive(UnitData unitInfo, (int, int) section, long createTime)
         {
             if (unitInfo.CheckUnitActive() && CheckUnitSet(section))
             {
@@ -67,7 +67,7 @@ namespace Logic
             //랜덤으로 줘야하는데 일단은 테스트 용이니까 2종류만 주자 1 -> 딜 2 -> 속박으로 세팅해서 작업 ㄱㄱ 
             //나중에 long으로 4개 놓고 비트연산 해서 고정으로 랜덤 테이블 갖는거 만들거임
 
-            List<UnitInfoData> retList = new List<UnitInfoData>();
+            List<UnitData> retList = new List<UnitData>();
 
             if (stageLevel == 0)
             {
@@ -90,7 +90,7 @@ namespace Logic
 
         public void AddUnitInfo(int UID)
         {
-            UnitInfoData actionData = null;
+            UnitData actionData = null;
 
             if (_allUnit.TryGetValue(UID, out var unitInfo))
             {
@@ -101,7 +101,7 @@ namespace Logic
             }
             else
             {
-                actionData = new UnitInfoData(UID);
+                actionData = new UnitData(UID);
                 _allUnit.Add(UID, actionData);
             }
 
@@ -158,6 +158,40 @@ namespace Logic
             StageLogic.Instance.ActiveUnitRemoved.Invoke(removeUnit);
             removeUnit.Clear();
             _activeUnit.Remove(removeUnit);
+        }
+
+        public bool ChckCanUnion(UnitUnionInfoScript unionInfo)
+        {
+            Dictionary<int, int> metarialInfo = new Dictionary<int, int>();
+
+            metarialInfo.Add(unionInfo.mainMaterialUID, 1);
+            if (unionInfo.materail2UID != 0)
+            {
+                if (metarialInfo.TryGetValue(unionInfo.materail2UID, out var count)) metarialInfo[unionInfo.materail2UID] = count + 1;
+                else metarialInfo.Add(unionInfo.materail2UID, 1);
+            }
+            if (unionInfo.materail3UID != 0)
+            {
+                if (metarialInfo.TryGetValue(unionInfo.materail3UID, out var count)) metarialInfo[unionInfo.materail3UID] = count + 1;
+                else metarialInfo.Add(unionInfo.materail3UID, 1);
+            }
+            if (unionInfo.materail4UID != 0)
+            {
+                if (metarialInfo.TryGetValue(unionInfo.materail4UID, out var count)) metarialInfo[unionInfo.materail4UID] = count + 1;
+                else metarialInfo.Add(unionInfo.materail4UID, 1);
+            }
+            if (unionInfo.materail5UID != 0)
+            {
+                if (metarialInfo.TryGetValue(unionInfo.materail5UID, out var count)) metarialInfo[unionInfo.materail5UID] = count + 1;
+                else metarialInfo.Add(unionInfo.materail5UID, 1);
+            }
+            if (unionInfo.materail6UID != 0)
+            {
+                if (metarialInfo.TryGetValue(unionInfo.materail6UID, out var count)) metarialInfo[unionInfo.materail6UID] = count + 1;
+                else metarialInfo.Add(unionInfo.materail6UID, 1);
+            }
+
+            return false;
         }
 
     }

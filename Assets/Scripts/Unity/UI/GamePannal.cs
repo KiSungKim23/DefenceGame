@@ -127,7 +127,7 @@ namespace Client
 
         }
 
-        public void CreateUnitButton(Logic.UnitInfoData unitInfo)
+        public void CreateUnitButton(Logic.UnitData unitInfo)
         {
             GameObject monsterObject = Managers.Resource.Instantiate(unitIconButtonObject.gameObject, unitButtonContent.transform);
 

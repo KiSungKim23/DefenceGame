@@ -2,7 +2,6 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using UnityEngine;
 
 namespace Client
@@ -10,7 +9,7 @@ namespace Client
 
     public partial class DataManager : Logic.IDataManager
     {
-        private Dictionary<int , Logic.UnitUnionInfoScript> _unitunioninfoDictionary = new Dictionary<int , Logic.UnitUnionInfoScript>();
+        private List< Logic.UnitUnionInfoScript> _unitunioninfoList = new List< Logic.UnitUnionInfoScript>();
 
         public void LoadUnitUnionInfoScript()
         {
@@ -19,10 +18,7 @@ namespace Client
             if (File.Exists(filePath))
             {
                 string json = File.ReadAllText(filePath);
-
-                List<Logic.UnitUnionInfoScript> dataList = JsonConvert.DeserializeObject<List<Logic.UnitUnionInfoScript>>(json);
-
-                _unitunioninfoDictionary = dataList.ToDictionary(_ => _.unitUID);
+                _unitunioninfoList = JsonConvert.DeserializeObject<List<Logic.UnitUnionInfoScript>>(json);
             }
             else
             {
@@ -30,18 +26,9 @@ namespace Client
             }
         }
 
-        public Dictionary<int , Logic.UnitUnionInfoScript> GetUnitUnionInfoScriptDictionaryAll()
+        public List<Logic.UnitUnionInfoScript> GetUnitUnionInfoScriptListAll()
         {
-            return _unitunioninfoDictionary;
-        }
-
-        public Logic.UnitUnionInfoScript GetUnitUnionInfoScriptDictionary(int keyData)
-        {
-            if(_unitunioninfoDictionary.TryGetValue(keyData, out var ret))
-            {
-                return ret;
-            }
-            return null;
+            return _unitunioninfoList;
         }
     }
 }

@@ -5,39 +5,31 @@ namespace Logic
 {
     public class Skill
     {
-        SkillInfoData _skillInfo;
+        SkillInfoScript _skillInfo;
 
         long _activeTick;
 
-        List<BuffInfo> buffInfoList = new List<BuffInfo>();
+        List<BuffInfoScript> _buffInfoList = new List<BuffInfoScript>();
 
         int _damage;
         long _durationTick;
 
         bool _acktive;
 
-        public Skill(SkillInfoData skillInfo, long createTick)
+        public Skill(SkillInfoScript skillInfo, long createTick)
         {
             _skillInfo = skillInfo;
             _acktive = false;
 
-            switch (_skillInfo.GetSkillType())
+            var skillBuffList = StageLogic.Data.GetSkillBuffInfoScriptListAll().FindAll(_ => _.skillType == _skillInfo.skillType);
+
+            foreach (var buffInfo in skillBuffList)
             {
-                case Define.SkillType.Attack:
-                    _damage = 20 * skillInfo.GetSkillLevel();
-                    _durationTick = 0;// Define.OneSecondTick / 4;
-                    break;
-                case Define.SkillType.Slow:
-                    _damage = 0 * skillInfo.GetSkillLevel();
-                    _durationTick = 0;// Define.OneSecondTick / 2;
-                    buffInfoList.Add(new BuffInfo(Define.BuffType.Moving, 1));
-                    break;
-                case Define.SkillType.Stun:
-                    _damage = 20 * skillInfo.GetSkillLevel();
-                    _durationTick = 0;//Define.OneSecondTick / 2;
-                    buffInfoList.Add(new BuffInfo(Define.BuffType.Moving, 100));
-                    break;
+                _buffInfoList.Add(StageLogic.Data.GetBuffInfoScriptDictionary(buffInfo.buffUID));
             }
+
+            _damage = skillInfo.damage;
+            _durationTick = skillInfo.durationTick;
 
             _activeTick = createTick + _durationTick;
         }
@@ -56,7 +48,7 @@ namespace Logic
             {
                 monster.GetDamaged(_damage);
 
-                foreach (var buff in buffInfoList)
+                foreach (var buff in _buffInfoList)
                 {
                     monster.AddBuff(new Buff(buff, _activeTick));
                 }
@@ -65,11 +57,11 @@ namespace Logic
             sectionData.ActiveSkill.Invoke(this);
 
             var deadMonsterList = monsters.FindAll(_ => _.State == Define.MonsterState.dead);
-            foreach(var monster in deadMonsterList)
+            foreach (var monster in deadMonsterList)
             {
                 StageLogic.Instance.SectionDatas[monster.GetSectionIndex()].RemoveSectionMonsterData(monster);
             }
-                
+
         }
 
         public bool CheckActive()

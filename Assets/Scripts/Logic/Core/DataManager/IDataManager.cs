@@ -14,7 +14,6 @@ namespace Logic
             public List<SkillBuffInfoScript> GetSkillBuffInfoScriptListAll();
             public Dictionary<int , Logic.UnitInfoScript> GetUnitInfoScriptDictionaryAll();
             public UnitInfoScript GetUnitInfoScriptDictionary(int keyData);
-            public Dictionary<int , Logic.UnitUnionInfoScript> GetUnitUnionInfoScriptDictionaryAll();
-            public UnitUnionInfoScript GetUnitUnionInfoScriptDictionary(int keyData);
+            public List<UnitUnionInfoScript> GetUnitUnionInfoScriptListAll();
     }
 }

@@ -17,53 +17,51 @@ namespace Logic
 
         public Section _targetSection;
         public long _targetSetTick;
-        private UnitInfoData _unitInfoData;
+        private UnitData _unitData;
 
         private List<Section> _canAttackSectionData = new List<Section>();
         public Action<long> unitAttack;
 
-        private SkillInfoData _unitSkillData;
+        private SkillInfoScript _unitBaseSkillInfo;
+        private List<SkillInfoScript> _unitSkillInfos;
 
         private (int, int) _sectionIndex;
 
-        private float _attackRange;
-        private float _attackSpeed;
+        private UnitInfoScript _unitInfoScript;
+
         private long _canAttackTick;
 
         public long CanAttackTick { get { return _canAttackTick; } }
         public (int, int) SectionIndex { get { return _sectionIndex; } }
 
 
-        public Unit(int objectIndex, UnitInfoData unitInfo, (int, int) section)
+        public Unit(int objectIndex, UnitData unitInfo, (int, int) section)
         {
             _targetSetTick = 0;
             _objectIndex = objectIndex;
             _sectionIndex = section;
-            //uid 기반으로 값 세팅 -> 스킬리스트, 공격 속도 ,공격 범위 
-            //나중에 스크립트 읽는거 만들어서 스크립트 세팅후 메니저를 통해 값 가져오는 걸로
-
-            _unitInfoData = unitInfo;
-            SetStat(unitInfo.GetUID());
+            _unitData = unitInfo;
+            SetScript(unitInfo.GetUID());
             SetWorldPosition();
             CheckCanAttackSection();
         }
 
         public void Update(long currentTick)
         {
-            if(_targetSection != null && StageLogic.Instance.CheckUnitAttack())
+            if (_targetSection != null && StageLogic.Instance.CheckUnitAttack())
             {
-                if(_canAttackTick <= _targetSetTick)
+                if (_canAttackTick <= _targetSetTick)
                 {
                     _canAttackTick = _targetSetTick <= _currentTick ? _targetSetTick : _currentTick;
                 }
 
                 while (_canAttackTick <= currentTick)
                 {
-                    Skill addSkill = new Skill(_unitSkillData, _canAttackTick);
+                    Skill addSkill = new Skill(GetActiveSkill(), _canAttackTick);
                     _targetSection.AddSkill(addSkill);
                     unitAttack.Invoke(_canAttackTick);
 
-                    _canAttackTick += (long)(_attackSpeed * Define.OneSecondTick);
+                    _canAttackTick += (long)(_unitInfoScript.attackSpeed * Define.OneSecondTick);
                 }
                 _currentTick = currentTick;
             }
@@ -82,7 +80,7 @@ namespace Logic
         {
             _currentTick = createTick;
             _state = Define.UnitState.wait;
-            _canAttackTick = createTick + (long)(_attackSpeed * Define.OneSecondTick);
+            _canAttackTick = createTick + (long)(_unitInfoScript.attackSpeed * Define.OneSecondTick);
         }
 
         public void MovePosition((int, int) moveSectionIndex)
@@ -129,7 +127,7 @@ namespace Logic
 
             foreach (var sectionInfo in StageLogic.Instance.SectionDatas)
             {
-                if (Vector3.Distance(_position, sectionInfo.Value.GetSectionWorldPosition()) < _attackRange)
+                if (Vector3.Distance(_position, sectionInfo.Value.GetSectionWorldPosition()) < _unitInfoScript.attackRange)
                 {
                     _canAttackSectionData.Add(sectionInfo.Value);
                     sectionInfo.Value.AddAttackWaitUnit(this);
@@ -141,11 +139,10 @@ namespace Logic
         {
             if (StageLogic.Instance.CheckUnitAttack() && _canAttackTick <= tick)
             {
-                //skill 계산 후 Section에 넣어주기
-                Skill addSkill = new Skill(_unitSkillData, tick);
+                Skill addSkill = new Skill(GetActiveSkill(), tick);
                 sectionData.AddSkill(addSkill);
                 unitAttack.Invoke(tick);
-                _canAttackTick = tick + (long)(_attackSpeed * Define.OneSecondTick);
+                _canAttackTick = tick + (long)(_unitInfoScript.attackSpeed * Define.OneSecondTick);
             }
         }
 
@@ -159,50 +156,24 @@ namespace Logic
             return _objectIndex;
         }
 
-        private void SetStat(int uid)
+        private void SetScript(int uid)
         {
+            _unitInfoScript = StageLogic.Data.GetUnitInfoScriptDictionary(uid);
 
-
-
-            switch(uid)
-            {
-                case 1:
-                    _attackRange = 2f;
-                    _attackSpeed = 2f;
-
-                    _unitSkillData = new SkillInfoData(Define.SkillType.Slow, 1);
-                    break;
-                case 2:
-                    _attackRange = 3f;
-                    _attackSpeed = 2f;
-
-                    _unitSkillData = new SkillInfoData(Define.SkillType.Attack, 1);
-                    break;
-                case 3:
-                    _attackRange = 2f;
-                    _attackSpeed = 1f;
-
-                    _unitSkillData = new SkillInfoData(Define.SkillType.Attack, 1);
-                    break;
-                case 4:
-                    _attackRange = 5f;
-                    _attackSpeed = 1f;
-
-                    _unitSkillData = new SkillInfoData(Define.SkillType.Attack, 1);
-                    break;
-                case 5:
-                    _attackRange = 4f;
-                    _attackSpeed = 1f;
-
-                    _unitSkillData = new SkillInfoData(Define.SkillType.Attack, 1);
-                    break;
-            }
+            _unitBaseSkillInfo = StageLogic.Data.GetSkillInfoScriptDictionary(_unitInfoScript.baseSkillType);
+            _unitSkillInfos = new List<SkillInfoScript>();
+            if (_unitInfoScript.skillType1 != 0)
+                _unitSkillInfos.Add(StageLogic.Data.GetSkillInfoScriptDictionary(_unitInfoScript.skillType1));
+            if (_unitInfoScript.skillType2 != 0)
+                _unitSkillInfos.Add(StageLogic.Data.GetSkillInfoScriptDictionary(_unitInfoScript.skillType2));
+            if (_unitInfoScript.skillType3 != 0)
+                _unitSkillInfos.Add(StageLogic.Data.GetSkillInfoScriptDictionary(_unitInfoScript.skillType3));
 
         }
 
-        public UnitInfoData GetUnitInfoData()
+        public UnitData GetUnitInfoData()
         {
-            return _unitInfoData;
+            return _unitData;
         }
 
         public (int, int) GetSectionIndex()
@@ -217,7 +188,7 @@ namespace Logic
 
         public void RemoveTarget()
         {
-            if(_targetSection != null)
+            if (_targetSection != null)
             {
                 CheckCanAttackSection();
                 _targetSection = null;
@@ -236,6 +207,26 @@ namespace Logic
                 _targetSection = sectionData;
                 _targetSetTick = currentTick;
             }
+        }
+
+        public SkillInfoScript GetActiveSkill()
+        {
+            if(_unitSkillInfos.Count == 0)
+            {
+                return _unitBaseSkillInfo;
+            }
+
+            long probability = StageLogic.Instance.RandomValue;
+            long nowProbability = 0;
+
+            foreach(var skillInfo in _unitSkillInfos)
+            {
+                nowProbability += (long)(skillInfo.probability * Define.MaxRandomValue);
+                if (probability < nowProbability)
+                    return skillInfo;
+            }
+
+            return _unitBaseSkillInfo;
         }
 
     }

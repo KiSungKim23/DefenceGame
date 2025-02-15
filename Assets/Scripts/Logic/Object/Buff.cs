@@ -5,16 +5,18 @@ namespace Logic
 {
     public class Buff
     {
-        BuffInfo _buffInfo;
+        BuffInfoScript _buffInfo;
 
         long _endTick;
-        float _value;
+        float _value1;
+        float _value2;
 
-        public Buff(BuffInfo buffInfo, long createTick)
+        public Buff(BuffInfoScript buffInfo, long createTick)
         {
             _buffInfo = buffInfo;
-            _endTick = createTick + _buffInfo.GetDurationTick();
-            _value = _buffInfo.GetValue();
+            _endTick = createTick + _buffInfo.durationTick;
+            _value1 = _buffInfo.value1;
+            _value2 = _buffInfo.value2;
         }
 
         public long GetEndTick()
@@ -22,10 +24,14 @@ namespace Logic
             return _endTick;
         }
 
-        public float GetValue()
+        public float GetValue1()
         {
-            return _value;
+            return _value1;
         }
 
+        public float GetValue2()
+        {
+            return _value2;
+        }
     }
 }

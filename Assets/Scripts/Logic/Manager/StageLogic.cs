@@ -55,13 +55,13 @@ namespace Logic
         public Action<Monster> MonsterCreated;
         public Action<Unit> ActiveUnitCreated;
         public Action<Unit> ActiveUnitRemoved;
-        public Action<UnitInfoData> UnitCardAdd;
+        public Action<UnitData> UnitCardAdd;
         #endregion
 
         #region system
         private Dictionary<(int, int), Section> _sectionDatas = new Dictionary<(int, int), Section>();
 
-        private List<(long, UnitInfoData, int)> _unionDatas = new List<(long, UnitInfoData, int)>();
+        private List<(long, UnitUnionInfo)> _unionDatas = new List<(long, UnitUnionInfo)>();
 
         private BaseRandomProbabiltty randomProbabiltty;
 
@@ -130,7 +130,7 @@ namespace Logic
                 Unit.Update(_updateTick);
                 SectionUpdate(_updateTick); 
                 
-                UnionUnit();
+                UnionUnit(_updateTick);
             }
         }
 
@@ -197,7 +197,7 @@ namespace Logic
             }
         }
 
-        public bool SetUnit(UnitInfoData unitInfo, (int, int) section, long createTime)
+        public bool SetUnit(UnitData unitInfo, (int, int) section, long createTime)
         {
             var activeUnit = _unit.SetUnitActive(unitInfo, section, createTime);
             if (activeUnit == null)
@@ -226,41 +226,39 @@ namespace Logic
         {
             foreach(var material in unionInfoList.GetMaterials())
             {
-                if (_unit.CheckCanUsingUnit(material.Item1, material.Item2) == false)
+                if (_unit.CheckCanUsingUnit(material.Key, material.Value) == false)
                     return false;
             }
 
             return true;
         }
 
-        public void UnionUnit()
+        public void UnionUnit(long updateTick)
         {
-            var deleteUnionDataList = _unionDatas.FindAll(_ => _.Item1 < _updateTick);
+            var deleteUnionDataList = _unionDatas.FindAll(_ => _.Item1 < updateTick);
             foreach (var uniondata in deleteUnionDataList)
             {
-                UnitUnion(uniondata.Item2, uniondata.Item3);
+                UnitUnion(uniondata.Item2);
                 _unionDatas.Remove(uniondata);
             }
         }
 
-        public void UnitUnion(UnitInfoData unitInfoData, int index)
+        public void UnitUnion(UnitUnionInfo unitInfoData)
         {
-            var unionData = unitInfoData.GetUnitUnionData(index);
-
-            if(unionData != null)
+            if(unitInfoData != null)
             {
-                foreach(var material in unionData.GetMaterials())
+                foreach(var material in unitInfoData.GetMaterials())
                 {
-                    _unit.UsingUnit(material.Item1, material.Item2);
+                    _unit.UsingUnit(material.Key, material.Value);
                 }
 
-                _unit.AddUnitInfo(unionData.GetCreatedUID());
+                _unit.AddUnitInfo(unitInfoData.GetCreatedUID());
             }
         }
 
-        public void AddUnionData(long addTick, UnitInfoData unitdata, int index)
+        public void AddUnionData(long addTick, UnitUnionInfo unitdata)
         {
-            _unionDatas.Add((addTick, unitdata, index));
+            _unionDatas.Add((addTick, unitdata));
         }
 
         public void UpgradeGrade(int upgradeGrade)

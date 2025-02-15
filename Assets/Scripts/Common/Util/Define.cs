@@ -26,6 +26,8 @@ public class Define
 
     static public long OneSecondTick = 10000000;
 
+    static public long MaxRandomValue = 65535;
+
     public enum Scene
     {
         Unknown,

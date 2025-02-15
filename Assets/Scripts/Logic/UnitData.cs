@@ -6,30 +6,44 @@ namespace Logic
 {
     public class UnitUnionInfo
     {
-        List<(int, int)> materials = new List<(int, int)>();
-
+        Dictionary<int, int> materials = new Dictionary<int, int>();
         int createdUID;
 
-        public UnitUnionInfo(int index)
+        public UnitUnionInfo(UnitUnionInfoScript scriptData)
         {
-            createdUID = index + 2;
+            createdUID = scriptData.unitUID;
 
-            switch(createdUID)
+            materials.Add(scriptData.mainMaterialUID, 1);
+
+            if(scriptData.materail2UID != 0)
             {
-                case 3:
-                    materials.Add((1, 1));
-                    materials.Add((2, 1));
-                    break;
-                case 4:
-                    materials.Add((1, 2));
-                    break;
-                case 5:
-                    materials.Add((2, 2));
-                    break;
+                if (materials.ContainsKey(scriptData.materail2UID)) materials[scriptData.materail2UID]++;
+                else materials.Add(scriptData.materail2UID, 1);
             }
+            if (scriptData.materail3UID != 0)
+            {
+                if (materials.ContainsKey(scriptData.materail3UID)) materials[scriptData.materail3UID]++;
+                else materials.Add(scriptData.materail3UID, 1);
+            }
+            if (scriptData.materail4UID != 0)
+            {
+                if (materials.ContainsKey(scriptData.materail4UID)) materials[scriptData.materail4UID]++;
+                else materials.Add(scriptData.materail4UID, 1);
+            }
+            if (scriptData.materail5UID != 0)
+            {
+                if (materials.ContainsKey(scriptData.materail5UID)) materials[scriptData.materail5UID]++;
+                else materials.Add(scriptData.materail5UID, 1);
+            }
+            if (scriptData.materail6UID != 0)
+            {
+                if (materials.ContainsKey(scriptData.materail6UID)) materials[scriptData.materail6UID]++;
+                else materials.Add(scriptData.materail6UID, 1);
+            }
+
         }
 
-        public List<(int, int)> GetMaterials()
+        public Dictionary<int, int> GetMaterials()
         {
             return materials;
         }
@@ -40,7 +54,7 @@ namespace Logic
         }
     }
 
-    public class UnitInfoData
+    public class UnitData
     {
         private int _uid;
 
@@ -50,21 +64,18 @@ namespace Logic
 
         private Dictionary<int, UnitUnionInfo> _unitUnionInfo = new Dictionary<int, UnitUnionInfo>();
 
-        public UnitInfoData(int uid)
+        public UnitData(int uid)
         {
             _uid = uid;
             _count = 1;
             _activeCount = 0;
 
-            //_unitUnionInfo = Managers.Data.GetUnionList(uid);
+            var unionScriptList = StageLogic.Data.GetUnitUnionInfoScriptListAll().FindAll(_=>_.mainMaterialUID == _uid);
 
-            _unitUnionInfo.Add(1, new UnitUnionInfo(1));
-            _unitUnionInfo.Add(2, new UnitUnionInfo(2));
-            _unitUnionInfo.Add(3, new UnitUnionInfo(3));
-
-            //////////////////////////////위에거는 자동 세팅 되도록 할거
-
-
+            foreach(var unionScript in unionScriptList)
+            {
+                _unitUnionInfo.Add(unionScript.unitUID, new UnitUnionInfo(unionScript));
+            }
         }
 
         public void AddCount()
@@ -120,7 +131,7 @@ namespace Logic
             return _uid;
         }
 
-        public bool CheckUnionButtonActive(int index)
+        public bool CheckUnionButtonActive(int createUnitUnionData)
         {
             foreach (var unitUnionInfo in _unitUnionInfo)
             {
@@ -147,9 +158,9 @@ namespace Logic
 
         }
 
-        public UnitUnionInfo GetUnitUnionData(int index)
+        public UnitUnionInfo GetUnitUnionData(int uid)
         {
-            if(_unitUnionInfo.TryGetValue(index, out var ret))
+            if(_unitUnionInfo.TryGetValue(uid, out var ret))
             {
                 return ret;
             }
@@ -157,6 +168,10 @@ namespace Logic
             {
                 return null;
             }
+        }
+        public Dictionary<int, UnitUnionInfo> GetUnitUnionDatas()
+        {
+            return _unitUnionInfo;
         }
     }
 }
