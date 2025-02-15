@@ -29,7 +29,7 @@ namespace Logic
             }
 
             _damage = skillInfo.damage;
-            _durationTick = skillInfo.durationTick;
+            _durationTick = (long)(skillInfo.durationTime * Define.OneSecondTick);
 
             _activeTick = createTick + _durationTick;
         }

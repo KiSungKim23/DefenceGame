@@ -9,7 +9,7 @@ namespace Logic
     {
         [Key(0)] public int buffUID;
         [Key(1)] public Define.BuffType buffType;
-        [Key(2)] public long durationTick;
+        [Key(2)] public float durationTime;
         [Key(3)] public float value1;
         [Key(4)] public float value2;
     }

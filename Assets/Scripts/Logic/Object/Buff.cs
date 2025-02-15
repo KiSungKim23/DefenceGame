@@ -14,9 +14,9 @@ namespace Logic
         public Buff(BuffInfoScript buffInfo, long createTick)
         {
             _buffInfo = buffInfo;
-            _endTick = createTick + _buffInfo.durationTick;
-            _value1 = _buffInfo.value1;
-            _value2 = _buffInfo.value2;
+            _endTick = createTick + (long)(buffInfo.durationTime * Define.OneSecondTick);
+            _value1 = buffInfo.value1;
+            _value2 = buffInfo.value2;
         }
 
         public long GetEndTick()
