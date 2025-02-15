@@ -1,0 +1,26 @@
+[
+  {
+    "skillType": "Attack",
+    "probability": 0,
+    "durationTick": 100,
+    "skillLevel": 1,
+    "damage": 100,
+    "addDamage": 10
+  },
+  {
+    "skillType": "Slow",
+    "probability": 0,
+    "durationTick": 100,
+    "skillLevel": 1,
+    "damage": 100,
+    "addDamage": 10
+  },
+  {
+    "skillType": "Stun",
+    "probability": 0,
+    "durationTick": 100,
+    "skillLevel": 1,
+    "damage": 100,
+    "addDamage": 10
+  }
+]

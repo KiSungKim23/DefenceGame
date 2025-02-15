@@ -1,0 +1,42 @@
+[
+  {
+    "buffUID": 1,
+    "buffType": "Moving",
+    "buffLevel": 1,
+    "durationTick": 100,
+    "value1": 1.0,
+    "value2": 0.0
+  },
+  {
+    "buffUID": 2,
+    "buffType": "Armor",
+    "buffLevel": 1,
+    "durationTick": 100,
+    "value1": 1.0,
+    "value2": 0.0
+  },
+  {
+    "buffUID": 3,
+    "buffType": "Moving",
+    "buffLevel": 1,
+    "durationTick": 100,
+    "value1": 1.0,
+    "value2": 0.0
+  },
+  {
+    "buffUID": 4,
+    "buffType": "Armor",
+    "buffLevel": 1,
+    "durationTick": 100,
+    "value1": 1.0,
+    "value2": 0.0
+  },
+  {
+    "buffUID": 5,
+    "buffType": "Moving",
+    "buffLevel": 1,
+    "durationTick": 100,
+    "value1": 1.0,
+    "value2": 0.0
+  }
+]

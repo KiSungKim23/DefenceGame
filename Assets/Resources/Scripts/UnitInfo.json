@@ -1,0 +1,41 @@
+[
+  {
+    "unitUID": 1,
+    "unitGrade": "Normal",
+    "attackRange": 2.0,
+    "attackSpeed": 2.0,
+    "baseSkillType": "Attack",
+    "skillType1": "None",
+    "skillType2": "None",
+    "skillType3": "None",
+    "unitName": "불 하급 마법사",
+    "objectPrefabName": "Unit",
+    "iconPrefabName": "UnitIcon"
+  },
+  {
+    "unitUID": 2,
+    "unitGrade": "Normal",
+    "attackRange": 2.0,
+    "attackSpeed": 2.0,
+    "baseSkillType": "Slow",
+    "skillType1": "None",
+    "skillType2": "None",
+    "skillType3": "None",
+    "unitName": "얼음 하급 마법사",
+    "objectPrefabName": "Unit",
+    "iconPrefabName": "UnitIcon"
+  },
+  {
+    "unitUID": 3,
+    "unitGrade": "Hero",
+    "attackRange": 3.0,
+    "attackSpeed": 2.0,
+    "baseSkillType": "Slow",
+    "skillType1": "None",
+    "skillType2": "None",
+    "skillType3": "None",
+    "unitName": "얼음 중급 마법사",
+    "objectPrefabName": "Unit",
+    "iconPrefabName": "UnitIcon"
+  }
+]

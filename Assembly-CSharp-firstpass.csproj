@@ -412,6 +412,10 @@
       <HintPath>Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections.LowLevel.ILSupport\Unity.Collections.LowLevel.ILSupport.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe">
+      <HintPath>Assets\Packages\System.Runtime.CompilerServices.Unsafe.6.1.0\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="DOTween">
       <HintPath>Assets\Plugins\Demigiant\DOTween\DOTween.dll</HintPath>
       <Private>False</Private>
@@ -420,8 +424,8 @@
       <HintPath>Library\PackageCache\com.unity.visualscripting@1.9.4\Runtime\VisualScripting.Flow\Dependencies\NCalc\Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="System.Runtime.CompilerServices.Unsafe">
-      <HintPath>Assets\Packages\System.Runtime.CompilerServices.Unsafe.6.1.0\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>Assets\Packages\Newtonsoft.Json.13.0.3\lib\netstandard2.0\Newtonsoft.Json.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.Android.Types">
@@ -1160,6 +1164,10 @@
       <HintPath>Library\ScriptAssemblies\Unity.Notifications.Android.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Unity.2D.SpriteShape.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.2D.SpriteShape.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Unity.2D.Tilemap.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.2D.Tilemap.Editor.dll</HintPath>
       <Private>False</Private>
@@ -1168,16 +1176,16 @@
       <HintPath>Library\ScriptAssemblies\Unity.2D.Animation.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.2D.SpriteShape.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.2D.SpriteShape.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Unity.2D.IK.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.2D.IK.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="MessagePack.csproj">
+      <Project>{9EFFEF3F-C39A-A20B-6315-F2BC3027D6F2}</Project>
+      <Name>MessagePack</Name>
+    </ProjectReference>
     <ProjectReference Include="UniRx.csproj">
       <Project>{3922F5C1-EAE5-C1D7-76E1-16796E1B3B0B}</Project>
       <Name>UniRx</Name>
@@ -1186,17 +1194,13 @@
       <Project>{4438F351-089C-3C7E-8058-D2A9BA9E8EDD}</Project>
       <Name>spine-unity</Name>
     </ProjectReference>
-    <ProjectReference Include="MessagePack.Annotations.csproj">
-      <Project>{FB0E0793-4211-74C2-25F7-B5366FFEB295}</Project>
-      <Name>MessagePack.Annotations</Name>
-    </ProjectReference>
     <ProjectReference Include="spine-unity-editor.csproj">
       <Project>{A438230E-3BA0-36FA-AD6F-63DFEBEBFF97}</Project>
       <Name>spine-unity-editor</Name>
     </ProjectReference>
-    <ProjectReference Include="MessagePack.csproj">
-      <Project>{9EFFEF3F-C39A-A20B-6315-F2BC3027D6F2}</Project>
-      <Name>MessagePack</Name>
+    <ProjectReference Include="MessagePack.Annotations.csproj">
+      <Project>{FB0E0793-4211-74C2-25F7-B5366FFEB295}</Project>
+      <Name>MessagePack.Annotations</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

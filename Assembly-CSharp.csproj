@@ -60,50 +60,58 @@
     <Analyzer Include="C:\Program Files\2022.3.31f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Sctipts\Logic\Core\DataManager\ScriptClass\SkillBuffInfoScript.cs" />
-    <Compile Include="Assets\Sctipts\Logic\Manager\UnitManager.cs" />
+    <Compile Include="Assets\Scripts\Unity\Managers\SceneManager.cs" />
+    <Compile Include="Assets\Scripts\Logic\Core\UpdateScheduler.cs" />
+    <Compile Include="Assets\Scripts\Unity\UI\SectionButton.cs" />
     <Compile Include="Assets\LINQtoGameObject\Examples\SampleSceneScript.cs" />
-    <Compile Include="Assets\Sctipts\Unity\Util\Utils.cs" />
-    <Compile Include="Assets\Sctipts\Logic\GameData.cs" />
-    <Compile Include="Assets\Sctipts\Unity\Scene\GameScene.cs" />
-    <Compile Include="Assets\Sctipts\Unity\Managers\ResourceManager.cs" />
-    <Compile Include="Assets\Sctipts\Logic\Manager\MonsterManager.cs" />
-    <Compile Include="Assets\Sctipts\Unity\Object\UnitObject.cs" />
-    <Compile Include="Assets\Sctipts\Logic\Object\Unit.cs" />
-    <Compile Include="Assets\Sctipts\Unity\Managers\SceneManager.cs" />
-    <Compile Include="Assets\Sctipts\Logic\Core\BaseRandomProbabiltty.cs" />
-    <Compile Include="Assets\Sctipts\Unity\UI\SectionButton.cs" />
-    <Compile Include="Assets\Sctipts\Unity\UI\UnitOptionButton.cs" />
-    <Compile Include="Assets\Sctipts\Unity\Scene\BaseScene.cs" />
-    <Compile Include="Assets\Sctipts\Logic\Object\Monster.cs" />
-    <Compile Include="Assets\Sctipts\Unity\Scene\StartScene.cs" />
-    <Compile Include="Assets\Sctipts\Logic\Core\DataManager\ScriptClass\SkillInfoScript.cs" />
-    <Compile Include="Assets\Sctipts\Logic\Section.cs" />
-    <Compile Include="Assets\Sctipts\Common\Util\Define.cs" />
-    <Compile Include="Assets\Sctipts\Unity\Object\MonsterObject.cs" />
+    <Compile Include="Assets\Scripts\Unity\Managers\DataManagers\DataManager.SkillInfo.cs" />
+    <Compile Include="Assets\Scripts\Logic\Manager\StageLogic.cs" />
+    <Compile Include="Assets\Scripts\Logic\Core\DataManager\ScriptClass\SkillInfoScript.cs" />
+    <Compile Include="Assets\Scripts\Unity\Managers\Managers.cs" />
+    <Compile Include="Assets\Scripts\Logic\Manager\UnitManager.cs" />
+    <Compile Include="Assets\Scripts\Unity\UI\UnitSetButton.cs" />
+    <Compile Include="Assets\Scripts\Logic\Object\Monster.cs" />
+    <Compile Include="Assets\Scripts\Logic\Object\Buff.cs" />
+    <Compile Include="Assets\Scripts\Unity\Scene\StartScene.cs" />
+    <Compile Include="Assets\Scripts\Unity\Managers\DataManagers\DataManager.Core.cs" />
+    <Compile Include="Assets\Scripts\Unity\Managers\DataManagers\DataManager.MonsterInfo.cs" />
+    <Compile Include="Assets\Scripts\Logic\Object\Object.cs" />
+    <Compile Include="Assets\Scripts\Logic\SkillInfoData.cs" />
+    <Compile Include="Assets\Scripts\Logic\Core\DataManager\IDataManager.cs" />
+    <Compile Include="Assets\Scripts\Logic\Object\Skill.cs" />
+    <Compile Include="Assets\Scripts\Unity\UI\ScrollViewBase.cs" />
+    <Compile Include="Assets\Scripts\Logic\Manager\MonsterManager.cs" />
+    <Compile Include="Assets\Scripts\Logic\Core\DataManager\ScriptClass\SkillBuffInfoScript.cs" />
+    <Compile Include="Assets\Scripts\Unity\Managers\DataManagers\DataManager.UnitUnionInfo.cs" />
+    <Compile Include="Assets\Scripts\Unity\Scene\ResourceReleaseSceneInit.cs" />
+    <Compile Include="Assets\Scripts\Common\Util\Define.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
-    <Compile Include="Assets\Sctipts\Logic\BuffInfo.cs" />
-    <Compile Include="Assets\Sctipts\Unity\Scene\ResourceReleaseSceneInit.cs" />
-    <Compile Include="Assets\Sctipts\Unity\UI\UnitSetButton.cs" />
-    <Compile Include="Assets\Sctipts\Logic\Core\UpdateScheduler.cs" />
-    <Compile Include="Assets\Sctipts\Logic\Object\Buff.cs" />
-    <Compile Include="Assets\Sctipts\Unity\Object\SectionObject.cs" />
+    <Compile Include="Assets\Scripts\Logic\BuffInfo.cs" />
+    <Compile Include="Assets\Scripts\Unity\Object\MonsterObject.cs" />
+    <Compile Include="Assets\Scripts\Logic\Core\BaseRandomProbabiltty.cs" />
+    <Compile Include="Assets\Scripts\Logic\Core\DataManager\ScriptClass\MonsterInfoScript.cs" />
     <Compile Include="Assets\LINQtoGameObject\Scripts\GameObjectExtensions.Enumerable.cs" />
-    <Compile Include="Assets\Sctipts\Logic\Core\DataManager\ScriptClass\UnitInfoScript.cs" />
-    <Compile Include="Assets\Sctipts\Logic\SkillInfoData.cs" />
-    <Compile Include="Assets\Sctipts\Unity\Managers\DataManagers\DataManager.Core.cs" />
-    <Compile Include="Assets\Sctipts\Unity\UI\UniIcon.cs" />
+    <Compile Include="Assets\Scripts\Logic\Section.cs" />
+    <Compile Include="Assets\Scripts\Unity\Scene\GameScene.cs" />
+    <Compile Include="Assets\Scripts\Unity\Managers\DataManagers\DataManager.BuffInfo.cs" />
+    <Compile Include="Assets\Scripts\Unity\Managers\ResourceManager.cs" />
+    <Compile Include="Assets\Scripts\Unity\Util\Utils.cs" />
+    <Compile Include="Assets\Scripts\Unity\UI\UnitOptionButton.cs" />
     <Compile Include="Assets\LINQtoGameObject\Scripts\GameObjectExtensions.Traverse.cs" />
-    <Compile Include="Assets\Sctipts\Unity\UI\ScrollViewBase.cs" />
-    <Compile Include="Assets\Sctipts\Logic\UnitIInfoData.cs" />
-    <Compile Include="Assets\Sctipts\Logic\Manager\StageLogic.cs" />
+    <Compile Include="Assets\Scripts\Unity\Scene\BaseScene.cs" />
+    <Compile Include="Assets\Scripts\Unity\Object\SectionObject.cs" />
+    <Compile Include="Assets\Scripts\Logic\GameData.cs" />
     <Compile Include="Assets\LINQtoGameObject\Scripts\GameObjectExtensions.Operate.cs" />
-    <Compile Include="Assets\Sctipts\Logic\Core\DataManager\ScriptClass\BuffInfoScript.cs" />
-    <Compile Include="Assets\Sctipts\Logic\Object\Object.cs" />
-    <Compile Include="Assets\Sctipts\Unity\UI\GamePannal.cs" />
-    <Compile Include="Assets\Sctipts\Unity\Managers\Managers.cs" />
-    <Compile Include="Assets\Sctipts\Logic\Object\Skill.cs" />
-    <Compile Include="Assets\Sctipts\Logic\Core\DataManager\IDataManager.cs" />
+    <Compile Include="Assets\Scripts\Logic\Object\Unit.cs" />
+    <Compile Include="Assets\Scripts\Logic\Core\DataManager\ScriptClass\BuffInfoScript.cs" />
+    <Compile Include="Assets\Scripts\Unity\Object\UnitObject.cs" />
+    <Compile Include="Assets\Scripts\Unity\Managers\DataManagers\DataManager.UnitInfo.cs" />
+    <Compile Include="Assets\Scripts\Unity\Managers\DataManagers\DataManager.SkillBuffInfo.cs" />
+    <Compile Include="Assets\Scripts\Unity\UI\GamePannal.cs" />
+    <Compile Include="Assets\Scripts\Logic\Core\DataManager\ScriptClass\UnitUnionInfoScript.cs" />
+    <Compile Include="Assets\Scripts\Logic\UnitIInfoData.cs" />
+    <Compile Include="Assets\Scripts\Unity\UI\UniIcon.cs" />
+    <Compile Include="Assets\Scripts\Logic\Core\DataManager\ScriptClass\UnitInfoScript.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
@@ -114,6 +122,7 @@
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
+    <None Include="Assets\Packages\Newtonsoft.Json.13.0.3\lib\netstandard2.0\Newtonsoft.Json.dll" />
     <None Include="Assets\LINQtoGameObject\README.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface.shader" />
     <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
@@ -123,6 +132,7 @@
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
+    <None Include="Assets\Packages\Newtonsoft.Json.13.0.3\lib\netstandard2.0\Newtonsoft.Json.xml" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
     <None Include="Assets\Packages\System.Runtime.CompilerServices.Unsafe.6.1.0\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.xml" />
@@ -469,6 +479,10 @@
       <HintPath>Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections.LowLevel.ILSupport\Unity.Collections.LowLevel.ILSupport.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe">
+      <HintPath>Assets\Packages\System.Runtime.CompilerServices.Unsafe.6.1.0\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="DOTween">
       <HintPath>Assets\Plugins\Demigiant\DOTween\DOTween.dll</HintPath>
       <Private>False</Private>
@@ -477,8 +491,8 @@
       <HintPath>Library\PackageCache\com.unity.visualscripting@1.9.4\Runtime\VisualScripting.Flow\Dependencies\NCalc\Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="System.Runtime.CompilerServices.Unsafe">
-      <HintPath>Assets\Packages\System.Runtime.CompilerServices.Unsafe.6.1.0\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>Assets\Packages\Newtonsoft.Json.13.0.3\lib\netstandard2.0\Newtonsoft.Json.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.Android.Types">
@@ -1217,16 +1231,16 @@
       <HintPath>Library\ScriptAssemblies\Unity.Notifications.Android.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Unity.2D.SpriteShape.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.2D.SpriteShape.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Unity.2D.Tilemap.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.2D.Tilemap.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.2D.Animation.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.2D.Animation.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.2D.SpriteShape.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.2D.SpriteShape.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.2D.IK.Editor">
@@ -1239,6 +1253,10 @@
       <Project>{F2BF8207-D87F-6E79-B748-6A4C87C1968B}</Project>
       <Name>Assembly-CSharp-firstpass</Name>
     </ProjectReference>
+    <ProjectReference Include="MessagePack.csproj">
+      <Project>{9EFFEF3F-C39A-A20B-6315-F2BC3027D6F2}</Project>
+      <Name>MessagePack</Name>
+    </ProjectReference>
     <ProjectReference Include="UniRx.csproj">
       <Project>{3922F5C1-EAE5-C1D7-76E1-16796E1B3B0B}</Project>
       <Name>UniRx</Name>
@@ -1247,17 +1265,13 @@
       <Project>{4438F351-089C-3C7E-8058-D2A9BA9E8EDD}</Project>
       <Name>spine-unity</Name>
     </ProjectReference>
-    <ProjectReference Include="MessagePack.Annotations.csproj">
-      <Project>{FB0E0793-4211-74C2-25F7-B5366FFEB295}</Project>
-      <Name>MessagePack.Annotations</Name>
-    </ProjectReference>
     <ProjectReference Include="spine-unity-editor.csproj">
       <Project>{A438230E-3BA0-36FA-AD6F-63DFEBEBFF97}</Project>
       <Name>spine-unity-editor</Name>
     </ProjectReference>
-    <ProjectReference Include="MessagePack.csproj">
-      <Project>{9EFFEF3F-C39A-A20B-6315-F2BC3027D6F2}</Project>
-      <Name>MessagePack</Name>
+    <ProjectReference Include="MessagePack.Annotations.csproj">
+      <Project>{FB0E0793-4211-74C2-25F7-B5366FFEB295}</Project>
+      <Name>MessagePack.Annotations</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

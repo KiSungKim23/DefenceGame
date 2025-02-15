@@ -73,8 +73,8 @@
     <Compile Include="Assets\Spine\Runtime\spine-csharp\Skin.cs" />
     <Compile Include="Assets\Spine\Runtime\spine-unity\Utility\SkeletonExtensions.cs" />
     <Compile Include="Assets\Spine\Runtime\spine-unity\Mesh Generation\MeshGenerator.cs" />
-    <Compile Include="Assets\Spine\Runtime\spine-csharp\BoneData.cs" />
     <Compile Include="Assets\Spine\Runtime\spine-csharp\AnimationState.cs" />
+    <Compile Include="Assets\Spine\Runtime\spine-csharp\BoneData.cs" />
     <Compile Include="Assets\Spine\Runtime\spine-unity\Components\RootMotion\SkeletonMecanimRootMotion.cs" />
     <Compile Include="Assets\Spine\Runtime\spine-unity\Components\SkeletonMecanim.cs" />
     <Compile Include="Assets\Spine\Runtime\spine-unity\Components\RootMotion\SkeletonRootMotionBase.cs" />
@@ -569,6 +569,10 @@
       <HintPath>Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections.LowLevel.ILSupport\Unity.Collections.LowLevel.ILSupport.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe">
+      <HintPath>Assets\Packages\System.Runtime.CompilerServices.Unsafe.6.1.0\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="unityplastic">
       <HintPath>Library\PackageCache\com.unity.collab-proxy@2.6.0\Lib\Editor\unityplastic.dll</HintPath>
       <Private>False</Private>
@@ -601,16 +605,16 @@
       <HintPath>Library\PackageCache\com.unity.visualscripting@1.9.4\Runtime\VisualScripting.Flow\Dependencies\NCalc\Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.VisualScripting.TextureAssets">
-      <HintPath>Library\PackageCache\com.unity.visualscripting@1.9.4\Editor\VisualScripting.Core\EditorAssetResources\Unity.VisualScripting.TextureAssets.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="NuGetForUnity.PluginAPI">
       <HintPath>Library\PackageCache\com.github-glitchenzo.nugetforunity@46e771daa4\Editor\PluginAPI\NuGetForUnity.PluginAPI.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="System.Runtime.CompilerServices.Unsafe">
-      <HintPath>Assets\Packages\System.Runtime.CompilerServices.Unsafe.6.1.0\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    <Reference Include="Unity.VisualScripting.TextureAssets">
+      <HintPath>Library\PackageCache\com.unity.visualscripting@1.9.4\Editor\VisualScripting.Core\EditorAssetResources\Unity.VisualScripting.TextureAssets.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>Assets\Packages\Newtonsoft.Json.13.0.3\lib\netstandard2.0\Newtonsoft.Json.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.Android.Types">
