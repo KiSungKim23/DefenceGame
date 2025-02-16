@@ -1,37 +1,290 @@
 [
   {
     "buffUID": 1,
-    "buffType": "Moving",
-    "durationTime": 3.0,
-    "value1": 0.5,
-    "value2": 0.0
+    "buffType": "Health",
+    "buffGrade": 1,
+    "durationTime": 8.0,
+    "effectStrength": 0.05,
+    "buffName": "화상"
   },
   {
     "buffUID": 2,
-    "buffType": "Armor",
-    "durationTime": 3.0,
-    "value1": 0.5,
-    "value2": 0.0
+    "buffType": "Health",
+    "buffGrade": 2,
+    "durationTime": 8.0,
+    "effectStrength": 0.05,
+    "buffName": "화상"
   },
   {
     "buffUID": 3,
-    "buffType": "Moving",
-    "durationTime": 3.0,
-    "value1": 0.5,
-    "value2": 0.0
+    "buffType": "Health",
+    "buffGrade": 3,
+    "durationTime": 8.0,
+    "effectStrength": 0.05,
+    "buffName": "화상"
   },
   {
     "buffUID": 4,
-    "buffType": "Armor",
-    "durationTime": 3.0,
-    "value1": 0.5,
-    "value2": 0.0
+    "buffType": "Health",
+    "buffGrade": 4,
+    "durationTime": 8.0,
+    "effectStrength": 0.05,
+    "buffName": "화상"
   },
   {
     "buffUID": 5,
     "buffType": "Moving",
-    "durationTime": 3.0,
-    "value1": 0.5,
-    "value2": 0.0
+    "buffGrade": 1,
+    "durationTime": 6.0,
+    "effectStrength": 0.4,
+    "buffName": "빙결"
+  },
+  {
+    "buffUID": 6,
+    "buffType": "Moving",
+    "buffGrade": 2,
+    "durationTime": 6.0,
+    "effectStrength": 0.4,
+    "buffName": "빙결"
+  },
+  {
+    "buffUID": 7,
+    "buffType": "Moving",
+    "buffGrade": 3,
+    "durationTime": 6.0,
+    "effectStrength": 0.4,
+    "buffName": "빙결"
+  },
+  {
+    "buffUID": 8,
+    "buffType": "Moving",
+    "buffGrade": 4,
+    "durationTime": 6.0,
+    "effectStrength": 0.4,
+    "buffName": "빙결"
+  },
+  {
+    "buffUID": 9,
+    "buffType": "Moving",
+    "buffGrade": 1,
+    "durationTime": 5.0,
+    "effectStrength": 0.3,
+    "buffName": "감전"
+  },
+  {
+    "buffUID": 10,
+    "buffType": "Moving",
+    "buffGrade": 2,
+    "durationTime": 5.0,
+    "effectStrength": 0.3,
+    "buffName": "감전"
+  },
+  {
+    "buffUID": 11,
+    "buffType": "Moving",
+    "buffGrade": 3,
+    "durationTime": 5.0,
+    "effectStrength": 0.3,
+    "buffName": "감전"
+  },
+  {
+    "buffUID": 12,
+    "buffType": "Moving",
+    "buffGrade": 4,
+    "durationTime": 5.0,
+    "effectStrength": 0.3,
+    "buffName": "감전"
+  },
+  {
+    "buffUID": 13,
+    "buffType": "Moving",
+    "buffGrade": 1,
+    "durationTime": 5.0,
+    "effectStrength": 0.2,
+    "buffName": "둔화"
+  },
+  {
+    "buffUID": 14,
+    "buffType": "Moving",
+    "buffGrade": 2,
+    "durationTime": 5.0,
+    "effectStrength": 0.2,
+    "buffName": "둔화"
+  },
+  {
+    "buffUID": 15,
+    "buffType": "Moving",
+    "buffGrade": 3,
+    "durationTime": 5.0,
+    "effectStrength": 0.2,
+    "buffName": "둔화"
+  },
+  {
+    "buffUID": 16,
+    "buffType": "Moving",
+    "buffGrade": 4,
+    "durationTime": 5.0,
+    "effectStrength": 0.2,
+    "buffName": "둔화"
+  },
+  {
+    "buffUID": 17,
+    "buffType": "Armor",
+    "buffGrade": 1,
+    "durationTime": 4.0,
+    "effectStrength": 0.25,
+    "buffName": "빛 속성 약화"
+  },
+  {
+    "buffUID": 18,
+    "buffType": "Armor",
+    "buffGrade": 2,
+    "durationTime": 4.0,
+    "effectStrength": 0.25,
+    "buffName": "빛 속성 약화"
+  },
+  {
+    "buffUID": 19,
+    "buffType": "Armor",
+    "buffGrade": 3,
+    "durationTime": 4.0,
+    "effectStrength": 0.25,
+    "buffName": "빛 속성 약화"
+  },
+  {
+    "buffUID": 20,
+    "buffType": "Armor",
+    "buffGrade": 4,
+    "durationTime": 4.0,
+    "effectStrength": 0.25,
+    "buffName": "빛 속성 약화"
+  },
+  {
+    "buffUID": 21,
+    "buffType": "Health",
+    "buffGrade": 1,
+    "durationTime": 6.0,
+    "effectStrength": 0.07,
+    "buffName": "중독"
+  },
+  {
+    "buffUID": 22,
+    "buffType": "Health",
+    "buffGrade": 2,
+    "durationTime": 6.0,
+    "effectStrength": 0.07,
+    "buffName": "중독"
+  },
+  {
+    "buffUID": 23,
+    "buffType": "Health",
+    "buffGrade": 3,
+    "durationTime": 6.0,
+    "effectStrength": 0.07,
+    "buffName": "중독"
+  },
+  {
+    "buffUID": 24,
+    "buffType": "Health",
+    "buffGrade": 4,
+    "durationTime": 6.0,
+    "effectStrength": 0.07,
+    "buffName": "중독"
+  },
+  {
+    "buffUID": 25,
+    "buffType": "Armor",
+    "buffGrade": 1,
+    "durationTime": 5.0,
+    "effectStrength": 0.2,
+    "buffName": "부식"
+  },
+  {
+    "buffUID": 26,
+    "buffType": "Armor",
+    "buffGrade": 2,
+    "durationTime": 5.0,
+    "effectStrength": 0.2,
+    "buffName": "부식"
+  },
+  {
+    "buffUID": 27,
+    "buffType": "Armor",
+    "buffGrade": 3,
+    "durationTime": 5.0,
+    "effectStrength": 0.2,
+    "buffName": "부식"
+  },
+  {
+    "buffUID": 28,
+    "buffType": "Armor",
+    "buffGrade": 4,
+    "durationTime": 5.0,
+    "effectStrength": 0.2,
+    "buffName": "부식"
+  },
+  {
+    "buffUID": 29,
+    "buffType": "Health",
+    "buffGrade": 1,
+    "durationTime": 7.0,
+    "effectStrength": 0.1,
+    "buffName": "저주"
+  },
+  {
+    "buffUID": 30,
+    "buffType": "Health",
+    "buffGrade": 2,
+    "durationTime": 7.0,
+    "effectStrength": 0.1,
+    "buffName": "저주"
+  },
+  {
+    "buffUID": 31,
+    "buffType": "Health",
+    "buffGrade": 3,
+    "durationTime": 7.0,
+    "effectStrength": 0.1,
+    "buffName": "저주"
+  },
+  {
+    "buffUID": 32,
+    "buffType": "Health",
+    "buffGrade": 4,
+    "durationTime": 7.0,
+    "effectStrength": 0.1,
+    "buffName": "저주"
+  },
+  {
+    "buffUID": 33,
+    "buffType": "Armor",
+    "buffGrade": 1,
+    "durationTime": 4.0,
+    "effectStrength": 0.3,
+    "buffName": "방어 파괴"
+  },
+  {
+    "buffUID": 34,
+    "buffType": "Armor",
+    "buffGrade": 2,
+    "durationTime": 4.0,
+    "effectStrength": 0.3,
+    "buffName": "방어 파괴"
+  },
+  {
+    "buffUID": 35,
+    "buffType": "Armor",
+    "buffGrade": 3,
+    "durationTime": 4.0,
+    "effectStrength": 0.3,
+    "buffName": "방어 파괴"
+  },
+  {
+    "buffUID": 36,
+    "buffType": "Armor",
+    "buffGrade": 4,
+    "durationTime": 4.0,
+    "effectStrength": 0.3,
+    "buffName": "방어 파괴"
   }
 ]

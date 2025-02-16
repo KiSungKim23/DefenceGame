@@ -84,7 +84,7 @@ namespace Client
 
         public void CreateMonster(Logic.Monster monster)
         {
-            if (_monsters.TryGetValue(monster.GetUID(), out var temp))
+            if (_monsters.TryGetValue(monster.GetObjectID(), out var temp))
             {
                 temp.SetMonsterData(monster);
                 temp.gameObject.SetActive(true);
@@ -97,7 +97,7 @@ namespace Client
                 if (monsterComponent != null)
                 {
                     monsterComponent.SetMonsterData(monster); 
-                    _monsters.Add(monster.GetUID(), monsterComponent);
+                    _monsters.Add(monster.GetObjectID(), monsterComponent);
                 }
             }
         }

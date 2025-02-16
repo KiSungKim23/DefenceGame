@@ -7,7 +7,7 @@ namespace Logic
     [MessagePackObject]
     public class SkillBuffInfoScript
     {
-        [Key(0)] public Define.SkillType skillType;
+        [Key(0)] public int skillUID;
         [Key(1)] public int buffUID;
     }
 }

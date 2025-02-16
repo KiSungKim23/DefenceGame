@@ -27,7 +27,7 @@ namespace Client
                 transform.position = new Vector3(positionData.X, positionData.Y, positionData.Z);
 
 
-                int monsterHP = _monster.GetCurrentHP();
+                long monsterHP = _monster.GetCurrentHP();
                 if (monsterHP != currentHP)
                 {
                     currentHP = monsterHP;

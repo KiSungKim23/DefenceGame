@@ -8,15 +8,13 @@ namespace Logic
         BuffInfoScript _buffInfo;
 
         long _endTick;
-        float _value1;
-        float _value2;
+        float _effectStrength;
 
         public Buff(BuffInfoScript buffInfo, long createTick)
         {
             _buffInfo = buffInfo;
             _endTick = createTick + (long)(buffInfo.durationTime * Define.OneSecondTick);
-            _value1 = buffInfo.value1;
-            _value2 = buffInfo.value2;
+            _effectStrength = buffInfo.effectStrength;
         }
 
         public long GetEndTick()
@@ -24,14 +22,10 @@ namespace Logic
             return _endTick;
         }
 
-        public float GetValue1()
+        public float GetEffectStrength()
         {
-            return _value1;
+            return _effectStrength;
         }
 
-        public float GetValue2()
-        {
-            return _value2;
-        }
     }
 }

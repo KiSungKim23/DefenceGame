@@ -9,7 +9,9 @@ namespace Logic
     {
         [Key(0)] public int monsterUID;
         [Key(1)] public float speed;
-        [Key(2)] public int maxHP;
-        [Key(3)] public string monsterPrefab;
+        [Key(2)] public long maxHP;
+        [Key(3)] public int armor;
+        [Key(4)] public string monsterName;
+        [Key(5)] public string monsterPrefab;
     }
 }

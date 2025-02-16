@@ -1,20 +1,402 @@
 [
   {
     "monsterUID": 1,
-    "speed": 1.3,
-    "maxHP": 100,
-    "monsterPrefab": "monster"
+    "speed": 0.8,
+    "maxHP": 1500,
+    "armor": 5,
+    "monsterName": "무명 도적",
+    "monsterPrefab": "monster1"
   },
   {
     "monsterUID": 2,
-    "speed": 1.3,
-    "maxHP": 100,
-    "monsterPrefab": "monster"
+    "speed": 0.8,
+    "maxHP": 1700,
+    "armor": 5,
+    "monsterName": "무명 도적",
+    "monsterPrefab": "monster1"
   },
   {
     "monsterUID": 3,
+    "speed": 0.8,
+    "maxHP": 1900,
+    "armor": 6,
+    "monsterName": "무명 도적",
+    "monsterPrefab": "monster1"
+  },
+  {
+    "monsterUID": 4,
+    "speed": 0.8,
+    "maxHP": 2200,
+    "armor": 6,
+    "monsterName": "무명 도적",
+    "monsterPrefab": "monster1"
+  },
+  {
+    "monsterUID": 5,
+    "speed": 0.8,
+    "maxHP": 2500,
+    "armor": 7,
+    "monsterName": "무명 도적",
+    "monsterPrefab": "monster1"
+  },
+  {
+    "monsterUID": 6,
+    "speed": 0.9,
+    "maxHP": 3000,
+    "armor": 8,
+    "monsterName": "떠돌이 용병",
+    "monsterPrefab": "monster2"
+  },
+  {
+    "monsterUID": 7,
+    "speed": 0.9,
+    "maxHP": 3500,
+    "armor": 9,
+    "monsterName": "떠돌이 용병",
+    "monsterPrefab": "monster2"
+  },
+  {
+    "monsterUID": 8,
+    "speed": 0.9,
+    "maxHP": 4100,
+    "armor": 10,
+    "monsterName": "떠돌이 용병",
+    "monsterPrefab": "monster2"
+  },
+  {
+    "monsterUID": 9,
+    "speed": 0.9,
+    "maxHP": 4800,
+    "armor": 11,
+    "monsterName": "떠돌이 용병",
+    "monsterPrefab": "monster2"
+  },
+  {
+    "monsterUID": 10,
+    "speed": 0.9,
+    "maxHP": 5600,
+    "armor": 12,
+    "monsterName": "떠돌이 용병",
+    "monsterPrefab": "monster2"
+  },
+  {
+    "monsterUID": 11,
+    "speed": 1.0,
+    "maxHP": 6500,
+    "armor": 14,
+    "monsterName": "도적단 간부",
+    "monsterPrefab": "monster3"
+  },
+  {
+    "monsterUID": 12,
+    "speed": 1.0,
+    "maxHP": 7500,
+    "armor": 15,
+    "monsterName": "도적단 간부",
+    "monsterPrefab": "monster3"
+  },
+  {
+    "monsterUID": 13,
+    "speed": 1.0,
+    "maxHP": 8700,
+    "armor": 16,
+    "monsterName": "도적단 간부",
+    "monsterPrefab": "monster3"
+  },
+  {
+    "monsterUID": 14,
+    "speed": 1.0,
+    "maxHP": 10000,
+    "armor": 17,
+    "monsterName": "도적단 간부",
+    "monsterPrefab": "monster3"
+  },
+  {
+    "monsterUID": 15,
+    "speed": 1.0,
+    "maxHP": 11500,
+    "armor": 18,
+    "monsterName": "도적단 간부",
+    "monsterPrefab": "monster3"
+  },
+  {
+    "monsterUID": 16,
+    "speed": 1.1,
+    "maxHP": 13200,
+    "armor": 20,
+    "monsterName": "전직 기사",
+    "monsterPrefab": "monster4"
+  },
+  {
+    "monsterUID": 17,
+    "speed": 1.1,
+    "maxHP": 15000,
+    "armor": 22,
+    "monsterName": "전직 기사",
+    "monsterPrefab": "monster4"
+  },
+  {
+    "monsterUID": 18,
+    "speed": 1.1,
+    "maxHP": 17000,
+    "armor": 24,
+    "monsterName": "전직 기사",
+    "monsterPrefab": "monster4"
+  },
+  {
+    "monsterUID": 19,
+    "speed": 1.1,
+    "maxHP": 19000,
+    "armor": 25,
+    "monsterName": "전직 기사",
+    "monsterPrefab": "monster4"
+  },
+  {
+    "monsterUID": 20,
+    "speed": 1.1,
+    "maxHP": 21500,
+    "armor": 26,
+    "monsterName": "전직 기사",
+    "monsterPrefab": "monster4"
+  },
+  {
+    "monsterUID": 21,
     "speed": 1.3,
-    "maxHP": 100,
-    "monsterPrefab": "monster"
+    "maxHP": 25000,
+    "armor": 28,
+    "monsterName": "암살단 요원",
+    "monsterPrefab": "monster5"
+  },
+  {
+    "monsterUID": 22,
+    "speed": 1.3,
+    "maxHP": 28000,
+    "armor": 30,
+    "monsterName": "암살단 요원",
+    "monsterPrefab": "monster5"
+  },
+  {
+    "monsterUID": 23,
+    "speed": 1.3,
+    "maxHP": 31000,
+    "armor": 32,
+    "monsterName": "암살단 요원",
+    "monsterPrefab": "monster5"
+  },
+  {
+    "monsterUID": 24,
+    "speed": 1.3,
+    "maxHP": 35000,
+    "armor": 33,
+    "monsterName": "암살단 요원",
+    "monsterPrefab": "monster5"
+  },
+  {
+    "monsterUID": 25,
+    "speed": 1.3,
+    "maxHP": 40000,
+    "armor": 35,
+    "monsterName": "암살단 요원",
+    "monsterPrefab": "monster5"
+  },
+  {
+    "monsterUID": 26,
+    "speed": 1.4,
+    "maxHP": 46000,
+    "armor": 37,
+    "monsterName": "타락한 성직자",
+    "monsterPrefab": "monster6"
+  },
+  {
+    "monsterUID": 27,
+    "speed": 1.4,
+    "maxHP": 52000,
+    "armor": 38,
+    "monsterName": "타락한 성직자",
+    "monsterPrefab": "monster6"
+  },
+  {
+    "monsterUID": 28,
+    "speed": 1.4,
+    "maxHP": 60000,
+    "armor": 39,
+    "monsterName": "타락한 성직자",
+    "monsterPrefab": "monster6"
+  },
+  {
+    "monsterUID": 29,
+    "speed": 1.4,
+    "maxHP": 70000,
+    "armor": 40,
+    "monsterName": "타락한 성직자",
+    "monsterPrefab": "monster6"
+  },
+  {
+    "monsterUID": 30,
+    "speed": 1.4,
+    "maxHP": 80000,
+    "armor": 42,
+    "monsterName": "타락한 성직자",
+    "monsterPrefab": "monster6"
+  },
+  {
+    "monsterUID": 31,
+    "speed": 1.3,
+    "maxHP": 100000,
+    "armor": 44,
+    "monsterName": "흑마법사 수련생",
+    "monsterPrefab": "monster7"
+  },
+  {
+    "monsterUID": 32,
+    "speed": 1.3,
+    "maxHP": 120000,
+    "armor": 46,
+    "monsterName": "흑마법사 수련생",
+    "monsterPrefab": "monster7"
+  },
+  {
+    "monsterUID": 33,
+    "speed": 1.3,
+    "maxHP": 140000,
+    "armor": 48,
+    "monsterName": "흑마법사 수련생",
+    "monsterPrefab": "monster7"
+  },
+  {
+    "monsterUID": 34,
+    "speed": 1.3,
+    "maxHP": 160000,
+    "armor": 50,
+    "monsterName": "흑마법사 수련생",
+    "monsterPrefab": "monster7"
+  },
+  {
+    "monsterUID": 35,
+    "speed": 1.3,
+    "maxHP": 190000,
+    "armor": 52,
+    "monsterName": "흑마법사 수련생",
+    "monsterPrefab": "monster7"
+  },
+  {
+    "monsterUID": 36,
+    "speed": 1.4,
+    "maxHP": 220000,
+    "armor": 54,
+    "monsterName": "이단 심문관",
+    "monsterPrefab": "monster8"
+  },
+  {
+    "monsterUID": 37,
+    "speed": 1.4,
+    "maxHP": 260000,
+    "armor": 56,
+    "monsterName": "이단 심문관",
+    "monsterPrefab": "monster8"
+  },
+  {
+    "monsterUID": 38,
+    "speed": 1.4,
+    "maxHP": 300000,
+    "armor": 58,
+    "monsterName": "이단 심문관",
+    "monsterPrefab": "monster8"
+  },
+  {
+    "monsterUID": 39,
+    "speed": 1.4,
+    "maxHP": 350000,
+    "armor": 60,
+    "monsterName": "이단 심문관",
+    "monsterPrefab": "monster8"
+  },
+  {
+    "monsterUID": 40,
+    "speed": 1.4,
+    "maxHP": 400000,
+    "armor": 62,
+    "monsterName": "이단 심문관",
+    "monsterPrefab": "monster8"
+  },
+  {
+    "monsterUID": 41,
+    "speed": 1.7,
+    "maxHP": 500000,
+    "armor": 65,
+    "monsterName": "타락한 성기사",
+    "monsterPrefab": "monster9"
+  },
+  {
+    "monsterUID": 42,
+    "speed": 1.7,
+    "maxHP": 600000,
+    "armor": 68,
+    "monsterName": "타락한 성기사",
+    "monsterPrefab": "monster9"
+  },
+  {
+    "monsterUID": 43,
+    "speed": 1.7,
+    "maxHP": 750000,
+    "armor": 70,
+    "monsterName": "타락한 성기사",
+    "monsterPrefab": "monster9"
+  },
+  {
+    "monsterUID": 44,
+    "speed": 1.7,
+    "maxHP": 900000,
+    "armor": 72,
+    "monsterName": "타락한 성기사",
+    "monsterPrefab": "monster9"
+  },
+  {
+    "monsterUID": 45,
+    "speed": 1.7,
+    "maxHP": 1100000,
+    "armor": 74,
+    "monsterName": "타락한 성기사",
+    "monsterPrefab": "monster9"
+  },
+  {
+    "monsterUID": 46,
+    "speed": 2.0,
+    "maxHP": 1400000,
+    "armor": 76,
+    "monsterName": "암흑 제왕의 사도",
+    "monsterPrefab": "monster10"
+  },
+  {
+    "monsterUID": 47,
+    "speed": 2.0,
+    "maxHP": 1700000,
+    "armor": 78,
+    "monsterName": "암흑 제왕의 사도",
+    "monsterPrefab": "monster10"
+  },
+  {
+    "monsterUID": 48,
+    "speed": 2.0,
+    "maxHP": 2000000,
+    "armor": 80,
+    "monsterName": "암흑 제왕의 사도",
+    "monsterPrefab": "monster10"
+  },
+  {
+    "monsterUID": 49,
+    "speed": 2.0,
+    "maxHP": 2500000,
+    "armor": 85,
+    "monsterName": "암흑 제왕의 사도",
+    "monsterPrefab": "monster10"
+  },
+  {
+    "monsterUID": 50,
+    "speed": 2.0,
+    "maxHP": 3000000,
+    "armor": 90,
+    "monsterName": "암흑 제왕의 사도",
+    "monsterPrefab": "monster10"
   }
 ]

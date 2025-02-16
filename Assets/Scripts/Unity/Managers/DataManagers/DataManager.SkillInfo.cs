@@ -10,7 +10,7 @@ namespace Client
 
     public partial class DataManager : Logic.IDataManager
     {
-        private Dictionary<Define.SkillType , Logic.SkillInfoScript> _skillinfoDictionary = new Dictionary<Define.SkillType , Logic.SkillInfoScript>();
+        private Dictionary<int , Logic.SkillInfoScript> _skillinfoDictionary = new Dictionary<int , Logic.SkillInfoScript>();
 
         public void LoadSkillInfoScript()
         {
@@ -22,7 +22,7 @@ namespace Client
 
                 List<Logic.SkillInfoScript> dataList = JsonConvert.DeserializeObject<List<Logic.SkillInfoScript>>(json);
 
-                _skillinfoDictionary = dataList.ToDictionary(_ => _.skillType);
+                _skillinfoDictionary = dataList.ToDictionary(_ => _.skillUID);
             }
             else
             {
@@ -30,12 +30,12 @@ namespace Client
             }
         }
 
-        public Dictionary<Define.SkillType , Logic.SkillInfoScript> GetSkillInfoScriptDictionaryAll()
+        public Dictionary<int , Logic.SkillInfoScript> GetSkillInfoScriptDictionaryAll()
         {
             return _skillinfoDictionary;
         }
 
-        public Logic.SkillInfoScript GetSkillInfoScriptDictionary(Define.SkillType keyData)
+        public Logic.SkillInfoScript GetSkillInfoScriptDictionary(int keyData)
         {
             if(_skillinfoDictionary.TryGetValue(keyData, out var ret))
             {

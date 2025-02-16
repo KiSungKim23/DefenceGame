@@ -160,14 +160,14 @@ namespace Logic
         {
             _unitInfoScript = StageLogic.Data.GetUnitInfoScriptDictionary(uid);
 
-            _unitBaseSkillInfo = StageLogic.Data.GetSkillInfoScriptDictionary(_unitInfoScript.baseSkillType);
+            _unitBaseSkillInfo = StageLogic.Data.GetSkillInfoScriptDictionary(_unitInfoScript.baseSkillID);
             _unitSkillInfos = new List<SkillInfoScript>();
-            if (_unitInfoScript.skillType1 != 0)
-                _unitSkillInfos.Add(StageLogic.Data.GetSkillInfoScriptDictionary(_unitInfoScript.skillType1));
-            if (_unitInfoScript.skillType2 != 0)
-                _unitSkillInfos.Add(StageLogic.Data.GetSkillInfoScriptDictionary(_unitInfoScript.skillType2));
-            if (_unitInfoScript.skillType3 != 0)
-                _unitSkillInfos.Add(StageLogic.Data.GetSkillInfoScriptDictionary(_unitInfoScript.skillType3));
+            if (_unitInfoScript.skill1ID != 0)
+                _unitSkillInfos.Add(StageLogic.Data.GetSkillInfoScriptDictionary(_unitInfoScript.skill1ID));
+            if (_unitInfoScript.skill2ID != 0)
+                _unitSkillInfos.Add(StageLogic.Data.GetSkillInfoScriptDictionary(_unitInfoScript.skill2ID));
+            if (_unitInfoScript.skill3ID != 0)
+                _unitSkillInfos.Add(StageLogic.Data.GetSkillInfoScriptDictionary(_unitInfoScript.skill3ID));
 
         }
 

@@ -75,9 +75,21 @@ public class Define
     public enum SkillType
     {
         None = 0, //이건 나중에 스킬 하나 하나 만든것들 전부 넣으면 될듯 ex) FireBall 뭐 이런 느낌
-        Attack = 1, 
-        Slow = 2,
-        Stun = 3, 
+        FireBall,
+        WaterBall,
+        ThunderBolt,
+        WindSlash,
+        EarthSpike,
+        DarkOrb,
+        HolyRay,
+        FireBlast,
+        FrostSpike,
+        AquaBurst,
+        ThunderStrike,
+        WindCutter,
+        ShadowFang,
+        HolySmite,
+        QuakeCrash,
     }
 
     [JsonConverter(typeof(StringEnumConverter))]
@@ -85,6 +97,7 @@ public class Define
     {
         Moving = 1,// 이동 관련 버프
         Armor = 2,// 방어력 관련 버프
+        Health = 3,// 체력 다는거
     }
 
     public enum SectionButtonType

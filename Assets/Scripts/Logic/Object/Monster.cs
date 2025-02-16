@@ -24,51 +24,57 @@ namespace Logic
 
         public Vector3 _destPosition;
 
-        public float _speed = 1.3f;
+        public float _speed;
         private int _waypointIndex = 0;
 
         (int, int) _nowSectionIndex;
 
-        private int _maxHP;
-        private int _currentHP;
+        private int _objectID;
+
+        private long _maxHP;
+        private long _currentHP;
+        private int _armor;
 
         public List<Buff> _buffList = new List<Buff>();
 
         public (int, int) NowSectionIndex { get { return _nowSectionIndex; } }
 
-        public Monster(int UID)
+        public Monster(int objectID)
         {
-            _uid = UID;
+            _objectID = objectID;
             _state = Define.MonsterState.wait;
-
             _position = waypoints[0];
             _position.Y += (Define.SectionSize / 3);
             _destPosition = waypoints[1];
             _waypointIndex = 1;
-            _nowSectionIndex = (0, 0);
-            _maxHP = 100;
-            _currentHP = 100;
+            _nowSectionIndex = GetSectionIndex();
+            _maxHP = 0;
+            _currentHP = 0;
+            _speed = 0;
+            _armor = 0;
         }
 
         public override void Init(long createTick)
         {
             _currentTick = createTick;
             _state = Define.MonsterState.active;
-
             _position = waypoints[0];
             _position.Y += (Define.SectionSize / 3);
             _destPosition = waypoints[1];
             _waypointIndex = 1;
-            _nowSectionIndex = (0, 0);
-            _maxHP = 100;
-            _currentHP = 100;
+            _nowSectionIndex = GetSectionIndex();
         }
 
 
         public void SetMonster(long createTick, int stageLevel)
         {
             Init(createTick);
-            // stageLevel에 따라 맞는 
+
+            var monsterInfoScript = StageLogic.Data.GetMonsterInfoScriptDictionary(stageLevel);
+            _maxHP = monsterInfoScript.maxHP;
+            _currentHP = monsterInfoScript.maxHP;
+            _speed = monsterInfoScript.speed;
+            _armor = monsterInfoScript.armor;
         }
 
         public void Update(long tick)
@@ -144,9 +150,9 @@ namespace Logic
             return CheckSectionIndex(_position);
         }
 
-        public void GetDamaged(int damage)
+        public void GetDamaged(long baseDamage,float percentDamage)
         {
-            _currentHP -= damage;
+            _currentHP -= baseDamage;
 
             if (_currentHP < 0)
             {
@@ -244,17 +250,17 @@ namespace Logic
             return (0, maxIndex);
         }
 
-        public int GetUID()
+        public int GetObjectID()
         {
-            return _uid;
+            return _objectID;
         }
 
-        public int GetMaxHP()
+        public long GetMaxHP()
         {
             return _maxHP;
         }
 
-        public int GetCurrentHP()
+        public long GetCurrentHP()
         {
             return _currentHP;
         }
@@ -262,7 +268,7 @@ namespace Logic
         private float GetMonsterMovingDistance(long updateTick)
         {
 
-            float currentBuffValue = _buffList.Where(_ => _.GetEndTick() > _currentTick).Sum(_ => _.GetValue1());
+            float currentBuffValue = _buffList.Where(_ => _.GetEndTick() > _currentTick).Sum(_ => _.GetEffectStrength());
             var buffList = _buffList.OrderBy(_ => _.GetEndTick()).Where(_ => _.GetEndTick() > _currentTick).ToList();
 
             long buffEndTick = 0;
@@ -283,7 +289,7 @@ namespace Logic
 
                 ret += (buffEndTick - tempTick) * speed * Define.SpeedScaleFactor;
                 tempTick = buffEndTick;
-                currentBuffValue -= buff.GetValue1();
+                currentBuffValue -= buff.GetEffectStrength();
             }
 
             return ret == 0 ? (updateTick - _currentTick) * _speed * Define.SpeedScaleFactor : ret;
@@ -295,7 +301,7 @@ namespace Logic
             long currentTick = startTick;
             float distanceTemp = distance;
 
-            float currentBuffValue = _buffList.Where(_ => _.GetEndTick() > startTick).Sum(_ => _.GetValue1());
+            float currentBuffValue = _buffList.Where(_ => _.GetEndTick() > startTick).Sum(_ => _.GetEffectStrength());
             List<Buff> buffList = _buffList.Where(_ => _.GetEndTick() > startTick).OrderBy(_ => _.GetEndTick()).ToList();
 
             if (buffList.Count == 0)
@@ -326,7 +332,7 @@ namespace Logic
                     distanceTemp -= MovementDistance ;
                     currentTick = buffEndTick;
 
-                    currentBuffValue -= buff.GetValue1();
+                    currentBuffValue -= buff.GetEffectStrength();
                 }
             }
 

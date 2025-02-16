@@ -11,7 +11,8 @@ namespace Logic
 
         List<BuffInfoScript> _buffInfoList = new List<BuffInfoScript>();
 
-        int _damage;
+        long _damage;
+        float _datamgePercent;
         long _durationTick;
 
         bool _acktive;
@@ -21,14 +22,15 @@ namespace Logic
             _skillInfo = skillInfo;
             _acktive = false;
 
-            var skillBuffList = StageLogic.Data.GetSkillBuffInfoScriptListAll().FindAll(_ => _.skillType == _skillInfo.skillType);
+            var skillBuffList = StageLogic.Data.GetSkillBuffInfoScriptListAll().FindAll(_ => _.skillUID == _skillInfo.skillUID);
 
             foreach (var buffInfo in skillBuffList)
             {
                 _buffInfoList.Add(StageLogic.Data.GetBuffInfoScriptDictionary(buffInfo.buffUID));
             }
 
-            _damage = skillInfo.damage;
+            _damage = skillInfo.baseDamage;
+            _datamgePercent = skillInfo.damagePercent;
             _durationTick = (long)(skillInfo.durationTime * Define.OneSecondTick);
 
             _activeTick = createTick + _durationTick;
@@ -46,7 +48,7 @@ namespace Logic
 
             foreach (var monster in monsters)
             {
-                monster.GetDamaged(_damage);
+                monster.GetDamaged(_damage, _datamgePercent);
 
                 foreach (var buff in _buffInfoList)
                 {

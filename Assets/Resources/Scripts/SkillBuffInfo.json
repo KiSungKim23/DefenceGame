@@ -1,6 +1,102 @@
 [
   {
-    "skillType": "Slow",
-    "buffUID": 1
+    "skillUID": 3,
+    "buffUID": 3
+  },
+  {
+    "skillUID": 4,
+    "buffUID": 4
+  },
+  {
+    "skillUID": 5,
+    "buffUID": 13
+  },
+  {
+    "skillUID": 7,
+    "buffUID": 15
+  },
+  {
+    "skillUID": 8,
+    "buffUID": 16
+  },
+  {
+    "skillUID": 11,
+    "buffUID": 11
+  },
+  {
+    "skillUID": 12,
+    "buffUID": 12
+  },
+  {
+    "skillUID": 19,
+    "buffUID": 35
+  },
+  {
+    "skillUID": 20,
+    "buffUID": 36
+  },
+  {
+    "skillUID": 23,
+    "buffUID": 28
+  },
+  {
+    "skillUID": 26,
+    "buffUID": 20
+  },
+  {
+    "skillUID": 28,
+    "buffUID": 3
+  },
+  {
+    "skillUID": 29,
+    "buffUID": 4
+  },
+  {
+    "skillUID": 31,
+    "buffUID": 7
+  },
+  {
+    "skillUID": 32,
+    "buffUID": 8
+  },
+  {
+    "skillUID": 34,
+    "buffUID": 15
+  },
+  {
+    "skillUID": 35,
+    "buffUID": 16
+  },
+  {
+    "skillUID": 37,
+    "buffUID": 11
+  },
+  {
+    "skillUID": 38,
+    "buffUID": 12
+  },
+  {
+    "skillUID": 43,
+    "buffUID": 23
+  },
+  {
+    "skillUID": 44,
+    "buffUID": 24
+  },
+  {
+    "skillUID": 46,
+    "buffUID": 19
+  },
+  {
+    "skillUID": 47,
+    "buffUID": 20
+  },
+  {
+    "skillUID": 49,
+    "buffUID": 35
+  },
+  {
+    "skillUID": 50,
+    "buffUID": 36
   }
 ]
