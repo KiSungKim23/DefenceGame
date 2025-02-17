@@ -70,7 +70,7 @@ namespace Logic
             _count = 1;
             _activeCount = 0;
 
-            var unionScriptList = StageLogic.Data.GetUnitUnionInfoScriptListAll().FindAll(_=>_.mainMaterialUID == _uid);
+            var unionScriptList = StageLogic.Instance.dataManager.GetUnitUnionInfoScriptListAll().FindAll(_=>_.mainMaterialUID == _uid);
 
             foreach(var unionScript in unionScriptList)
             {
@@ -152,7 +152,7 @@ namespace Logic
         {
             if (_unitUnionInfo.TryGetValue(index, out var ret))
             {
-                return StageLogic.Instance.CheckUnitUnion(ret); ;
+                return StageLogic.Instance.unitManager.CheckUnitUnion(ret); ;
             }
             return false;
 

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -7,11 +8,16 @@ namespace Logic
     {
         long _tick = 0;
 
+        public Action<Unit> ActiveUnitCreated;
+        public Action<Unit> ActiveUnitRemoved;
+
         public Dictionary<int, UnitData> _allUnit = new Dictionary<int, UnitData>();
         public List<Unit> _activeUnit = new List<Unit>();
 
         public Dictionary<int, UnitData> AllUnit { get { return _allUnit; } }
         public List<Unit> ActiveUnit { get { return _activeUnit; } }
+
+        private List<(long, UnitUnionInfo)> _unionDatas = new List<(long, UnitUnionInfo)>();
 
         private int _objectIndex = 0;
 
@@ -25,6 +31,8 @@ namespace Logic
             {
                 unit.Update(currentTick);
             }
+
+            UnionUnit(currentTick);
         }
 
         public void Init(long Tick)
@@ -62,11 +70,6 @@ namespace Logic
 
         public void GetUnitInfo(int stageLevel)
         {
-            //stageLevel에 따라 지급하는 유닛 카드 갯수 차이가 있음
-
-            //랜덤으로 줘야하는데 일단은 테스트 용이니까 2종류만 주자 1 -> 딜 2 -> 속박으로 세팅해서 작업 ㄱㄱ 
-            //나중에 long으로 4개 놓고 비트연산 해서 고정으로 랜덤 테이블 갖는거 만들거임
-
             List<UnitData> retList = new List<UnitData>();
 
             if (stageLevel == 0)
@@ -112,6 +115,17 @@ namespace Logic
 
         }
 
+        public bool CheckUnitUnion(UnitUnionInfo unionInfoList)
+        {
+            foreach (var material in unionInfoList.GetMaterials())
+            {
+                if (CheckCanUsingUnit(material.Key, material.Value) == false)
+                    return false;
+            }
+
+            return true;
+        }
+
         public bool CheckCanUsingUnit(int materialUID, int materialCount)
         {
             if(_allUnit.TryGetValue(materialUID, out var data))
@@ -155,7 +169,7 @@ namespace Logic
 
         public void RemoveActiveUnit(Logic.Unit removeUnit)
         {
-            StageLogic.Instance.ActiveUnitRemoved.Invoke(removeUnit);
+            ActiveUnitRemoved.Invoke(removeUnit);
             removeUnit.Clear();
             _activeUnit.Remove(removeUnit);
         }
@@ -193,6 +207,50 @@ namespace Logic
 
             return false;
         }
+
+        public void UnionUnit(long updateTick)
+        {
+            var deleteUnionDataList = _unionDatas.FindAll(_ => _.Item1 < updateTick);
+            foreach (var uniondata in deleteUnionDataList)
+            {
+                UnitUnion(uniondata.Item2);
+                _unionDatas.Remove(uniondata);
+            }
+        }
+
+        public void UnitUnion(UnitUnionInfo unitInfoData)
+        {
+            if (unitInfoData != null)
+            {
+                foreach (var material in unitInfoData.GetMaterials())
+                {
+                    UsingUnit(material.Key, material.Value);
+                }
+
+                AddUnitInfo(unitInfoData.GetCreatedUID());
+            }
+        }
+
+        public void AddUnionData(long addTick, UnitUnionInfo unitdata)
+        {
+            _unionDatas.Add((addTick, unitdata));
+        }
+
+        public bool SetUnit(UnitData unitInfo, (int, int) section, long createTime)
+        {
+            var activeUnit = SetUnitActive(unitInfo, section, createTime);
+            if (activeUnit == null)
+                return false;
+
+            ActiveUnitCreated.Invoke(activeUnit);
+            return true;
+        }
+
+        public void MoveUnit(Unit unit, (int, int) section)
+        {
+            unit.MovePosition(section);
+        }
+
 
     }
 }

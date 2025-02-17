@@ -119,7 +119,7 @@ namespace Client
 
         void UpgradeUnit(int upgradeGrade)
         {
-            Managers.Stage.UpgradeGrade(upgradeGrade);
+            Managers.Stage.unitManager.UpgradeGrade(upgradeGrade);
         }
 
         void DrawHero()

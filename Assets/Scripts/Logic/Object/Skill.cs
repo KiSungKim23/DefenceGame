@@ -22,11 +22,11 @@ namespace Logic
             _skillInfo = skillInfo;
             _acktive = false;
 
-            var skillBuffList = StageLogic.Data.GetSkillBuffInfoScriptListAll().FindAll(_ => _.skillUID == _skillInfo.skillUID);
+            var skillBuffList = StageLogic.Instance.dataManager.GetSkillBuffInfoScriptListAll().FindAll(_ => _.skillUID == _skillInfo.skillUID);
 
             foreach (var buffInfo in skillBuffList)
             {
-                _buffInfoList.Add(StageLogic.Data.GetBuffInfoScriptDictionary(buffInfo.buffUID));
+                _buffInfoList.Add(StageLogic.Instance.dataManager.GetBuffInfoScriptDictionary(buffInfo.buffUID));
             }
 
             _damage = skillInfo.baseDamage;

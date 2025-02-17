@@ -77,7 +77,7 @@ namespace Client
         {
             if (_activeUnitButton == null)
             {
-                if (Managers.Stage.SetUnit(_unitInfo, GetUnitSectionIndex(), Managers.Stage.GetCurrentTick()) == false)
+                if (Managers.Stage.unitManager.SetUnit(_unitInfo, GetUnitSectionIndex(), Managers.Stage.GetCurrentTick()) == false)
                 {
                     Debug.LogError("이미 유닛 있음 나중에 팝업 띄우는 식으로 ㄱ");
                 }
@@ -86,7 +86,7 @@ namespace Client
             {
                 var data = _activeUnitButton.GetUnitObject();
                 _activeUnitButton.ResetUnitData();
-                Managers.Stage.MoveUnit(data.GetUnitData(), GetUnitSectionIndex());
+                Managers.Stage.unitManager.MoveUnit(data.GetUnitData(), GetUnitSectionIndex());
                 gameScene.SetUnitDataInUnitButton(GetUnitSectionIndex(), data);
                 data.MoveUnitPosition();
 

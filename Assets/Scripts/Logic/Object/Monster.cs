@@ -70,7 +70,7 @@ namespace Logic
         {
             Init(createTick);
 
-            var monsterInfoScript = StageLogic.Data.GetMonsterInfoScriptDictionary(stageLevel);
+            var monsterInfoScript = StageLogic.Instance.dataManager.GetMonsterInfoScriptDictionary(stageLevel);
             _maxHP = monsterInfoScript.maxHP;
             _currentHP = monsterInfoScript.maxHP;
             _speed = monsterInfoScript.speed;

@@ -668,6 +668,10 @@
       <HintPath>Library\PackageCache\com.unity.collab-proxy@2.6.0\Lib\Editor\Unity.Plastic.Newtonsoft.Json.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>Assets\Packages\Newtonsoft.Json.13.0.3\lib\netstandard2.0\Newtonsoft.Json.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="log4netPlastic">
       <HintPath>Library\PackageCache\com.unity.collab-proxy@2.6.0\Lib\Editor\log4netPlastic.dll</HintPath>
       <Private>False</Private>
@@ -690,10 +694,6 @@
     </Reference>
     <Reference Include="Unity.VisualScripting.TextureAssets">
       <HintPath>Library\PackageCache\com.unity.visualscripting@1.9.4\Editor\VisualScripting.Core\EditorAssetResources\Unity.VisualScripting.TextureAssets.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>Assets\Packages\Newtonsoft.Json.13.0.3\lib\netstandard2.0\Newtonsoft.Json.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.Android.Types">

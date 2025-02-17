@@ -48,7 +48,7 @@ namespace Logic
 
         public void Update(long currentTick)
         {
-            if (_targetSection != null && StageLogic.Instance.CheckUnitAttack())
+            if (_targetSection != null && StageLogic.Instance.monsterManager.CheckUnitAttack())
             {
                 if (_canAttackTick <= _targetSetTick)
                 {
@@ -137,7 +137,7 @@ namespace Logic
 
         public void UnitAttack(long tick, Section sectionData)
         {
-            if (StageLogic.Instance.CheckUnitAttack() && _canAttackTick <= tick)
+            if (StageLogic.Instance.monsterManager.CheckUnitAttack() && _canAttackTick <= tick)
             {
                 Skill addSkill = new Skill(GetActiveSkill(), tick);
                 sectionData.AddSkill(addSkill);
@@ -158,16 +158,16 @@ namespace Logic
 
         private void SetScript(int uid)
         {
-            _unitInfoScript = StageLogic.Data.GetUnitInfoScriptDictionary(uid);
+            _unitInfoScript = StageLogic.Instance.dataManager.GetUnitInfoScriptDictionary(uid);
 
-            _unitBaseSkillInfo = StageLogic.Data.GetSkillInfoScriptDictionary(_unitInfoScript.baseSkillID);
+            _unitBaseSkillInfo = StageLogic.Instance.dataManager.GetSkillInfoScriptDictionary(_unitInfoScript.baseSkillID);
             _unitSkillInfos = new List<SkillInfoScript>();
             if (_unitInfoScript.skill1ID != 0)
-                _unitSkillInfos.Add(StageLogic.Data.GetSkillInfoScriptDictionary(_unitInfoScript.skill1ID));
+                _unitSkillInfos.Add(StageLogic.Instance.dataManager.GetSkillInfoScriptDictionary(_unitInfoScript.skill1ID));
             if (_unitInfoScript.skill2ID != 0)
-                _unitSkillInfos.Add(StageLogic.Data.GetSkillInfoScriptDictionary(_unitInfoScript.skill2ID));
+                _unitSkillInfos.Add(StageLogic.Instance.dataManager.GetSkillInfoScriptDictionary(_unitInfoScript.skill2ID));
             if (_unitInfoScript.skill3ID != 0)
-                _unitSkillInfos.Add(StageLogic.Data.GetSkillInfoScriptDictionary(_unitInfoScript.skill3ID));
+                _unitSkillInfos.Add(StageLogic.Instance.dataManager.GetSkillInfoScriptDictionary(_unitInfoScript.skill3ID));
 
         }
 

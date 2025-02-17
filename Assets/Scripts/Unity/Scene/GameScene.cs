@@ -43,9 +43,9 @@ namespace Client
         void Start()
         {
             //Stage.Init(DateTime.UtcNow.Ticks);
-            Managers.Stage.MonsterCreated = CreateMonster;
-            Managers.Stage.ActiveUnitCreated = CreateActiveUnit;
-            Managers.Stage.ActiveUnitRemoved = RemoveActiveUnit;
+            Managers.Stage.monsterManager.MonsterCreated = CreateMonster;
+            Managers.Stage.unitManager.ActiveUnitCreated = CreateActiveUnit;
+            Managers.Stage.unitManager.ActiveUnitRemoved = RemoveActiveUnit;
 
             CreateSectionData();
             gamePannal.Init();

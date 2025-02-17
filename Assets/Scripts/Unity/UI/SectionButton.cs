@@ -99,7 +99,7 @@ namespace Client
 
         public void DeActiveUnit()
         {
-            Managers.Stage.RemoveActiveUnit(_unitData.GetUnitData());
+            Managers.Stage.unitManager.RemoveActiveUnit(_unitData.GetUnitData());
             ResetUnitData();
         }
 

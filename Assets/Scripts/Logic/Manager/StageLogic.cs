@@ -9,12 +9,6 @@ namespace Logic
         #region variable
         public int _stageLevel;
         long _stageStartTick;
-        long _addMonsterTick;
-        private int _stageMonsterCount;
-        private int _activeMonsterCount;
-
-        public int StageMonsterCount { get { return _stageMonsterCount; } }
-        public int ActiveMonsterCount { get { return _activeMonsterCount; } }
 
         public int StageLevel { get { return _stageLevel; } }
         public long StageStartTick { get { return _stageStartTick; } }
@@ -45,23 +39,17 @@ namespace Logic
         UnitManager _unit = new UnitManager();
         IDataManager _data;
 
-        public static UnitManager Unit { get { return _instance._unit; } }
-        public static MonsterManager Monster { get { return _instance._monster; } }
-
-        public static IDataManager Data { get { return _instance._data; } }
+        public UnitManager unitManager { get { return _instance._unit; } }
+        public MonsterManager monsterManager { get { return _instance._monster; } }
+        public IDataManager dataManager { get { return _instance._data; } }
         #endregion
 
         #region action
-        public Action<Monster> MonsterCreated;
-        public Action<Unit> ActiveUnitCreated;
-        public Action<Unit> ActiveUnitRemoved;
         public Action<UnitData> UnitCardAdd;
         #endregion
 
         #region system
         private Dictionary<(int, int), Section> _sectionDatas = new Dictionary<(int, int), Section>();
-
-        private List<(long, UnitUnionInfo)> _unionDatas = new List<(long, UnitUnionInfo)>();
 
         private BaseRandomProbabiltty randomProbabiltty;
 
@@ -105,11 +93,9 @@ namespace Logic
             }
 
             _updateTick = currentTick;
-            Unit.Init(_updateTick);
-            Monster.Init(_updateTick);
-
+            unitManager.Init(_updateTick);
             _stageStartTick = _updateTick + (long)(Define.ReadyStageTime * Define.OneSecondTick);
-            _addMonsterTick = _stageStartTick;
+            monsterManager.Init(_stageStartTick);
 
             SetSectionData();
         }
@@ -121,61 +107,33 @@ namespace Logic
 
             while(_updateTick < currentTick)
             {
-                if (_activeMonsterCount >= Define.MonsterMaxCount)
+                if (_monster.StageMonsterCount >= Define.MonsterMaxCount)
                     return;
 
                  _updateTick = CheckUpdateTick(currentTick);
-                StageMonsterCreate();
-                Monster.Update(_updateTick);
-                Unit.Update(_updateTick);
+                if (_updateTick >= _stageStartTick) StageStart();
+                monsterManager.Update(_updateTick);
+                unitManager.Update(_updateTick);
                 SectionUpdate(_updateTick); 
-                
-                UnionUnit(_updateTick);
             }
         }
 
         private long CheckUpdateTick(long currentTick)
         {
             long updateTick = _stageStartTick < currentTick ? _stageStartTick : currentTick;
-            updateTick = (_addMonsterTick < updateTick && _stageMonsterCount < Define.MonsterStageCreateCount) ? _stageStartTick : updateTick;
-            long checkMonsterUpdateTick = _monster.GetUpdateTick(currentTick);
-            updateTick = checkMonsterUpdateTick < updateTick ? checkMonsterUpdateTick : updateTick;
+            updateTick = monsterManager.GetUpdateTick(currentTick, updateTick);
             updateTick = CheckSkillActiveTick(updateTick);
             return updateTick;
         }
-
-        public void StageMonsterCreate()
-        {
-            if (_updateTick >= _stageStartTick)
-            {
-                StageStart(_updateTick);
-            }
-
-            if (_stageMonsterCount >= Define.MonsterStageCreateCount)
-            {
-                return;
-            }
-
-            if (_addMonsterTick <= _updateTick)
-            {
-                var monster = Monster.AddMonster(_addMonsterTick);
-                _addMonsterTick += (long)(Define.MonsterCreateTime * Define.OneSecondTick);
-                _stageMonsterCount++;
-                _activeMonsterCount++;
-                MonsterCreated.Invoke(monster);
-            }
-        }
-
         public static void Clear()
         {
             //Clear
         }
 
-        private void StageStart(long updateTick)
+        private void StageStart()
         {
             _unit.GetUnitInfo(_stageLevel);
-            _stageMonsterCount = 0;
-            _addMonsterTick = _stageStartTick;
+            _monster.SetStageStart(_stageStartTick);
             _stageStartTick += (long)(Define.DuringStageTime * Define.OneSecondTick);
             _stageLevel++;
         }
@@ -195,75 +153,6 @@ namespace Logic
                     }
                 }
             }
-        }
-
-        public bool SetUnit(UnitData unitInfo, (int, int) section, long createTime)
-        {
-            var activeUnit = _unit.SetUnitActive(unitInfo, section, createTime);
-            if (activeUnit == null)
-                return false;
-
-            ActiveUnitCreated.Invoke(activeUnit);
-            return true;
-        }
-
-        public void MoveUnit(Unit unit, (int, int) section)
-        {
-            unit.MovePosition(section);
-        }
-
-        public bool CheckUnitAttack()
-        {
-            if(_activeMonsterCount >= 0 || _stageMonsterCount <= Define.MonsterStageCreateCount)
-            {
-                return true;
-            }
-
-            return false;
-        }
-
-        public bool CheckUnitUnion(UnitUnionInfo unionInfoList)
-        {
-            foreach(var material in unionInfoList.GetMaterials())
-            {
-                if (_unit.CheckCanUsingUnit(material.Key, material.Value) == false)
-                    return false;
-            }
-
-            return true;
-        }
-
-        public void UnionUnit(long updateTick)
-        {
-            var deleteUnionDataList = _unionDatas.FindAll(_ => _.Item1 < updateTick);
-            foreach (var uniondata in deleteUnionDataList)
-            {
-                UnitUnion(uniondata.Item2);
-                _unionDatas.Remove(uniondata);
-            }
-        }
-
-        public void UnitUnion(UnitUnionInfo unitInfoData)
-        {
-            if(unitInfoData != null)
-            {
-                foreach(var material in unitInfoData.GetMaterials())
-                {
-                    _unit.UsingUnit(material.Key, material.Value);
-                }
-
-                _unit.AddUnitInfo(unitInfoData.GetCreatedUID());
-            }
-        }
-
-        public void AddUnionData(long addTick, UnitUnionInfo unitdata)
-        {
-            _unionDatas.Add((addTick, unitdata));
-        }
-
-        public void UpgradeGrade(int upgradeGrade)
-        {
-            _unit.UpgradeGrade(upgradeGrade);
         }
 
         public long GetCurrentTick()
@@ -290,11 +179,6 @@ namespace Logic
             }
 
             return ret;
-        }
-
-        public void RemoveActiveUnit(Unit activeUnit)
-        {
-            Unit.RemoveActiveUnit(activeUnit);
         }
 
         public void SetDataManager(IDataManager dataManager)

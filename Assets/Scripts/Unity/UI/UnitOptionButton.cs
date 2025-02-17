@@ -61,7 +61,7 @@ namespace Client
         {
             if (_unitData.CheckCanUnion(unionUID))
             {
-                Managers.Stage.AddUnionData(Managers.Stage.GetCurrentTick() + (Define.OneSecondTick / 100), _unitData.GetUnitUnionData(unionUID));
+                Managers.Stage.unitManager.AddUnionData(Managers.Stage.GetCurrentTick() + (Define.OneSecondTick / 100), _unitData.GetUnitUnionData(unionUID));
             }
             UnitSetting.gameObject.SetActive(false);
             gameObject.SetActive(false);

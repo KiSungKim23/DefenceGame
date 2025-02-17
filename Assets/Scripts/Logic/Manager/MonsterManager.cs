@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,25 +7,32 @@ namespace Logic
 {
     public class MonsterManager
     {
-        long _tick = 0;
+
+        long _addMonsterTick;
+        private int _stageMonsterCount;
+        private int _activeMonsterCount;
+
+        public int StageMonsterCount { get { return _stageMonsterCount; } }
+
+        public Action<Monster> MonsterCreated;
 
         private Dictionary<int, Monster> _monsters = new Dictionary<int, Monster>();
 
-        public void Init(long tick)
+        public void Init(long stageStartTick)
         {
-            _tick = tick;
+            _addMonsterTick = stageStartTick;
             SetMonsterInit();
         }
 
-        public void Update(long tick)
+        public void Update(long updateTick)
         {
-            _tick = tick;
+            MonsterCreate(updateTick);
 
             foreach (var monster in _monsters)
             {
                 if (monster.Value.State == Define.MonsterState.active)
                 {
-                    monster.Value.Update(_tick);
+                    monster.Value.Update(updateTick);
 
                     ((int, int), (int, int)) sectionData = monster.Value.GetSectionData();
                     if (sectionData.Item1 != sectionData.Item2)
@@ -36,7 +44,6 @@ namespace Logic
                 }
             }
         }
-
 
         public Monster AddMonster(long CreateTick)
         {
@@ -58,21 +65,57 @@ namespace Logic
             }
         }
 
-        public long GetUpdateTick(long currentTick)
+        public long GetUpdateTick(long currentTick, long updateTick)
         {
-            long ret = currentTick;
+            if (_addMonsterTick < updateTick && _stageMonsterCount < Define.MonsterStageCreateCount)
+            {
+                updateTick = _addMonsterTick;
+            }
 
             foreach (var monster in _monsters)
             {
                 if (monster.Value.State == Define.MonsterState.active)
                 {
                     long checkTick = monster.Value.CheckUpdateTick(currentTick);
-                    ret = checkTick < ret ? checkTick : ret;
+                    if (checkTick < updateTick)
+                        updateTick = checkTick;
                 }
             }
-
-            return ret;
-
+            return updateTick;
         }
+
+        public void SetStageStart(long stageStartTick)
+        {
+            _stageMonsterCount = 0;
+            _addMonsterTick = stageStartTick;
+        }
+
+        public void MonsterCreate(long updateTick)
+        {
+            if (_stageMonsterCount >= Define.MonsterStageCreateCount)
+            {
+                return;
+            }
+
+            if (_addMonsterTick <= updateTick)
+            {
+                var monster = AddMonster(_addMonsterTick);
+                _addMonsterTick += (long)(Define.MonsterCreateTime * Define.OneSecondTick);
+                _stageMonsterCount++;
+                _activeMonsterCount++;
+                MonsterCreated.Invoke(monster);
+            }
+        }
+
+        public bool CheckUnitAttack()
+        {
+            if (_activeMonsterCount >= 0 || _stageMonsterCount <= Define.MonsterStageCreateCount)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
     }
 }
