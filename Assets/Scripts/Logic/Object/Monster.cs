@@ -154,7 +154,7 @@ namespace Logic
         {
             _currentHP -= baseDamage;
 
-            if (_currentHP < 0)
+            if (_currentHP <= 0)
             {
                 _state = Define.MonsterState.dead;
             }
@@ -173,7 +173,13 @@ namespace Logic
 
             bool isFirst = false;
 
-            Section checkSection = StageLogic.Instance.SectionDatas[index];
+            Section checkSection = StageLogic.Instance.sectionManager.GetSectionData(index);
+
+            if(checkSection == null)
+            {
+                StageLogic.Instance.errorOccurred.Invoke(Define.Errors.E_LogicError);
+                return ret;
+            }
 
             while (checkTick < tick)
             {
@@ -192,6 +198,8 @@ namespace Logic
 
                 checkTick = exitTick;
                 checkSection = GetNextSection(checkSection);
+                if (checkSection == null)
+                    return ret;
                 isFirst = true;
             }
 
@@ -223,7 +231,12 @@ namespace Logic
         private Section GetNextSection(Section currentSection)
         {
             (int, int) nextIndex = GetNextSectionIndex(currentSection.GetSectionIndex());
-            return StageLogic.Instance.SectionDatas[nextIndex];
+            var nextSection = StageLogic.Instance.sectionManager.GetSectionData(nextIndex);
+            if(nextSection == null)
+            {
+                StageLogic.Instance.errorOccurred.Invoke(Define.Errors.E_LogicError);
+            }
+            return nextSection;
         }
 
         private (int, int) GetNextSectionIndex((int, int) currentIndex)

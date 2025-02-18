@@ -45,7 +45,7 @@ namespace Client
 
         public void Init()
         {
-            Managers.Stage.UnitCardAdd = CreateUnitButton;
+            Managers.Stage.unitManager.UnitCardAdd = CreateUnitButton;
 
             unitPannalBtn.OnClickAsObservable().Subscribe(_ => ChangePannal(Define.PannalType.Unit));
             upgradePannalBtn.OnClickAsObservable().Subscribe(_ => ChangePannal(Define.PannalType.Upgrade));

@@ -31,42 +31,28 @@ namespace Logic
                 return _instance;
             }
         }
-
         #endregion
+
+        public Action<Define.Errors> errorOccurred;
+        public Action<string> debug;
 
         #region manager
         MonsterManager _monster = new MonsterManager();
         UnitManager _unit = new UnitManager();
+        SectionManager _section = new SectionManager();
         IDataManager _data;
 
-        public UnitManager unitManager { get { return _instance._unit; } }
-        public MonsterManager monsterManager { get { return _instance._monster; } }
-        public IDataManager dataManager { get { return _instance._data; } }
-        #endregion
-
-        #region action
-        public Action<UnitData> UnitCardAdd;
+        public UnitManager unitManager { get { return Instance._unit; } }
+        public MonsterManager monsterManager { get { return Instance._monster; } }
+        public SectionManager sectionManager { get { return Instance._section; } }
+        public IDataManager dataManager { get { return Instance._data; } }
         #endregion
 
         #region system
-        private Dictionary<(int, int), Section> _sectionDatas = new Dictionary<(int, int), Section>();
-
         private BaseRandomProbabiltty randomProbabiltty;
 
         public long RandomValue { get { return randomProbabiltty.GetRandomValue(); } }
 
-        public Dictionary<(int, int), Section> SectionDatas 
-        { 
-            get 
-            { 
-                if(_sectionDatas.Count == 0)
-                {
-                    SetSectionData();
-                }
-
-                return _instance._sectionDatas; 
-            } 
-        }
         #endregion
 
         public void Init(long currentTick)
@@ -93,11 +79,10 @@ namespace Logic
             }
 
             _updateTick = currentTick;
-            unitManager.Init(_updateTick);
-            _stageStartTick = _updateTick + (long)(Define.ReadyStageTime * Define.OneSecondTick);
+            _stageStartTick = currentTick + (long)(Define.ReadyStageTime * Define.OneSecondTick);
+            unitManager.Init();
             monsterManager.Init(_stageStartTick);
-
-            SetSectionData();
+            sectionManager.Init();
         }
 
         public void Update(long currentTick)
@@ -111,10 +96,11 @@ namespace Logic
                     return;
 
                  _updateTick = CheckUpdateTick(currentTick);
+                debug.Invoke(monsterManager.StageMonsterCount.ToString());
                 if (_updateTick >= _stageStartTick) StageStart();
                 monsterManager.Update(_updateTick);
-                unitManager.Update(_updateTick);
-                SectionUpdate(_updateTick); 
+                unitManager.Update(_updateTick); 
+                sectionManager.Update(_updateTick);
             }
         }
 
@@ -122,12 +108,8 @@ namespace Logic
         {
             long updateTick = _stageStartTick < currentTick ? _stageStartTick : currentTick;
             updateTick = monsterManager.GetUpdateTick(currentTick, updateTick);
-            updateTick = CheckSkillActiveTick(updateTick);
+            updateTick = sectionManager.CheckSkillActiveTick(updateTick);
             return updateTick;
-        }
-        public static void Clear()
-        {
-            //Clear
         }
 
         private void StageStart()
@@ -138,52 +120,19 @@ namespace Logic
             _stageLevel++;
         }
 
-        public void SetSectionData()
-        {
-            if (_sectionDatas.Count == 0)
-            {
-                for (int i = 0; i < Define.SectionCount; i++)
-                {
-                    for (int j = 0; j < Define.SectionCount; j++)
-                    {
-                        if (i == 0 || i == Define.SectionCount - 1 || j == 0 || j == Define.SectionCount - 1)
-                        {
-                            _sectionDatas.Add((i, j), new Section((i, j)));
-                        }
-                    }
-                }
-            }
-        }
-
         public long GetCurrentTick()
         {
             return _updateTick;
         }
 
-        public void SectionUpdate(long updateTick)
-        {
-            foreach(var section in _sectionDatas)
-            {
-                section.Value.Update(updateTick);
-            }
-        }
-
-        public long CheckSkillActiveTick(long checkTick)
-        {
-            long ret = checkTick;
-
-            foreach(var section in _sectionDatas)
-            {
-                long sectionCheckTick = section.Value.CheckActiveSkillTick();
-                ret = ((sectionCheckTick == 0) || (ret < sectionCheckTick)) ? ret : sectionCheckTick;
-            }
-
-            return ret;
-        }
-
         public void SetDataManager(IDataManager dataManager)
         {
             _data = dataManager;
+        }
+
+        public static void Clear()
+        {
+            //Clear
         }
     }
 }

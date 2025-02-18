@@ -37,11 +37,44 @@ namespace Logic
                     ((int, int), (int, int)) sectionData = monster.Value.GetSectionData();
                     if (sectionData.Item1 != sectionData.Item2)
                     {
-                        StageLogic.Instance.SectionDatas[sectionData.Item1].RemoveSectionMonsterData(monster.Value);
-                        StageLogic.Instance.SectionDatas[sectionData.Item2].AddSectionMonsterData(monster.Value);
+                        var removeSection = StageLogic.Instance.sectionManager.GetSectionData(sectionData.Item1);
+                        if (removeSection != null)
+                        {
+                            removeSection.RemoveSectionMonsterData(monster.Value);
+                        }
+                        else StageLogic.Instance.errorOccurred.Invoke(Define.Errors.E_LogicError);
+
+                        var moveSection = StageLogic.Instance.sectionManager.GetSectionData(sectionData.Item2);
+                        if (moveSection != null)
+                        {
+                            moveSection.AddSectionMonsterData(monster.Value);
+                        }
+                        else StageLogic.Instance.errorOccurred.Invoke(Define.Errors.E_LogicError);
+
                         monster.Value.SetSectionIndex(sectionData.Item2);
                     }
                 }
+            }
+        }
+
+        public void MonsterDead(List<Monster> monsters)
+        {
+            bool isDeadMoster = (monsters.Count != 0);
+
+            foreach(var monster in monsters)
+            {
+                var sectionData = StageLogic.Instance.sectionManager.GetSectionData(monster.GetSectionIndex());
+
+                if (sectionData != null)
+                {
+                    sectionData.RemoveSectionMonsterData(monster);
+                }
+                else StageLogic.Instance.errorOccurred(Define.Errors.E_LogicError);
+            }
+
+            if(monsters.Count != 0)
+            {
+                StageLogic.Instance.monsterManager.SetStageCount();
             }
         }
 
@@ -49,7 +82,15 @@ namespace Logic
         {
             var createMonster = _monsters.FirstOrDefault(monster => monster.Value.State == Define.MonsterState.dead || monster.Value.State == Define.MonsterState.wait);
             createMonster.Value.SetMonster(CreateTick, StageLogic.Instance.StageLevel);
-            StageLogic.Instance.SectionDatas[createMonster.Value.NowSectionIndex].AddSectionMonsterData(createMonster.Value);
+            var addMonsterSection = StageLogic.Instance.sectionManager.GetSectionData(createMonster.Value.NowSectionIndex);
+            if (addMonsterSection != null)
+            {
+                addMonsterSection.AddSectionMonsterData(createMonster.Value);
+            }
+            else
+            {
+                StageLogic.Instance.errorOccurred.Invoke(Define.Errors.E_LogicError);
+            }
             return createMonster.Value;
         }
 
@@ -102,8 +143,8 @@ namespace Logic
                 var monster = AddMonster(_addMonsterTick);
                 _addMonsterTick += (long)(Define.MonsterCreateTime * Define.OneSecondTick);
                 _stageMonsterCount++;
-                _activeMonsterCount++;
                 MonsterCreated.Invoke(monster);
+                SetStageCount();
             }
         }
 
@@ -116,6 +157,10 @@ namespace Logic
 
             return false;
         }
-
+        
+        public void SetStageCount()
+        {
+            _activeMonsterCount = _monsters.Where(_ => _.Value.State == Define.MonsterState.active).ToList().Count;
+        }
     }
 }

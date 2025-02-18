@@ -100,7 +100,7 @@ namespace Logic
             foreach(var skill in noneActiveSkill)
             {
                 var tick = skill.GetActiveTick();
-                ret = ret == 0 || ret < tick ? tick : ret;
+                ret = ret == 0 || tick < ret ? tick : ret;
             }
             return ret;
         }

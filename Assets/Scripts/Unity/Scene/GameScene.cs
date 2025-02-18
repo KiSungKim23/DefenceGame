@@ -163,7 +163,7 @@ namespace Client
             var sectionComponent = gameObject.GetComponent<SectionObject>();
             if (sectionComponent != null)
             {
-                if (Managers.Stage.SectionDatas.TryGetValue((i, j), out var section))
+                if (Managers.Stage.sectionManager.SectionDatas.TryGetValue((i, j), out var section))
                 {
                     sectionComponent.SetSection(section);
                     _sections.Add((i, j), sectionComponent);

@@ -48,7 +48,19 @@ namespace Client
 
                 Data.Init();
                 Stage.SetDataManager(Data);
+                Stage.errorOccurred = s_instance.ShowError;
+                Stage.debug = s_instance.ShowDebug;
             }
+        }
+
+        public void ShowError(Define.Errors error)
+        {
+            Debug.LogError(error.ToString());
+        }
+
+        public void ShowDebug(string log)
+        {
+            Debug.Log(log);
         }
     }
 }

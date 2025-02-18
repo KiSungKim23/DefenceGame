@@ -125,7 +125,7 @@ namespace Logic
                 _canAttackSectionData.Clear();
             }
 
-            foreach (var sectionInfo in StageLogic.Instance.SectionDatas)
+            foreach (var sectionInfo in StageLogic.Instance.sectionManager.SectionDatas)
             {
                 if (Vector3.Distance(_position, sectionInfo.Value.GetSectionWorldPosition()) < _unitInfoScript.attackRange)
                 {
@@ -197,7 +197,7 @@ namespace Logic
 
         public void SetTarget((int, int) targetSectionIndex, long currentTick)
         {
-            if (StageLogic.Instance.SectionDatas.TryGetValue(targetSectionIndex, out var sectionData))
+            if (StageLogic.Instance.sectionManager.SectionDatas.TryGetValue(targetSectionIndex, out var sectionData))
             {
                 foreach (var section in _canAttackSectionData)
                 {

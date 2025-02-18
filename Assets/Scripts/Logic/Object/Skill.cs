@@ -29,7 +29,7 @@ namespace Logic
                 _buffInfoList.Add(StageLogic.Instance.dataManager.GetBuffInfoScriptDictionary(buffInfo.buffUID));
             }
 
-            _damage = skillInfo.baseDamage;
+            _damage = skillInfo.baseDamage + 400;
             _datamgePercent = skillInfo.damagePercent;
             _durationTick = (long)(skillInfo.durationTime * Define.OneSecondTick);
 
@@ -45,25 +45,23 @@ namespace Logic
         {
             _acktive = true;
 
-
             foreach (var monster in monsters)
             {
-                monster.GetDamaged(_damage, _datamgePercent);
-
-                foreach (var buff in _buffInfoList)
+                if (monster.State == Define.MonsterState.active)
                 {
-                    monster.AddBuff(new Buff(buff, _activeTick));
+                    monster.GetDamaged(_damage, _datamgePercent);
+
+                    foreach (var buff in _buffInfoList)
+                    {
+                        monster.AddBuff(new Buff(buff, _activeTick));
+                    }
                 }
             }
 
             sectionData.ActiveSkill.Invoke(this);
 
             var deadMonsterList = monsters.FindAll(_ => _.State == Define.MonsterState.dead);
-            foreach (var monster in deadMonsterList)
-            {
-                StageLogic.Instance.SectionDatas[monster.GetSectionIndex()].RemoveSectionMonsterData(monster);
-            }
-
+            StageLogic.Instance.monsterManager.MonsterDead(deadMonsterList);
         }
 
         public bool CheckActive()

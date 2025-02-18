@@ -6,10 +6,9 @@ namespace Logic
 {
     public class UnitManager
     {
-        long _tick = 0;
-
         public Action<Unit> ActiveUnitCreated;
         public Action<Unit> ActiveUnitRemoved;
+        public Action<UnitData> UnitCardAdd;
 
         public Dictionary<int, UnitData> _allUnit = new Dictionary<int, UnitData>();
         public List<Unit> _activeUnit = new List<Unit>();
@@ -35,9 +34,8 @@ namespace Logic
             UnionUnit(currentTick);
         }
 
-        public void Init(long Tick)
+        public void Init()
         {
-            _tick = Tick;
         }
 
         public Unit SetUnitActive(UnitData unitInfo, (int, int) section, long createTime)
@@ -110,7 +108,7 @@ namespace Logic
 
             if(actionData != null)
             {
-                StageLogic.Instance.UnitCardAdd.Invoke(actionData);
+                UnitCardAdd.Invoke(actionData);
             }
 
         }
@@ -172,40 +170,6 @@ namespace Logic
             ActiveUnitRemoved.Invoke(removeUnit);
             removeUnit.Clear();
             _activeUnit.Remove(removeUnit);
-        }
-
-        public bool ChckCanUnion(UnitUnionInfoScript unionInfo)
-        {
-            Dictionary<int, int> metarialInfo = new Dictionary<int, int>();
-
-            metarialInfo.Add(unionInfo.mainMaterialUID, 1);
-            if (unionInfo.materail2UID != 0)
-            {
-                if (metarialInfo.TryGetValue(unionInfo.materail2UID, out var count)) metarialInfo[unionInfo.materail2UID] = count + 1;
-                else metarialInfo.Add(unionInfo.materail2UID, 1);
-            }
-            if (unionInfo.materail3UID != 0)
-            {
-                if (metarialInfo.TryGetValue(unionInfo.materail3UID, out var count)) metarialInfo[unionInfo.materail3UID] = count + 1;
-                else metarialInfo.Add(unionInfo.materail3UID, 1);
-            }
-            if (unionInfo.materail4UID != 0)
-            {
-                if (metarialInfo.TryGetValue(unionInfo.materail4UID, out var count)) metarialInfo[unionInfo.materail4UID] = count + 1;
-                else metarialInfo.Add(unionInfo.materail4UID, 1);
-            }
-            if (unionInfo.materail5UID != 0)
-            {
-                if (metarialInfo.TryGetValue(unionInfo.materail5UID, out var count)) metarialInfo[unionInfo.materail5UID] = count + 1;
-                else metarialInfo.Add(unionInfo.materail5UID, 1);
-            }
-            if (unionInfo.materail6UID != 0)
-            {
-                if (metarialInfo.TryGetValue(unionInfo.materail6UID, out var count)) metarialInfo[unionInfo.materail6UID] = count + 1;
-                else metarialInfo.Add(unionInfo.materail6UID, 1);
-            }
-
-            return false;
         }
 
         public void UnionUnit(long updateTick)

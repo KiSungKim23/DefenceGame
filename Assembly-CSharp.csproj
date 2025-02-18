@@ -65,9 +65,11 @@
     <Compile Include="Assets\Scripts\Unity\UI\SectionButton.cs" />
     <Compile Include="Assets\LINQtoGameObject\Examples\SampleSceneScript.cs" />
     <Compile Include="Assets\Scripts\Unity\Managers\DataManagers\DataManager.SkillInfo.cs" />
+    <Compile Include="Assets\Scripts\Common\Util\Errors.cs" />
     <Compile Include="Assets\Scripts\Logic\Manager\StageLogic.cs" />
     <Compile Include="Assets\Scripts\Logic\Core\DataManager\ScriptClass\SkillInfoScript.cs" />
     <Compile Include="Assets\Scripts\Unity\Managers\Managers.cs" />
+    <Compile Include="Assets\Scripts\Logic\Manager\SectionManager.cs" />
     <Compile Include="Assets\Scripts\Logic\Manager\UnitManager.cs" />
     <Compile Include="Assets\Scripts\Unity\UI\UnitSetButton.cs" />
     <Compile Include="Assets\Scripts\Logic\Object\Monster.cs" />

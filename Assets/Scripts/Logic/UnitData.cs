@@ -148,9 +148,9 @@ namespace Logic
             return false;
         }
 
-        public bool CheckCanUnion(int index)
+        public bool CheckCanUnion(int unionUID)
         {
-            if (_unitUnionInfo.TryGetValue(index, out var ret))
+            if (_unitUnionInfo.TryGetValue(unionUID, out var ret))
             {
                 return StageLogic.Instance.unitManager.CheckUnitUnion(ret); ;
             }

@@ -3,14 +3,14 @@ using Newtonsoft.Json.Converters;
 using System.Collections;
 using System.Collections.Generic;
 
-public class Define 
+public partial class Define 
 {
-    static public float DuringStageTime = 10;
+    static public float DuringStageTime = 20;
     static public float ReadyStageTime = 1;
     static public float MonsterCreateTime = 1;
 
     static public int MonsterMaxCount = 100;
-    static public int MonsterStageCreateCount = 5;
+    static public int MonsterStageCreateCount = 7;
 
     static public int MaxUnitCount = 10;
 
