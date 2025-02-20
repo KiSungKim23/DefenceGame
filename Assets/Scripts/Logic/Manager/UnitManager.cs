@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Logic
 {
@@ -12,6 +13,9 @@ namespace Logic
 
         public Dictionary<int, UnitData> _allUnit = new Dictionary<int, UnitData>();
         public List<Unit> _activeUnit = new List<Unit>();
+
+        public Dictionary<int, int> normalAppearedCount;
+        public List<UnitInfoScript> normalUnitInfoList;
 
         public Dictionary<int, UnitData> AllUnit { get { return _allUnit; } }
         public List<Unit> ActiveUnit { get { return _activeUnit; } }
@@ -36,6 +40,22 @@ namespace Logic
 
         public void Init()
         {
+            if (normalUnitInfoList == null)
+                normalUnitInfoList = new List<UnitInfoScript>();
+            else
+                normalUnitInfoList.Clear();
+
+            if (normalAppearedCount == null)
+                normalAppearedCount = new Dictionary<int, int>();
+            else
+                normalAppearedCount.Clear();
+
+            normalUnitInfoList = StageLogic.Instance.dataManager.GetUnitInfoScriptDictionaryAll().Where(_ => _.Value.unitGrade == 1).Select(_ => _.Value).ToList();
+
+            foreach(var normalUnit in normalUnitInfoList)
+            {
+                normalAppearedCount.Add(normalUnit.unitUID, 0);
+            }
         }
 
         public Unit SetUnitActive(UnitData unitInfo, (int, int) section, long createTime)
@@ -68,34 +88,82 @@ namespace Logic
 
         public void GetUnitInfo(int stageLevel)
         {
-            List<UnitData> retList = new List<UnitData>();
-
             if (stageLevel == 0)
             {
-                for (int i = 0; i < 2; i++)
+                for(int i = 0; i< Define.UnitStartStageCreateCount; i++)
                 {
-                    AddUnitInfo(1);
+                    AddUnitInfo();
                 }
-                for (int i = 0; i < 3; i++)
-                {
-                    AddUnitInfo(2);
-                }
+                AddUnitInfo(1);
+                AddUnitInfo(1);
+                AddUnitInfo(1);
+                AddUnitInfo(1);
+                AddUnitInfo(1);
+                AddUnitInfo(1);
+                AddUnitInfo(1);
             }
             else
             {
-                AddUnitInfo(1);
-                AddUnitInfo(2);
+                for (int i = 0; i < Define.UnitStageCreateCount; i++)
+                {
+                    AddUnitInfo();
+                }
             }
 
+        }
+
+        public void AddUnitInfo()
+        {
+            UnitData actionData = null;
+            UnitInfoScript selectedNormalUnit = null;
+
+            int index = (int)(StageLogic.Instance.RandomValue / (Define.MaxRandomValue / normalUnitInfoList.Count));
+
+            for (int i = 0; i < normalUnitInfoList.Count; i++)
+            {
+                if(index == i)
+                {
+                    selectedNormalUnit = normalUnitInfoList[i];
+                }
+            }
+
+            if(selectedNormalUnit == null)
+            {
+                int minKey = normalAppearedCount
+                   .Aggregate((x, y) => x.Value <= y.Value ? x : y)
+                   .Key;
+
+                selectedNormalUnit = normalUnitInfoList.Find(_ => _.unitUID == minKey);
+                normalAppearedCount[minKey]++;
+            }
+            else
+            {
+                normalAppearedCount[selectedNormalUnit.unitUID]++;
+            }
+
+            if (_allUnit.TryGetValue(selectedNormalUnit.unitUID, out var unitInfo))
+            {
+                actionData = unitInfo;
+                unitInfo.AddCount();
+            }
+            else
+            {
+                actionData = new UnitData(selectedNormalUnit.unitUID);
+                _allUnit.Add(selectedNormalUnit.unitUID, actionData);
+            }
+
+            if(actionData != null)
+            {
+                UnitCardAdd.Invoke(actionData);
+            }
         }
 
         public void AddUnitInfo(int UID)
         {
             UnitData actionData = null;
-
             if (_allUnit.TryGetValue(UID, out var unitInfo))
             {
-                if (unitInfo.GetCount() == 0)
+                if (unitInfo.GetCount() >= 0)
                     actionData = unitInfo;
 
                 unitInfo.AddCount();
@@ -106,16 +174,15 @@ namespace Logic
                 _allUnit.Add(UID, actionData);
             }
 
-            if(actionData != null)
+            if (actionData != null)
             {
                 UnitCardAdd.Invoke(actionData);
             }
-
         }
 
-        public bool CheckUnitUnion(UnitUnionInfo unionInfoList)
+        public bool CheckUnitUnion(UnitUnionInfo unitInfo)
         {
-            foreach (var material in unionInfoList.GetMaterials())
+            foreach (var material in unitInfo.GetMaterials())
             {
                 if (CheckCanUsingUnit(material.Key, material.Value) == false)
                     return false;
@@ -136,14 +203,19 @@ namespace Logic
 
         public void UsingUnit(int uid, int count)
         {
+            List<int> removedObjectID = new List<int>();
+
             if (_allUnit.TryGetValue(uid, out var unit))
             {
                 int usingActiveUnitCount = unit.UsingUnit(count);
 
                 for(int i = 0; i < usingActiveUnitCount; i++)
                 {
-                    var activeUnit = _activeUnit.Find(_ => _.GetUID() == uid);
+                    var activeUnit = _activeUnit.Find(_ => _.GetUID() == uid && removedObjectID.Find(_1 => _1 == _.GetObjectIndex()) == 0);
+                    //var activeUnit = _activeUnit.Find(_ => _.GetUID() == uid);
+
                     RemoveActiveUnit(activeUnit);
+                    removedObjectID.Add(activeUnit.GetObjectIndex());
                 }
             }
 

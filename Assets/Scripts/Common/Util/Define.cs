@@ -11,6 +11,8 @@ public partial class Define
 
     static public int MonsterMaxCount = 100;
     static public int MonsterStageCreateCount = 7;
+    static public int UnitStartStageCreateCount = 5;
+    static public int UnitStageCreateCount = 2;
 
     static public int MaxUnitCount = 10;
 

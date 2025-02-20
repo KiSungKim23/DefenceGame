@@ -57,6 +57,8 @@ namespace Client
 
             drawHeroBtn.OnClickAsObservable().Subscribe(_ => DrawHero());
 
+            CreateUnitButtonAll();
+
             optionButton.Init();
             unitSetButton.Init();
         }
@@ -129,22 +131,29 @@ namespace Client
 
         public void CreateUnitButton(Logic.UnitData unitInfo)
         {
-            GameObject monsterObject = Managers.Resource.Instantiate(unitIconButtonObject.gameObject, unitButtonContent.transform);
-
-            var unitInfoComponent = monsterObject.GetComponent<UnitIcon>();
-            if (unitInfoComponent != null)
+            if (_unitInfos.TryGetValue(unitInfo.GetUID() , out var unitIcon))
             {
-                unitInfoComponent.SetUnitInfo(unitInfo);
-                _unitInfos.Add(unitInfoComponent.GetUnitUID(), unitInfoComponent);
+                unitIcon.SetUnitInfo(unitInfo);
+                unitIcon.gameObject.SetActive(true);
             }
-
-            foreach (var unit in _unitInfos)
+            else
             {
-                if (unit.Value.GetUnitCount() > 0)
-                    unit.Value.gameObject.SetActive(true);
-                else
-                    unit.Value.gameObject.SetActive(false);
-                
+                unitIcon.gameObject.SetActive(true);
+            }
+        }
+
+        public void CreateUnitButtonAll()
+        {
+            var createUnitButtonAll = Managers.Data.GetUnitInfoScriptDictionaryAll();
+
+            foreach (var unitScript in createUnitButtonAll)
+            {
+                GameObject unitIconObject = Managers.Resource.Instantiate(unitIconButtonObject.gameObject, unitButtonContent.transform);
+                var unitInfoComponent = unitIconObject.GetComponent<UnitIcon>();
+                if (unitInfoComponent != null)
+                {
+                    _unitInfos.Add(unitScript.Key, unitInfoComponent);
+                }
             }
         }
 

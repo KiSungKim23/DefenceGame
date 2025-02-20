@@ -31,6 +31,8 @@ namespace Logic
 
         private long _canAttackTick;
 
+        private bool _attackWait;
+
         public long CanAttackTick { get { return _canAttackTick; } }
         public (int, int) SectionIndex { get { return _sectionIndex; } }
 
@@ -41,29 +43,45 @@ namespace Logic
             _objectIndex = objectIndex;
             _sectionIndex = section;
             _unitData = unitInfo;
+            _uid = unitInfo.GetUID();
             SetScript(unitInfo.GetUID());
             SetWorldPosition();
             CheckCanAttackSection();
+            _attackWait = false;
         }
 
         public void Update(long currentTick)
         {
-            if (_targetSection != null && StageLogic.Instance.monsterManager.CheckUnitAttack())
+            if (_targetSection != null)
             {
-                if (_canAttackTick <= _targetSetTick)
+                if (StageLogic.Instance.monsterManager.CheckUnitAttack())
                 {
-                    _canAttackTick = _targetSetTick <= _currentTick ? _targetSetTick : _currentTick;
-                }
+                    if(_attackWait == true)
+                    {
+                        _canAttackTick = currentTick;
+                        _attackWait = false;
+                    }
 
-                while (_canAttackTick <= currentTick)
+                    if (_canAttackTick <= _targetSetTick)
+                    {
+                        _canAttackTick = _targetSetTick <= _currentTick ? _targetSetTick : _currentTick;
+                    }
+
+                    while (_canAttackTick <= currentTick)
+                    {
+                        Skill addSkill = new Skill(GetActiveSkill(), _canAttackTick);
+                        _targetSection.AddSkill(addSkill);
+                        unitAttack.Invoke(_canAttackTick);
+
+                        _canAttackTick += (long)(_unitInfoScript.attackSpeed * Define.OneSecondTick);
+                    }
+
+                    _currentTick = currentTick;
+                }
+                else
                 {
-                    Skill addSkill = new Skill(GetActiveSkill(), _canAttackTick);
-                    _targetSection.AddSkill(addSkill);
-                    unitAttack.Invoke(_canAttackTick);
-
-                    _canAttackTick += (long)(_unitInfoScript.attackSpeed * Define.OneSecondTick);
+                    _attackWait = true;
                 }
-                _currentTick = currentTick;
             }
         }
 

@@ -3,8 +3,8 @@
     "unitUID": 6,
     "mainMaterialUID": 1,
     "materail2UID": 1,
-    "materail3UID": 2,
-    "materail4UID": 0,
+    "materail3UID": 1,
+    "materail4UID": 1,
     "materail5UID": 0,
     "materail6UID": 0
   },
@@ -12,9 +12,9 @@
     "unitUID": 7,
     "mainMaterialUID": 2,
     "materail2UID": 2,
-    "materail3UID": 3,
-    "materail4UID": 0,
-    "materail5UID": 0,
+    "materail3UID": 1,
+    "materail4UID": 1,
+    "materail5UID": 1,
     "materail6UID": 0
   },
   {

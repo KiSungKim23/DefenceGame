@@ -77,7 +77,7 @@ namespace Client
         private void SetSectionButtonPosition((int, int) sectionIndex)
         {
             float positionX = (sectionIndex.Item1 * Define.SectionUISize) + Define.SectionUISize + (Define.SectionUISize / 8);
-            float positionY = (sectionIndex.Item2 * Define.SectionUISize) + (Define.SectionUISize * (Define.SectionCount / 2) + (Define.SectionUISize / 2)) + Define.SectionUISize;
+            float positionY = (sectionIndex.Item2 * Define.SectionUISize) + (Define.SectionUISize * (Define.SectionCount / 2) + (Define.SectionUISize / 2)) + (Define.SectionUISize / 2);
 
             transform.position = new Vector3(positionX, positionY, 0);
         }

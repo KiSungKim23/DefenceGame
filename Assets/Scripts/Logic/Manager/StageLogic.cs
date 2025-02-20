@@ -92,11 +92,11 @@ namespace Logic
 
             while(_updateTick < currentTick)
             {
-                if (_monster.StageMonsterCount >= Define.MonsterMaxCount)
+                if (_monster.ActiveMonsterCount >= Define.MonsterMaxCount)
                     return;
 
                  _updateTick = CheckUpdateTick(currentTick);
-                debug.Invoke(monsterManager.StageMonsterCount.ToString());
+                //debug.Invoke(monsterManager.StageMonsterCount.ToString());
                 if (_updateTick >= _stageStartTick) StageStart();
                 monsterManager.Update(_updateTick);
                 unitManager.Update(_updateTick); 

@@ -97,7 +97,7 @@ namespace Client
         public (int, int) GetUnitSectionIndex()
         {
             int sectionX = (int)((transform.position.x - (Define.SectionUISize / 2)) / Define.SectionUISize);
-            int sectionY = (int)((transform.position.y - (Define.SectionUISize * (Define.SectionCount / 2)) - Define.SectionUISize) / Define.SectionUISize);
+            int sectionY = (int)((transform.position.y - (Define.SectionUISize * (Define.SectionCount / 2)) - (Define.SectionUISize / 2)) / Define.SectionUISize);
 
             if (sectionX < 1 && sectionX > Define.SectionCount - 1 && sectionY < 1 && sectionY > Define.SectionCount - 1)
             {

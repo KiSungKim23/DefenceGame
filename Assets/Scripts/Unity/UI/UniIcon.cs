@@ -14,6 +14,7 @@ namespace Client
         public Button optionActiveBtn;
         public TextMeshProUGUI countText;
         public TextMeshProUGUI activeCountText;
+        public TextMeshProUGUI UIDText;
 
         public UnitOptionButton option;
 
@@ -42,14 +43,22 @@ namespace Client
                 _activeCount = activeCount;
                 activeCountText.text = "x" + activeCount.ToString();
             }
+
+            if(count == 0)
+            {
+                gameObject.SetActive(false);
+            }
         }
 
         public void SetUnitInfo(Logic.UnitData data)
         {
             _unitData = data;
+            _count = data.GetCount();
+            _activeCount = data.GetActiveCount();
 
-            countText.text = "x" + _unitData.GetCount().ToString();
-            activeCountText.text = "x" + _unitData.GetActiveCount().ToString();
+            UIDText.text = data.GetUID().ToString();
+            countText.text = "x" + _count.ToString();
+            activeCountText.text = "x" + _activeCount.ToString();
         }
 
         void ActiveOption()

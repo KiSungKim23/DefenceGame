@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 namespace Client
@@ -28,6 +29,12 @@ namespace Client
 
         public bool setTime = false;
 
+        public TextMeshProUGUI stageLevelText;
+        public TextMeshProUGUI monsterCountText;
+
+        private int _stageLevel;
+        private int _monsterCount;
+
         private Dictionary<int, MonsterObject> _monsters = new Dictionary<int, MonsterObject>();
         private List<UnitObject> _activeUnits = new List<UnitObject>();
 
@@ -50,6 +57,8 @@ namespace Client
             CreateSectionData();
             gamePannal.Init();
             LoadingImage.SetActive(false);
+            _stageLevel = 0;
+            _monsterCount = 0;
         }
 
         // Update is called once per frame
@@ -59,6 +68,18 @@ namespace Client
             {
                 setNowTime = setNowTimeTemp;
                 setTime = false;
+            }
+
+            if(_stageLevel != Managers.Stage.StageLevel)
+            {
+                _stageLevel = Managers.Stage.StageLevel;
+                stageLevelText.SetText("Stage : " + _stageLevel.ToString());
+            }
+
+            if(_monsterCount != Managers.Stage.monsterManager.ActiveMonsterCount)
+            {
+                _monsterCount = Managers.Stage.monsterManager.ActiveMonsterCount;
+                monsterCountText.SetText(_monsterCount.ToString() + " / " + Define.MonsterMaxCount.ToString());
             }
 
             if (updateSetTick == false)

@@ -8,8 +8,6 @@ namespace Client
 {
     public class UnitOptionButton : MonoBehaviour
     {
-        private int _unitCount;
-
         private Logic.UnitData _unitData;
         private SectionButton _activeUnitButton;
 
@@ -36,7 +34,6 @@ namespace Client
 
         public void Init()
         {
-            _unitCount = 0;
             optionDeactiveBtn.OnClickAsObservable().Subscribe(_ => DeActiveOption()).AddTo(this);
             UnitUnion1Btn.OnClickAsObservable().Subscribe(_ => UnionUnit(_union1UID)).AddTo(this);
             UnitUnion2Btn.OnClickAsObservable().Subscribe(_ => UnionUnit(_union2UID)).AddTo(this);
@@ -49,12 +46,6 @@ namespace Client
         // Update is called once per frame
         void Update()
         {
-            if(_unitCount != _unitData.GetCount())
-            {
-                _unitCount = _unitData.GetCount();
-                UnitSetting.gameObject.SetActive(_unitCount != 0);
-            }
-
         }
 
         void UnionUnit(int unionUID)
@@ -107,8 +98,7 @@ namespace Client
             transform.position = iconPosition.position;
             UnitSetting.gameObject.transform.position = UnitSetButtonPosition.transform.position;
             UnitSetting.SetData(this, _unitData, activeUnitButton);
-            _unitCount = _unitData.GetCount();
-            UnitSetting.gameObject.SetActive(_unitCount != 0);
+            UnitSetting.gameObject.SetActive(data.CheckCanActive());
             SetUnionData(data);
             TargetSetButton.gameObject.SetActive(activeUnitButton != null);
             DeActiveButton.gameObject.SetActive(activeUnitButton != null);
@@ -132,15 +122,15 @@ namespace Client
                 {
                     case 0:
                         _union1UID = unionInfo.Key;
-                        UnitUnion1Btn.gameObject.SetActive(true);
+                        UnitUnion1Btn.gameObject.SetActive(Managers.Stage.unitManager.CheckUnitUnion(unionInfo.Value));
                         break;
                     case 1:
                         _union2UID = unionInfo.Key;
-                        UnitUnion1Btn.gameObject.SetActive(true);
+                        UnitUnion1Btn.gameObject.SetActive(Managers.Stage.unitManager.CheckUnitUnion(unionInfo.Value));
                         break;
                     case 2:
                         _union3UID = unionInfo.Key;
-                        UnitUnion1Btn.gameObject.SetActive(true);
+                        UnitUnion1Btn.gameObject.SetActive(Managers.Stage.unitManager.CheckUnitUnion(unionInfo.Value));
                         break;
                 }
                 index++;

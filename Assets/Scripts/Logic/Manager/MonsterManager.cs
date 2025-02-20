@@ -12,7 +12,7 @@ namespace Logic
         private int _stageMonsterCount;
         private int _activeMonsterCount;
 
-        public int StageMonsterCount { get { return _stageMonsterCount; } }
+        public int ActiveMonsterCount { get { return _activeMonsterCount; } }
 
         public Action<Monster> MonsterCreated;
 
@@ -74,7 +74,7 @@ namespace Logic
 
             if(monsters.Count != 0)
             {
-                StageLogic.Instance.monsterManager.SetStageCount();
+                StageLogic.Instance.monsterManager.SetActiveCount();
             }
         }
 
@@ -144,13 +144,13 @@ namespace Logic
                 _addMonsterTick += (long)(Define.MonsterCreateTime * Define.OneSecondTick);
                 _stageMonsterCount++;
                 MonsterCreated.Invoke(monster);
-                SetStageCount();
+                SetActiveCount();
             }
         }
 
         public bool CheckUnitAttack()
         {
-            if (_activeMonsterCount >= 0 || _stageMonsterCount <= Define.MonsterStageCreateCount)
+            if (_activeMonsterCount > 0 || _stageMonsterCount < Define.MonsterStageCreateCount)
             {
                 return true;
             }
@@ -158,7 +158,7 @@ namespace Logic
             return false;
         }
         
-        public void SetStageCount()
+        public void SetActiveCount()
         {
             _activeMonsterCount = _monsters.Where(_ => _.Value.State == Define.MonsterState.active).ToList().Count;
         }

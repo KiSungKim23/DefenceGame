@@ -173,5 +173,15 @@ namespace Logic
         {
             return _unitUnionInfo;
         }
+
+        public void DeActive()
+        {
+            _activeCount--;
+        }
+
+        public bool CheckCanActive()
+        {
+            return _count - _activeCount > 0;
+        }
     }
 }
