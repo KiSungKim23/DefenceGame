@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
@@ -17,6 +18,10 @@ namespace Client
         public Button UnitUnion1Btn;
         public Button UnitUnion2Btn;
         public Button UnitUnion3Btn;
+
+        public TextMeshProUGUI union1UIDText;
+        public TextMeshProUGUI union2UIDText;
+        public TextMeshProUGUI union3UIDText;
 
         public Button TargetSetButton;
         public Button DeActiveButton;
@@ -122,14 +127,17 @@ namespace Client
                 {
                     case 0:
                         _union1UID = unionInfo.Key;
+                        union1UIDText.text = _union1UID.ToString();
                         UnitUnion1Btn.gameObject.SetActive(Managers.Stage.unitManager.CheckUnitUnion(unionInfo.Value));
                         break;
                     case 1:
                         _union2UID = unionInfo.Key;
+                        union2UIDText.text = _union2UID.ToString();
                         UnitUnion1Btn.gameObject.SetActive(Managers.Stage.unitManager.CheckUnitUnion(unionInfo.Value));
                         break;
                     case 2:
                         _union3UID = unionInfo.Key;
+                        union3UIDText.text = _union3UID.ToString();
                         UnitUnion1Btn.gameObject.SetActive(Managers.Stage.unitManager.CheckUnitUnion(unionInfo.Value));
                         break;
                 }

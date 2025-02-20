@@ -59,8 +59,22 @@ namespace Client
                 RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas.transform as RectTransform,
                     Input.mousePosition, canvas.worldCamera, out localPoint);
 
-
                 rectTransform.anchoredPosition = localPoint; // UI 좌표로 이동
+
+                int sectionX = (int)((transform.position.x - (Define.SectionUISize / 2)) / Define.SectionUISize);
+                int sectionY = (int)((transform.position.y - (Define.SectionUISize * (Define.SectionCount / 2)) - (Define.SectionUISize / 2)) / Define.SectionUISize);
+
+                if ((sectionX >= 1 || sectionX <= Define.SectionCount - 1) && (sectionY >= 1 && sectionY <= Define.SectionCount - 1))
+                {
+                    gameScene.CheckSectionTarget((float)(sectionX * Define.SectionSize) - (Define.SectionSize * (Define.SectionCount / 2) - (Define.SectionSize / 2))
+                        , (float)(sectionY * Define.SectionSize) - (Define.SectionSize * (Define.SectionCount / 2) - (Define.SectionSize / 2))
+                        , Managers.Data.GetUnitInfoScriptDictionary(_unitInfo.GetUID()).attackRange);
+                }
+                else
+                {
+                    gameScene.ResetTargetBtn();
+                }
+
 #else
                 if (Input.touchCount > 0)
         {
@@ -75,21 +89,27 @@ namespace Client
 
         void DeActiveOption()
         {
-            if (_activeUnitButton == null)
-            {
-                if (Managers.Stage.unitManager.SetUnit(_unitInfo, GetUnitSectionIndex(), Managers.Stage.GetCurrentTick()) == false)
-                {
-                    Debug.LogError("이미 유닛 있음 나중에 팝업 띄우는 식으로 ㄱ");
-                }
-            }
-            else
-            {
-                var data = _activeUnitButton.GetUnitObject();
-                _activeUnitButton.ResetUnitData();
-                Managers.Stage.unitManager.MoveUnit(data.GetUnitData(), GetUnitSectionIndex());
-                gameScene.SetUnitDataInUnitButton(GetUnitSectionIndex(), data);
-                data.MoveUnitPosition();
+            var sectionIndex = GetUnitSectionIndex();
 
+            if ((sectionIndex.Item1 >= 1 || sectionIndex.Item1 <= Define.SectionCount - 1) && (sectionIndex.Item2 >= 1 && sectionIndex.Item2 <= Define.SectionCount - 1))
+            {
+
+                if (_activeUnitButton == null)
+                {
+                    if (Managers.Stage.unitManager.SetUnit(_unitInfo, GetUnitSectionIndex(), Managers.Stage.GetCurrentTick()) == false)
+                    {
+                        Debug.LogError("이미 유닛 있음 나중에 팝업 띄우는 식으로 ㄱ");
+                    }
+                }
+                else
+                {
+                    var data = _activeUnitButton.GetUnitObject();
+                    _activeUnitButton.ResetUnitData();
+                    Managers.Stage.unitManager.MoveUnit(data.GetUnitData(), GetUnitSectionIndex());
+                    gameScene.SetUnitDataInUnitButton(GetUnitSectionIndex(), data);
+                    data.MoveUnitPosition();
+                }
+                gameScene.ResetTargetBtn();
             }
             gameObject.SetActive(false);
         }
@@ -98,12 +118,6 @@ namespace Client
         {
             int sectionX = (int)((transform.position.x - (Define.SectionUISize / 2)) / Define.SectionUISize);
             int sectionY = (int)((transform.position.y - (Define.SectionUISize * (Define.SectionCount / 2)) - (Define.SectionUISize / 2)) / Define.SectionUISize);
-
-            if (sectionX < 1 && sectionX > Define.SectionCount - 1 && sectionY < 1 && sectionY > Define.SectionCount - 1)
-            {
-                sectionX = 4;
-                sectionY = 4;
-            }
 
             return (sectionX, sectionY);
         }

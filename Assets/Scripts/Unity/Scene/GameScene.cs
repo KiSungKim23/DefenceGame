@@ -233,12 +233,23 @@ namespace Client
             }
         }
 
-        public void IsSetTarget()
+        public void ResetTargetBtn()
         {
             foreach(var sectionbtn in _sectionMonsterButtons)
             {
                 sectionbtn.Value.ResetUnitData();
                 sectionbtn.Value.gameObject.SetActive(false);
+            }
+        }
+
+        public void CheckSectionTarget(float positionX, float positionY, float attackRange)
+        {
+            List<SectionButton> activeSectionButton = new List<SectionButton>();
+
+            foreach (var monsterSection in _sectionMonsterButtons)
+            {
+                bool check = monsterSection.Value.CheckIsActive(positionX, positionY, attackRange);
+                monsterSection.Value.SetActive(check);
             }
         }
 

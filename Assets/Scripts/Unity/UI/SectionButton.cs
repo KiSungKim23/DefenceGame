@@ -10,6 +10,8 @@ namespace Client
     {
         private Define.SectionButtonType _sectionButtonType;
 
+        private Vector3 _sectionLogicWorldPosition;
+
         private (int, int) buttonIndex;
         private UnitObject _unitData;
 
@@ -19,6 +21,7 @@ namespace Client
         public UnitOptionButton option;
         public Image buttonImage;
 
+        private bool isActive;
 
         // Start is called before the first frame update
         void Start()
@@ -42,12 +45,13 @@ namespace Client
             {
                 case Define.SectionButtonType.Monster:
                     _unitData.GetUnitData().SetTarget(buttonIndex, Managers.Stage.GetCurrentTick());
-                    gameScene.IsSetTarget();
+                    gameScene.ResetTargetBtn();
                     break;
                 case Define.SectionButtonType.Unit:
                     if (_unitData != null)
                     {
                         option.SetUnitInfo(_unitData.GetUnitData().GetUnitInfoData(), transform, this);
+                        isActive = true;
                         option.gameObject.SetActive(true);
                     }
                     break;
@@ -62,15 +66,18 @@ namespace Client
             {
                 _sectionButtonType = Define.SectionButtonType.Monster;
                 buttonImage.color = new Color(0, 0, 0, 0.5f);
+                isActive = false;
                 gameObject.SetActive(false);
             }
             else
             {
                 _sectionButtonType = Define.SectionButtonType.Unit;
+                isActive = true;
                 gameObject.SetActive(true);
             }
 
             SetSectionButtonPosition(sectionIndex);
+            SetSectionPosition(sectionIndex);
         }
 
 
@@ -80,6 +87,14 @@ namespace Client
             float positionY = (sectionIndex.Item2 * Define.SectionUISize) + (Define.SectionUISize * (Define.SectionCount / 2) + (Define.SectionUISize / 2)) + (Define.SectionUISize / 2);
 
             transform.position = new Vector3(positionX, positionY, 0);
+        }
+
+        private void SetSectionPosition((int, int) sectionIndex)
+        {
+            float positionX = (sectionIndex.Item1 * Define.SectionSize) - (Define.SectionSize * (Define.SectionCount / 2) - (Define.SectionSize / 2));
+            float positionY = (sectionIndex.Item2 * Define.SectionSize) - (Define.SectionSize * (Define.SectionCount / 2) - (Define.SectionSize / 2));
+
+            _sectionLogicWorldPosition = new Vector3(positionX, positionY, 0);
         }
 
         public Define.SectionButtonType GetSectionButtonType()
@@ -108,6 +123,19 @@ namespace Client
             _unitData = null;
         }
 
+        public bool CheckIsActive(float positionX, float positionY, float attackRange)
+        {
+            return Vector3.Distance(new Vector3(positionX, positionY , 0), _sectionLogicWorldPosition) < attackRange;
+        }
 
+
+        public void SetActive(bool active)
+        {
+            if (isActive != active)
+            {
+                isActive = active;
+                gameObject.SetActive(active);
+            }
+        }
     }
 }
