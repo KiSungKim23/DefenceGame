@@ -94,13 +94,6 @@ namespace Logic
                 {
                     AddUnitInfo();
                 }
-                AddUnitInfo(1);
-                AddUnitInfo(1);
-                AddUnitInfo(1);
-                AddUnitInfo(1);
-                AddUnitInfo(1);
-                AddUnitInfo(1);
-                AddUnitInfo(1);
             }
             else
             {
