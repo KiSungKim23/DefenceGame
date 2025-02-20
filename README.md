@@ -15,7 +15,8 @@
 - 결정론적 랜덤 시스템: 랜덤 시드를 사전 생성하여 일관된 결과 제공  
 - 독립적인 스테이지 로직: 클라이언트와 스테이지 로직을 분리하여 독립성 유지  
 
-
+자세한 정보 노션 :
+https://concrete-shoemaker-f1d.notion.site/19d6e3215b3a8091901bf34bd10ccfa8?pvs=4
 
 todo list
 
