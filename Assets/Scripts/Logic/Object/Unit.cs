@@ -69,10 +69,28 @@ namespace Logic
 
                     while (_canAttackTick <= currentTick)
                     {
+
+                        var addSkillInfo = GetActiveSkill();
+
                         Skill addSkill = new Skill(GetActiveSkill(), _canAttackTick);
                         _targetSection.AddSkill(addSkill);
-                        unitAttack.Invoke(_canAttackTick);
 
+                        if (addSkillInfo.skillRange > 1)
+                        {
+                            var nextSection = _targetSection.GetNextSection();
+                            var previousSection = _targetSection.GetPreviousSection();
+                            for (int i = 1; i < addSkillInfo.skillRange; i++)
+                            {
+                                Skill addSkillNextSection = new Skill(GetActiveSkill(), _canAttackTick, i);
+                                nextSection.AddSkill(addSkillNextSection);
+                                Skill addSkillPreviousSection = new Skill(GetActiveSkill(), _canAttackTick, i);
+                                previousSection.AddSkill(addSkillPreviousSection);
+
+                                nextSection = nextSection.GetNextSection();
+                                previousSection = previousSection.GetPreviousSection();
+                            }
+                        }
+                        unitAttack.Invoke(_canAttackTick);
                         _canAttackTick += (long)(_unitInfoScript.attackSpeed * Define.OneSecondTick);
                     }
 
@@ -157,8 +175,27 @@ namespace Logic
         {
             if (StageLogic.Instance.monsterManager.CheckUnitAttack() && _canAttackTick <= tick)
             {
+                var addSkillInfo = GetActiveSkill();
+
                 Skill addSkill = new Skill(GetActiveSkill(), tick);
                 sectionData.AddSkill(addSkill);
+
+                if (addSkillInfo.skillRange > 1)
+                {
+                    var nextSection = sectionData.GetNextSection();
+                    var previousSection = sectionData.GetPreviousSection();
+                    for (int i = 1; i < addSkillInfo.skillRange; i++)
+                    {
+                        Skill addSkillNextSection = new Skill(GetActiveSkill(), tick, i);
+                        nextSection.AddSkill(addSkillNextSection);
+                        Skill addSkillPreviousSection = new Skill(GetActiveSkill(), tick, i);
+                        previousSection.AddSkill(addSkillPreviousSection);
+
+                        nextSection = nextSection.GetNextSection();
+                        previousSection = previousSection.GetPreviousSection();
+                    }
+                }
+
                 unitAttack.Invoke(tick);
                 _canAttackTick = tick + (long)(_unitInfoScript.attackSpeed * Define.OneSecondTick);
             }

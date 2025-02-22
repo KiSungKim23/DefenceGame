@@ -154,5 +154,78 @@ namespace Logic
             return ret;
         }
 
+        private (int, int) GetNextSectionIndex((int, int) currentIndex)
+        {
+            int maxIndex = Define.SectionCount - 1;
+
+            if (currentIndex.Item1 == 0 && currentIndex.Item2 > 0)
+            {
+                return (currentIndex.Item1, currentIndex.Item2 - 1);
+            }
+            else if (currentIndex.Item2 == 0 && currentIndex.Item1 < maxIndex)
+            {
+                return (currentIndex.Item1 + 1, currentIndex.Item2);
+            }
+            else if (currentIndex.Item1 == maxIndex && currentIndex.Item2 < maxIndex)
+            {
+                return (currentIndex.Item1, currentIndex.Item2 + 1);
+            }
+            else if (currentIndex.Item2 == maxIndex && currentIndex.Item1 > 0)
+            {
+                return (currentIndex.Item1 - 1, currentIndex.Item2);
+            }
+
+            return (0, maxIndex);
+        }
+
+        private (int, int) GetPreviousSectionIndex((int, int) currentIndex)
+        {
+            int maxIndex = Define.SectionCount - 1;
+
+            if (currentIndex.Item1 == 0 && currentIndex.Item2 < maxIndex)
+            {
+                return (currentIndex.Item1, currentIndex.Item2 + 1);
+            }
+            else if (currentIndex.Item2 == 0 && currentIndex.Item1 > 0)
+            {
+                return (currentIndex.Item1 - 1, currentIndex.Item2);
+            }
+            else if (currentIndex.Item1 == maxIndex && currentIndex.Item2 > 0 && currentIndex.Item2 < maxIndex)
+            {
+                return (maxIndex, currentIndex.Item2 - 1);
+            }
+            else if (currentIndex.Item1 == maxIndex && currentIndex.Item2 == maxIndex)
+            {
+                return (maxIndex - 1, maxIndex);
+            }
+            else if (currentIndex.Item2 == maxIndex && currentIndex.Item1 < maxIndex)
+            {
+                return (currentIndex.Item1 + 1, maxIndex);
+            }
+
+            return (0, maxIndex);
+        }
+
+        public Section GetNextSection()
+        {
+            (int, int) nextIndex = GetNextSectionIndex(_sectionIndex);
+            var nextSection = StageLogic.Instance.sectionManager.GetSectionData(nextIndex);
+            if (nextSection == null)
+            {
+                StageLogic.Instance.errorOccurred.Invoke(Define.Errors.E_LogicError);
+            }
+            return nextSection;
+        }
+
+        public Section GetPreviousSection()
+        {
+            (int, int) previousIndex = GetPreviousSectionIndex(_sectionIndex);
+            var previousSection = StageLogic.Instance.sectionManager.GetSectionData(previousIndex);
+            if (previousSection == null)
+            {
+                StageLogic.Instance.errorOccurred.Invoke(Define.Errors.E_LogicError);
+            }
+            return previousSection;
+        }
     }
 }

@@ -14,10 +14,11 @@ namespace Logic
         long _damage;
         float _datamgePercent;
         long _durationTick;
+        int _range;
 
         bool _acktive;
 
-        public Skill(SkillInfoScript skillInfo, long createTick)
+        public Skill(SkillInfoScript skillInfo, long createTick, int range = 0)
         {
             _skillInfo = skillInfo;
             _acktive = false;
@@ -33,7 +34,7 @@ namespace Logic
             _datamgePercent = skillInfo.damagePercent;
             _durationTick = (long)(skillInfo.durationTime * Define.OneSecondTick);
 
-            _activeTick = createTick + _durationTick;
+            _activeTick = createTick + _durationTick + (long)(skillInfo.SkillChainDelay * range * Define.OneSecondTick);
         }
 
         public long GetActiveTick()
@@ -67,6 +68,11 @@ namespace Logic
         public bool CheckActive()
         {
             return _acktive;
+        }
+
+        public void SetRange(int range)
+        {
+            _range = range;
         }
     }
 }
