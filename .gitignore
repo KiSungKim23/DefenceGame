@@ -5,3 +5,7 @@ Logs/
 Temp/
 Library/
 Packages/
+com.Tivadar.Best.HTTP.csproj/
+com.Tivadar.Best.HTTP.Profiler.Editor.csproj/
+com.Tivadar.Best.SignalR.csproj/
+com.Tivadar.Best.WebSockets.csproj/
