@@ -62,55 +62,55 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Unity\Managers\SceneManager.cs" />
     <Compile Include="Assets\Scripts\Logic\Core\UpdateScheduler.cs" />
-    <Compile Include="Assets\Scripts\Unity\UI\SectionButton.cs" />
-    <Compile Include="Assets\LINQtoGameObject\Examples\SampleSceneScript.cs" />
     <Compile Include="Assets\Scripts\Unity\Managers\DataManagers\DataManager.SkillInfo.cs" />
-    <Compile Include="Assets\Scripts\Common\Util\Errors.cs" />
-    <Compile Include="Assets\Scripts\Logic\Manager\StageLogic.cs" />
     <Compile Include="Assets\Scripts\Logic\Core\DataManager\ScriptClass\SkillInfoScript.cs" />
-    <Compile Include="Assets\Scripts\Unity\Managers\Managers.cs" />
     <Compile Include="Assets\Scripts\Logic\Manager\SectionManager.cs" />
-    <Compile Include="Assets\Scripts\Logic\Manager\UnitManager.cs" />
-    <Compile Include="Assets\Scripts\Unity\UI\UnitSetButton.cs" />
-    <Compile Include="Assets\Scripts\Logic\Object\Monster.cs" />
     <Compile Include="Assets\Scripts\Logic\Object\Buff.cs" />
     <Compile Include="Assets\Scripts\Unity\Scene\StartScene.cs" />
-    <Compile Include="Assets\Scripts\Logic\UnitData.cs" />
     <Compile Include="Assets\Scripts\Unity\Managers\DataManagers\DataManager.Core.cs" />
     <Compile Include="Assets\Scripts\Unity\Managers\DataManagers\DataManager.MonsterInfo.cs" />
-    <Compile Include="Assets\Scripts\Logic\Object\Object.cs" />
     <Compile Include="Assets\Scripts\Logic\Core\DataManager\IDataManager.cs" />
-    <Compile Include="Assets\Scripts\Logic\Object\Skill.cs" />
     <Compile Include="Assets\Scripts\Unity\UI\ScrollViewBase.cs" />
-    <Compile Include="Assets\Scripts\Logic\Manager\MonsterManager.cs" />
-    <Compile Include="Assets\Scripts\Logic\Core\DataManager\ScriptClass\SkillBuffInfoScript.cs" />
     <Compile Include="Assets\Scripts\Unity\Managers\DataManagers\DataManager.UnitUnionInfo.cs" />
     <Compile Include="Assets\Scripts\Unity\Scene\ResourceReleaseSceneInit.cs" />
-    <Compile Include="Assets\Scripts\Common\Util\Define.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
     <Compile Include="Assets\Scripts\Unity\Object\MonsterObject.cs" />
     <Compile Include="Assets\Scripts\Logic\Core\BaseRandomProbabiltty.cs" />
     <Compile Include="Assets\Scripts\Logic\Core\DataManager\ScriptClass\MonsterInfoScript.cs" />
+    <Compile Include="Assets\Scripts\Unity\Scene\GameScene.cs" />
+    <Compile Include="Assets\Scripts\Unity\Managers\ResourceManager.cs" />
+    <Compile Include="Assets\LINQtoGameObject\Scripts\GameObjectExtensions.Operate.cs" />
+    <Compile Include="Assets\Scripts\Logic\Object\Unit.cs" />
+    <Compile Include="Assets\Scripts\Logic\Core\DataManager\ScriptClass\BuffInfoScript.cs" />
+    <Compile Include="Assets\Scripts\Unity\Object\UnitObject.cs" />
+    <Compile Include="Assets\Scripts\Unity\Managers\DataManagers\DataManager.UnitInfo.cs" />
+    <Compile Include="Assets\Scripts\Unity\UI\GamePannal.cs" />
+    <Compile Include="Assets\Scripts\Logic\Core\DataManager\ScriptClass\UnitUnionInfoScript.cs" />
+    <Compile Include="Assets\Scripts\Unity\UI\UniIcon.cs" />
+    <Compile Include="Assets\Scripts\Unity\UI\SectionButton.cs" />
+    <Compile Include="Assets\LINQtoGameObject\Examples\SampleSceneScript.cs" />
+    <Compile Include="Assets\Scripts\Common\Util\Errors.cs" />
+    <Compile Include="Assets\Scripts\Logic\Manager\StageLogic.cs" />
+    <Compile Include="Assets\Scripts\Unity\Managers\Managers.cs" />
+    <Compile Include="Assets\Scripts\Logic\Manager\UnitManager.cs" />
+    <Compile Include="Assets\Scripts\Unity\UI\UnitSetButton.cs" />
+    <Compile Include="Assets\Scripts\Logic\Object\Monster.cs" />
+    <Compile Include="Assets\Scripts\Logic\UnitData.cs" />
+    <Compile Include="Assets\Scripts\Logic\Object\Object.cs" />
+    <Compile Include="Assets\Scripts\Logic\Object\Skill.cs" />
+    <Compile Include="Assets\Scripts\Logic\Manager\MonsterManager.cs" />
+    <Compile Include="Assets\Scripts\Logic\Core\DataManager\ScriptClass\SkillBuffInfoScript.cs" />
+    <Compile Include="Assets\Scripts\Common\Util\Define.cs" />
     <Compile Include="Assets\LINQtoGameObject\Scripts\GameObjectExtensions.Enumerable.cs" />
     <Compile Include="Assets\Scripts\Logic\Section.cs" />
-    <Compile Include="Assets\Scripts\Unity\Scene\GameScene.cs" />
     <Compile Include="Assets\Scripts\Unity\Managers\DataManagers\DataManager.BuffInfo.cs" />
-    <Compile Include="Assets\Scripts\Unity\Managers\ResourceManager.cs" />
     <Compile Include="Assets\Scripts\Unity\Util\Utils.cs" />
     <Compile Include="Assets\Scripts\Unity\UI\UnitOptionButton.cs" />
     <Compile Include="Assets\LINQtoGameObject\Scripts\GameObjectExtensions.Traverse.cs" />
     <Compile Include="Assets\Scripts\Unity\Scene\BaseScene.cs" />
     <Compile Include="Assets\Scripts\Unity\Object\SectionObject.cs" />
     <Compile Include="Assets\Scripts\Logic\GameData.cs" />
-    <Compile Include="Assets\LINQtoGameObject\Scripts\GameObjectExtensions.Operate.cs" />
-    <Compile Include="Assets\Scripts\Logic\Object\Unit.cs" />
-    <Compile Include="Assets\Scripts\Logic\Core\DataManager\ScriptClass\BuffInfoScript.cs" />
-    <Compile Include="Assets\Scripts\Unity\Object\UnitObject.cs" />
-    <Compile Include="Assets\Scripts\Unity\Managers\DataManagers\DataManager.UnitInfo.cs" />
     <Compile Include="Assets\Scripts\Unity\Managers\DataManagers\DataManager.SkillBuffInfo.cs" />
-    <Compile Include="Assets\Scripts\Unity\UI\GamePannal.cs" />
-    <Compile Include="Assets\Scripts\Logic\Core\DataManager\ScriptClass\UnitUnionInfoScript.cs" />
-    <Compile Include="Assets\Scripts\Unity\UI\UniIcon.cs" />
     <Compile Include="Assets\Scripts\Logic\Core\DataManager\ScriptClass\UnitInfoScript.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -1264,6 +1264,14 @@
     <ProjectReference Include="spine-unity.csproj">
       <Project>{4438F351-089C-3C7E-8058-D2A9BA9E8EDD}</Project>
       <Name>spine-unity</Name>
+    </ProjectReference>
+    <ProjectReference Include="com.Tivadar.Best.HTTP.csproj">
+      <Project>{D1CEB4FA-F353-340D-67D4-F3C7F04D23A7}</Project>
+      <Name>com.Tivadar.Best.HTTP</Name>
+    </ProjectReference>
+    <ProjectReference Include="com.Tivadar.Best.SignalR.csproj">
+      <Project>{593389E0-CABD-DABF-825A-F229A700D613}</Project>
+      <Name>com.Tivadar.Best.SignalR</Name>
     </ProjectReference>
     <ProjectReference Include="spine-unity-editor.csproj">
       <Project>{A438230E-3BA0-36FA-AD6F-63DFEBEBFF97}</Project>

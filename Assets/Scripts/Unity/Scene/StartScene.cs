@@ -14,6 +14,8 @@ namespace Client
         void Start()
         {
             startButton.OnClickAsObservable().Subscribe(_ => GameStart());
+
+            startButton.gameObject.SetActive(false);
         }
 
         // Update is called once per frame

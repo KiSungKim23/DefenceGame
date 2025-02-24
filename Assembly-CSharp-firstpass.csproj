@@ -60,14 +60,14 @@
     <Analyzer Include="C:\Program Files\2022.3.31f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Plugins\Demigiant\DOTween\Modules\DOTweenModulePhysics2D.cs" />
-    <Compile Include="Assets\Plugins\Demigiant\DOTween\Modules\DOTweenModuleUnityVersion.cs" />
     <Compile Include="Assets\Plugins\Demigiant\DOTween\Modules\DOTweenModulePhysics.cs" />
-    <Compile Include="Assets\Plugins\Demigiant\DOTween\Modules\DOTweenModuleEPOOutline.cs" />
     <Compile Include="Assets\Plugins\Demigiant\DOTween\Modules\DOTweenModuleUtils.cs" />
     <Compile Include="Assets\Plugins\Demigiant\DOTween\Modules\DOTweenModuleAudio.cs" />
     <Compile Include="Assets\Plugins\Demigiant\DOTween\Modules\DOTweenModuleSprite.cs" />
     <Compile Include="Assets\Plugins\Demigiant\DOTween\Modules\DOTweenModuleUI.cs" />
+    <Compile Include="Assets\Plugins\Demigiant\DOTween\Modules\DOTweenModulePhysics2D.cs" />
+    <Compile Include="Assets\Plugins\Demigiant\DOTween\Modules\DOTweenModuleUnityVersion.cs" />
+    <Compile Include="Assets\Plugins\Demigiant\DOTween\Modules\DOTweenModuleEPOOutline.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Plugins\UniRx\ReadMe.txt" />
@@ -1193,6 +1193,14 @@
     <ProjectReference Include="spine-unity.csproj">
       <Project>{4438F351-089C-3C7E-8058-D2A9BA9E8EDD}</Project>
       <Name>spine-unity</Name>
+    </ProjectReference>
+    <ProjectReference Include="com.Tivadar.Best.HTTP.csproj">
+      <Project>{D1CEB4FA-F353-340D-67D4-F3C7F04D23A7}</Project>
+      <Name>com.Tivadar.Best.HTTP</Name>
+    </ProjectReference>
+    <ProjectReference Include="com.Tivadar.Best.SignalR.csproj">
+      <Project>{593389E0-CABD-DABF-825A-F229A700D613}</Project>
+      <Name>com.Tivadar.Best.SignalR</Name>
     </ProjectReference>
     <ProjectReference Include="spine-unity-editor.csproj">
       <Project>{A438230E-3BA0-36FA-AD6F-63DFEBEBFF97}</Project>
