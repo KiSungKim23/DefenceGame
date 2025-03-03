@@ -8,7 +8,15 @@ namespace Logic
 {
     public class SectionManager
     {
+        private StageLogic _stageLogic;
+
         private Dictionary<(int, int), Section> _sectionDatas = new Dictionary<(int, int), Section>();
+
+        public SectionManager(StageLogic stageLogic)
+        {
+            _stageLogic = stageLogic;
+        }
+
 
         public Dictionary<(int, int), Section> SectionDatas
         {
@@ -38,7 +46,7 @@ namespace Logic
                     {
                         if (i == 0 || i == Define.SectionCount - 1 || j == 0 || j == Define.SectionCount - 1)
                         {
-                            _sectionDatas.Add((i, j), new Section((i, j)));
+                            _sectionDatas.Add((i, j), new Section(_stageLogic, (i, j)));
                         }
                     }
                 }

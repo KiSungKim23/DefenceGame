@@ -1,3 +1,4 @@
+using GameVals;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -16,36 +17,19 @@ namespace Logic
         long _updateTick = 0;
 
         #endregion
-
-        #region singlton
-        private static StageLogic _instance;
-
-        public static StageLogic Instance
-        {
-            get
-            {
-                if (_instance == null)
-                {
-                    _instance = new StageLogic();
-                }
-                return _instance;
-            }
-        }
-        #endregion
-
         public Action<Define.Errors> errorOccurred;
         public Action<string> debug;
 
         #region manager
-        MonsterManager _monster = new MonsterManager();
-        UnitManager _unit = new UnitManager();
-        SectionManager _section = new SectionManager();
+        MonsterManager _monster;
+        UnitManager _unit;
+        SectionManager _section;
         IDataManager _data;
 
-        public UnitManager unitManager { get { return Instance._unit; } }
-        public MonsterManager monsterManager { get { return Instance._monster; } }
-        public SectionManager sectionManager { get { return Instance._section; } }
-        public IDataManager dataManager { get { return Instance._data; } }
+        public UnitManager unitManager { get { return this._unit; } }
+        public MonsterManager monsterManager { get { return this._monster; } }
+        public SectionManager sectionManager { get { return this._section; } }
+        public IDataManager dataManager { get { return this._data; } }
         #endregion
 
         #region system
@@ -55,9 +39,15 @@ namespace Logic
 
         #endregion
 
+        public StageLogic()
+        {
+            _monster = new MonsterManager(this);
+            _unit = new UnitManager(this); 
+            _section = new SectionManager(this);
+        }
+
         public void Init(long currentTick)
         {
-
             System.Random random = new System.Random();
             var initValue = new List<long>();
 
@@ -78,6 +68,7 @@ namespace Logic
                 randomProbabiltty.Init(initValue);
             }
 
+            _stageLevel = 0;
             _updateTick = currentTick;
             _stageStartTick = currentTick + (long)(Define.ReadyStageTime * Define.OneSecondTick);
             unitManager.Init();
@@ -85,23 +76,33 @@ namespace Logic
             sectionManager.Init();
         }
 
-        public void Update(long currentTick)
+        public List<MonsterCheckData> Update(long currentTick ,bool isCheck = false)
         {
+            List<MonsterCheckData> checkData = null;
+
             if (_updateTick == 0)
                 Init(currentTick);
 
             while(_updateTick < currentTick)
             {
                 if (_monster.ActiveMonsterCount >= Define.MonsterMaxCount)
-                    return;
+                    return checkData;
 
                  _updateTick = CheckUpdateTick(currentTick);
-                //debug.Invoke(monsterManager.StageMonsterCount.ToString());
                 if (_updateTick >= _stageStartTick) StageStart();
                 monsterManager.Update(_updateTick);
-                unitManager.Update(_updateTick); 
+                unitManager.Update(_updateTick);
                 sectionManager.Update(_updateTick);
+
+                unitManager.LateUpdate(_updateTick);
+
+                if(isCheck && _updateTick == currentTick)
+                {
+                    checkData = monsterManager.GetMonsterCheckDatas();
+                }
             }
+
+            return checkData;
         }
 
         private long CheckUpdateTick(long currentTick)

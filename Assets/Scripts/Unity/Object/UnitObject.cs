@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,7 +23,7 @@ namespace Client
         // Update is called once per frame
         void Update()
         {
-            if(attackTick + Define.OneSecondTick / 4 > Managers.Stage.GetCurrentTick())
+            if(attackTick + Define.OneSecondTick / 4 >= DateTime.UtcNow.Ticks)
             {
                 unitImage.color = new Color(100, 100, 100);
             }

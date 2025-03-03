@@ -32,6 +32,14 @@
         "com.tivadar.best.websockets": "3.0.0"
       }
     },
+    "com.tivadar.best.tlssecurity": {
+      "version": "file:com.tivadar.best.tlssecurity",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {
+        "com.tivadar.best.http": "3.0.0"
+      }
+    },
     "com.tivadar.best.websockets": {
       "version": "file:com.tivadar.best.websockets",
       "depth": 0,

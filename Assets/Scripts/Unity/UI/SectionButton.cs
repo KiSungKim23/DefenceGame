@@ -44,7 +44,18 @@ namespace Client
             switch(_sectionButtonType)
             {
                 case Define.SectionButtonType.Monster:
-                    _unitData.GetUnitData().SetTarget(buttonIndex, Managers.Stage.GetCurrentTick());
+
+                    var error = Managers.Stage.unitManager.SetTarget(_unitData.GetUnitObjectIndex(), buttonIndex, System.DateTime.UtcNow.Ticks + (Define.OneSecondTick / 100));
+
+                    if (error != Define.Errors.S_OK)
+                    {
+                        Debug.Log(error.ToString());
+                    }
+                    else
+                    {
+                        //targetSetPackit
+                    }
+
                     gameScene.ResetTargetBtn();
                     break;
                 case Define.SectionButtonType.Unit:
@@ -112,9 +123,19 @@ namespace Client
             return _unitData;
         }
 
-        public void DeActiveUnit()
+        public void DeactiveUnit()
         {
-            Managers.Stage.unitManager.RemoveActiveUnit(_unitData.GetUnitData());
+            var error = Managers.Stage.unitManager.AddDeactiveUnit(_unitData.GetUnitObjectIndex(), System.DateTime.UtcNow.Ticks + (Define.OneSecondTick / 100));
+
+            //여기도 시간처리 해야할듯
+            if (error != Define.Errors.S_OK)
+            {
+                Debug.Log(error.ToString());
+            }
+            else
+            {
+                //AddDeActiveUnitPackit(objectIndex, tryTick);
+            }
             ResetUnitData();
         }
 

@@ -6,9 +6,10 @@ using System.Numerics;
 
 namespace Logic
 {
-
     public class Monster : Object
     {
+        private StageLogic _stageLogic;
+
         float destValue = (Define.SectionSize * (Define.SectionCount / 2)) - (Define.SectionSize / 2);
 
         Vector3[] waypoints = new Vector3[]
@@ -39,8 +40,9 @@ namespace Logic
 
         public (int, int) NowSectionIndex { get { return _nowSectionIndex; } }
 
-        public Monster(int objectID)
+        public Monster(StageLogic stageLogic, int objectID)
         {
+            _stageLogic = stageLogic;
             _objectID = objectID;
             _state = Define.MonsterState.wait;
             _position = waypoints[0];
@@ -70,7 +72,7 @@ namespace Logic
         {
             Init(createTick);
 
-            var monsterInfoScript = StageLogic.Instance.dataManager.GetMonsterInfoScriptDictionary(stageLevel);
+            var monsterInfoScript = _stageLogic.dataManager.GetMonsterInfoScriptDictionary(stageLevel);
             _maxHP = monsterInfoScript.maxHP;
             _currentHP = monsterInfoScript.maxHP;
             _speed = monsterInfoScript.speed;
@@ -173,11 +175,11 @@ namespace Logic
 
             bool isFirst = false;
 
-            Section checkSection = StageLogic.Instance.sectionManager.GetSectionData(index);
+            Section checkSection = _stageLogic.sectionManager.GetSectionData(index);
 
             if(checkSection == null)
             {
-                StageLogic.Instance.errorOccurred.Invoke(Define.Errors.E_LogicError);
+                _stageLogic.errorOccurred.Invoke(Define.Errors.E_LogicError);
                 return ret;
             }
 
@@ -319,6 +321,7 @@ namespace Logic
             return currentTick - startTick;
         }
     }
+
 }
 
 

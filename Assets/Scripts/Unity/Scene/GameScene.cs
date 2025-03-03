@@ -1,3 +1,4 @@
+using GameVals;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -18,19 +19,20 @@ namespace Client
 
         public SectionButton sectionButtonOrigin;
 
+        public TextMeshProUGUI stageLevelText;
+        public TextMeshProUGUI monsterCountText;
+
+        public bool updateSetTick = true;
+        public bool setTime = false;
+
+
         public long updateTick = 0;
         public long currentTick = 0;
         public float updateTime = 0f;
         public float setNowTimeTemp = 0f;
 
-        private float setNowTime = 0f;
-
-        public bool updateSetTick = true;
-
-        public bool setTime = false;
-
-        public TextMeshProUGUI stageLevelText;
-        public TextMeshProUGUI monsterCountText;
+        private float _setNowTime = 0f;
+        private long _serverUpdateTick = 0;
 
         private int _stageLevel;
         private int _monsterCount;
@@ -44,6 +46,8 @@ namespace Client
         #endregion
 
         private Dictionary<(int, int), SectionObject> _sections = new Dictionary<(int, int), SectionObject>();
+
+        public List<(long, List<MonsterCheckData>)> checkDatas = new List<(long, List<MonsterCheckData>)>();
 
 
         // Start is called before the first frame update
@@ -66,7 +70,7 @@ namespace Client
         {
             if (setTime)
             {
-                setNowTime = setNowTimeTemp;
+                _setNowTime = setNowTimeTemp;
                 setTime = false;
             }
 
@@ -84,21 +88,34 @@ namespace Client
 
             if (updateSetTick == false)
             {
-                long tick = DateTime.UtcNow.Ticks;
+                updateTick = DateTime.UtcNow.Ticks;
+                if (_serverUpdateTick == 0)
+                {
+                    _serverUpdateTick = updateTick + Define.OneSecondTick;
 
-                updateTick += tick - currentTick;
+                }
 
-                Managers.Stage.Update(updateTick);
+                if(_serverUpdateTick <= updateTick)
+                {
+                    updateTick = _serverUpdateTick;
+                    //ServerUpdateCheckReq(long currentTick);
+                    var checkData = Managers.Stage.Update(updateTick, true);
+                    checkDatas.Add((_serverUpdateTick, checkData));
 
-                currentTick = tick;
+                    _serverUpdateTick += Define.OneSecondTick;
+                }
+                else
+                    Managers.Stage.Update(updateTick);
+
+                currentTick = updateTick;
             }
             else
             {
-                if (updateTime != setNowTime)
+                if (updateTime != _setNowTime)
                 {
-                    updateTick = (long)(setNowTime * Define.OneSecondTick);
+                    updateTick = (long)(_setNowTime * Define.OneSecondTick);
                     Managers.Stage.Update(updateTick);
-                    updateTime = setNowTime;
+                    updateTime = _setNowTime;
                 }
             }
         }

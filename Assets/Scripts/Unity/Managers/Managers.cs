@@ -14,12 +14,11 @@ namespace Client
         ResourceManager resource = new ResourceManager();
         SceneManagerEx scene = new SceneManagerEx();
         DataManager data = new DataManager();
-
-
+        StageLogic _stage = new StageLogic();
         public static ResourceManager Resource => Instance.resource;
         public static SceneManagerEx Scene => Instance.scene;
         public static DataManager Data => Instance.data;
-        public static Logic.StageLogic Stage => Logic.StageLogic.Instance;
+        public static StageLogic Stage => Instance._stage;
 
         void Start()
         {

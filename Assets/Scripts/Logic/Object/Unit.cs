@@ -9,6 +9,8 @@ namespace Logic
 
     public class Unit : Object
     {
+        private StageLogic _stageLogic;
+
         Define.UnitState _state;
 
         private int _objectIndex;
@@ -37,8 +39,9 @@ namespace Logic
         public (int, int) SectionIndex { get { return _sectionIndex; } }
 
 
-        public Unit(int objectIndex, UnitData unitInfo, (int, int) section)
+        public Unit(StageLogic stageLogic, int objectIndex, UnitData unitInfo, (int, int) section)
         {
+            _stageLogic = stageLogic;
             _targetSetTick = 0;
             _objectIndex = objectIndex;
             _sectionIndex = section;
@@ -54,7 +57,7 @@ namespace Logic
         {
             if (_targetSection != null)
             {
-                if (StageLogic.Instance.monsterManager.CheckUnitAttack())
+                if (_stageLogic.monsterManager.CheckUnitAttack())
                 {
                     if(_attackWait == true)
                     {
@@ -72,7 +75,7 @@ namespace Logic
 
                         var addSkillInfo = GetActiveSkill();
 
-                        Skill addSkill = new Skill(GetActiveSkill(), _canAttackTick);
+                        Skill addSkill = new Skill(_stageLogic, GetActiveSkill(), _canAttackTick);
                         _targetSection.AddSkill(addSkill);
 
                         if (addSkillInfo.skillRange > 1)
@@ -81,9 +84,9 @@ namespace Logic
                             var previousSection = _targetSection.GetPreviousSection();
                             for (int i = 1; i < addSkillInfo.skillRange; i++)
                             {
-                                Skill addSkillNextSection = new Skill(GetActiveSkill(), _canAttackTick, i);
+                                Skill addSkillNextSection = new Skill(_stageLogic, GetActiveSkill(), _canAttackTick, i);
                                 nextSection.AddSkill(addSkillNextSection);
-                                Skill addSkillPreviousSection = new Skill(GetActiveSkill(), _canAttackTick, i);
+                                Skill addSkillPreviousSection = new Skill(_stageLogic, GetActiveSkill(), _canAttackTick, i);
                                 previousSection.AddSkill(addSkillPreviousSection);
 
                                 nextSection = nextSection.GetNextSection();
@@ -105,6 +108,8 @@ namespace Logic
 
         public void Clear()
         {
+            _unitData.DeActive();
+
             foreach (var section in _canAttackSectionData)
             {
                 section.ClearWaitUnitData(this);
@@ -161,7 +166,7 @@ namespace Logic
                 _canAttackSectionData.Clear();
             }
 
-            foreach (var sectionInfo in StageLogic.Instance.sectionManager.SectionDatas)
+            foreach (var sectionInfo in _stageLogic.sectionManager.SectionDatas)
             {
                 if (Vector3.Distance(_position, sectionInfo.Value.GetSectionWorldPosition()) < _unitInfoScript.attackRange)
                 {
@@ -173,11 +178,11 @@ namespace Logic
 
         public void UnitAttack(long tick, Section sectionData)
         {
-            if (StageLogic.Instance.monsterManager.CheckUnitAttack() && _canAttackTick <= tick)
+            if (_stageLogic.monsterManager.CheckUnitAttack() && _canAttackTick <= tick)
             {
                 var addSkillInfo = GetActiveSkill();
 
-                Skill addSkill = new Skill(GetActiveSkill(), tick);
+                Skill addSkill = new Skill(_stageLogic,GetActiveSkill(), tick);
                 sectionData.AddSkill(addSkill);
 
                 if (addSkillInfo.skillRange > 1)
@@ -186,9 +191,9 @@ namespace Logic
                     var previousSection = sectionData.GetPreviousSection();
                     for (int i = 1; i < addSkillInfo.skillRange; i++)
                     {
-                        Skill addSkillNextSection = new Skill(GetActiveSkill(), tick, i);
+                        Skill addSkillNextSection = new Skill(_stageLogic,GetActiveSkill(), tick, i);
                         nextSection.AddSkill(addSkillNextSection);
-                        Skill addSkillPreviousSection = new Skill(GetActiveSkill(), tick, i);
+                        Skill addSkillPreviousSection = new Skill(_stageLogic, GetActiveSkill(), tick, i);
                         previousSection.AddSkill(addSkillPreviousSection);
 
                         nextSection = nextSection.GetNextSection();
@@ -213,16 +218,16 @@ namespace Logic
 
         private void SetScript(int uid)
         {
-            _unitInfoScript = StageLogic.Instance.dataManager.GetUnitInfoScriptDictionary(uid);
+            _unitInfoScript = _stageLogic.dataManager.GetUnitInfoScriptDictionary(uid);
 
-            _unitBaseSkillInfo = StageLogic.Instance.dataManager.GetSkillInfoScriptDictionary(_unitInfoScript.baseSkillID);
+            _unitBaseSkillInfo = _stageLogic.dataManager.GetSkillInfoScriptDictionary(_unitInfoScript.baseSkillID);
             _unitSkillInfos = new List<SkillInfoScript>();
             if (_unitInfoScript.skill1ID != 0)
-                _unitSkillInfos.Add(StageLogic.Instance.dataManager.GetSkillInfoScriptDictionary(_unitInfoScript.skill1ID));
+                _unitSkillInfos.Add(_stageLogic.dataManager.GetSkillInfoScriptDictionary(_unitInfoScript.skill1ID));
             if (_unitInfoScript.skill2ID != 0)
-                _unitSkillInfos.Add(StageLogic.Instance.dataManager.GetSkillInfoScriptDictionary(_unitInfoScript.skill2ID));
+                _unitSkillInfos.Add(_stageLogic.dataManager.GetSkillInfoScriptDictionary(_unitInfoScript.skill2ID));
             if (_unitInfoScript.skill3ID != 0)
-                _unitSkillInfos.Add(StageLogic.Instance.dataManager.GetSkillInfoScriptDictionary(_unitInfoScript.skill3ID));
+                _unitSkillInfos.Add(_stageLogic.dataManager.GetSkillInfoScriptDictionary(_unitInfoScript.skill3ID));
 
         }
 
@@ -250,9 +255,9 @@ namespace Logic
             }
         }
 
-        public void SetTarget((int, int) targetSectionIndex, long currentTick)
+        public bool SetTarget((int, int) targetSectionIndex, long currentTick)
         {
-            if (StageLogic.Instance.sectionManager.SectionDatas.TryGetValue(targetSectionIndex, out var sectionData))
+            if (_stageLogic.sectionManager.SectionDatas.TryGetValue(targetSectionIndex, out var sectionData))
             {
                 foreach (var section in _canAttackSectionData)
                 {
@@ -261,6 +266,11 @@ namespace Logic
                 _canAttackSectionData.Clear();
                 _targetSection = sectionData;
                 _targetSetTick = currentTick;
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
 
@@ -271,7 +281,7 @@ namespace Logic
                 return _unitBaseSkillInfo;
             }
 
-            long probability = StageLogic.Instance.RandomValue;
+            long probability = _stageLogic.RandomValue;
             long nowProbability = 0;
 
             foreach(var skillInfo in _unitSkillInfos)

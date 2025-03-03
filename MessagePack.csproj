@@ -146,8 +146,8 @@
     <Compile Include="Assets\Scripts\MessagePack\MessagePackSerializer.Json.cs" />
     <Compile Include="Assets\Scripts\MessagePack\_InternalVisibleTo.cs" />
     <Compile Include="Assets\Scripts\MessagePack\MonoProtection.cs" />
-    <Compile Include="Assets\Scripts\MessagePack\HashCode.cs" />
     <Compile Include="Assets\Scripts\MessagePack\ExtensionResult.cs" />
+    <Compile Include="Assets\Scripts\MessagePack\HashCode.cs" />
     <Compile Include="Assets\Scripts\MessagePack\Formatters\ExpandoObjectFormatter.cs" />
     <Compile Include="Assets\Scripts\MessagePack\Resolvers\DynamicObjectResolver.cs" />
     <Compile Include="Assets\Scripts\MessagePack\Nil.cs" />

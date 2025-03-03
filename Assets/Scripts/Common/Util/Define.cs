@@ -107,4 +107,12 @@ public partial class Define
         Monster,
         Unit,
     }
+
+    [JsonConverter(typeof(StringEnumConverter))]
+    public enum AuthType
+    {
+        Guest,
+        Google,
+        KaKao,
+    }
 }

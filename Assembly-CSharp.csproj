@@ -56,6 +56,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
+    <Analyzer Include="C:\DefenceGame\DefenceGame\Assets\Packages\MessagePackAnalyzer.3.1.3\analyzers\roslyn4.3\cs\MessagePack.Analyzers.CodeFixes.dll" />
+    <Analyzer Include="C:\DefenceGame\DefenceGame\Assets\Packages\MessagePackAnalyzer.3.1.3\analyzers\roslyn4.3\cs\MessagePack.SourceGenerator.dll" />
     <Analyzer Include="C:\Program Files\2022.3.31f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.SourceGenerators.dll" />
     <Analyzer Include="C:\Program Files\2022.3.31f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
@@ -68,15 +70,20 @@
     <Compile Include="Assets\Scripts\Logic\Object\Buff.cs" />
     <Compile Include="Assets\Scripts\Unity\Scene\StartScene.cs" />
     <Compile Include="Assets\Scripts\Unity\Managers\DataManagers\DataManager.Core.cs" />
+    <Compile Include="Assets\Scripts\Unity\Util\Singleton.cs" />
     <Compile Include="Assets\Scripts\Unity\Managers\DataManagers\DataManager.MonsterInfo.cs" />
     <Compile Include="Assets\Scripts\Logic\Core\DataManager\IDataManager.cs" />
-    <Compile Include="Assets\Scripts\Unity\UI\ScrollViewBase.cs" />
+    <Compile Include="Assets\Scripts\ServerHub\MessagePackFormatter\PSignUserReqFormatter.cs" />
     <Compile Include="Assets\Scripts\Unity\Managers\DataManagers\DataManager.UnitUnionInfo.cs" />
     <Compile Include="Assets\Scripts\Unity\Scene\ResourceReleaseSceneInit.cs" />
+    <Compile Include="Assets\Scripts\ServerHub\MessagePackFormatter\PTestReqFormatter.cs" />
+    <Compile Include="Assets\Scripts\ServerHub\CentralServerManager.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
     <Compile Include="Assets\Scripts\Unity\Object\MonsterObject.cs" />
+    <Compile Include="Assets\Scripts\ServerHub\Vals\CentralServerHubVals.cs" />
     <Compile Include="Assets\Scripts\Logic\Core\BaseRandomProbabiltty.cs" />
     <Compile Include="Assets\Scripts\Logic\Core\DataManager\ScriptClass\MonsterInfoScript.cs" />
+    <Compile Include="Assets\Scripts\ServerHub\MessagePackFormatter\AccountInfoFormatter.cs" />
     <Compile Include="Assets\Scripts\Unity\Scene\GameScene.cs" />
     <Compile Include="Assets\Scripts\Unity\Managers\ResourceManager.cs" />
     <Compile Include="Assets\LINQtoGameObject\Scripts\GameObjectExtensions.Operate.cs" />
@@ -87,24 +94,31 @@
     <Compile Include="Assets\Scripts\Unity\UI\GamePannal.cs" />
     <Compile Include="Assets\Scripts\Logic\Core\DataManager\ScriptClass\UnitUnionInfoScript.cs" />
     <Compile Include="Assets\Scripts\Unity\UI\UniIcon.cs" />
+    <Compile Include="Assets\Scripts\ServerHub\CentralServerClient.cs" />
     <Compile Include="Assets\Scripts\Unity\UI\SectionButton.cs" />
     <Compile Include="Assets\LINQtoGameObject\Examples\SampleSceneScript.cs" />
     <Compile Include="Assets\Scripts\Common\Util\Errors.cs" />
     <Compile Include="Assets\Scripts\Logic\Manager\StageLogic.cs" />
+    <Compile Include="Assets\Scripts\ServerHub\Vals\GameData.cs" />
     <Compile Include="Assets\Scripts\Unity\Managers\Managers.cs" />
     <Compile Include="Assets\Scripts\Logic\Manager\UnitManager.cs" />
     <Compile Include="Assets\Scripts\Unity\UI\UnitSetButton.cs" />
     <Compile Include="Assets\Scripts\Logic\Object\Monster.cs" />
     <Compile Include="Assets\Scripts\Logic\UnitData.cs" />
+    <Compile Include="Assets\Scripts\ServerHub\MessagePackFormatter\MonsterCheckDataFormatter.cs" />
     <Compile Include="Assets\Scripts\Logic\Object\Object.cs" />
     <Compile Include="Assets\Scripts\Logic\Object\Skill.cs" />
     <Compile Include="Assets\Scripts\Logic\Manager\MonsterManager.cs" />
+    <Compile Include="Assets\Scripts\ServerHub\CentralServerHub\AutoCentralServerHub.cs" />
     <Compile Include="Assets\Scripts\Logic\Core\DataManager\ScriptClass\SkillBuffInfoScript.cs" />
     <Compile Include="Assets\Scripts\Common\Util\Define.cs" />
+    <Compile Include="Assets\Scripts\ServerHub\MessagePackFormatter\PSignUserAckFormatter.cs" />
     <Compile Include="Assets\LINQtoGameObject\Scripts\GameObjectExtensions.Enumerable.cs" />
     <Compile Include="Assets\Scripts\Logic\Section.cs" />
     <Compile Include="Assets\Scripts\Unity\Managers\DataManagers\DataManager.BuffInfo.cs" />
+    <Compile Include="Assets\Scripts\ServerHub\CentralServerHub\CustomCentralServerHub.cs" />
     <Compile Include="Assets\Scripts\Unity\Util\Utils.cs" />
+    <Compile Include="Assets\Scripts\ServerHub\MessagePackFormatter\PTestAckFormatter.cs" />
     <Compile Include="Assets\Scripts\Unity\UI\UnitOptionButton.cs" />
     <Compile Include="Assets\LINQtoGameObject\Scripts\GameObjectExtensions.Traverse.cs" />
     <Compile Include="Assets\Scripts\Unity\Scene\BaseScene.cs" />
@@ -116,31 +130,49 @@
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
     <None Include="Assets\Spine\version.txt" />
+    <None Include="Assets\Packages\MessagePack.3.1.3\lib\netstandard2.1\MessagePack.dll" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
+    <None Include="Assets\Packages\MessagePack.3.1.3\lib\netstandard2.1\MessagePack.xml" />
+    <None Include="Assets\Packages\System.Collections.Immutable.8.0.0\lib\netstandard2.0\System.Collections.Immutable.dll" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
     <None Include="Assets\Packages\System.Runtime.CompilerServices.Unsafe.6.1.0\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
+    <None Include="Assets\Packages\Microsoft.NET.StringTools.17.11.4\lib\netstandard2.0\Microsoft.NET.StringTools.dll" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
     <None Include="Assets\Packages\Newtonsoft.Json.13.0.3\lib\netstandard2.0\Newtonsoft.Json.dll" />
     <None Include="Assets\LINQtoGameObject\README.txt" />
+    <None Include="Assets\Packages\Microsoft.NET.StringTools.17.11.4\notices\THIRDPARTYNOTICES.txt" />
+    <None Include="Assets\Packages\MessagePack.Annotations.3.1.3\lib\netstandard2.0\MessagePack.Annotations.xml" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface.shader" />
     <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF.shader" />
+    <None Include="Assets\Packages\MessagePackAnalyzer.3.1.3\analyzers\roslyn4.3\cs\MessagePack.SourceGenerator.dll" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile SSD.shader" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
+    <None Include="Assets\Packages\System.Reactive.Linq.6.0.1\lib\netstandard2.0\System.Reactive.Linq.dll" />
+    <None Include="Assets\Packages\System.Collections.Immutable.8.0.0\useSharedDesignerContext.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
+    <None Include="Assets\Packages\Microsoft.NET.StringTools.17.11.4\lib\netstandard2.0\Microsoft.NET.StringTools.xml" />
+    <None Include="Assets\Packages\System.Collections.Immutable.8.0.0\LICENSE.TXT" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
     <None Include="Assets\Packages\Newtonsoft.Json.13.0.3\lib\netstandard2.0\Newtonsoft.Json.xml" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
+    <None Include="Assets\Packages\MessagePack.Annotations.3.1.3\lib\netstandard2.0\MessagePack.Annotations.dll" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
     <None Include="Assets\Packages\System.Runtime.CompilerServices.Unsafe.6.1.0\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.xml" />
+    <None Include="Assets\Packages\MessagePackAnalyzer.3.1.3\analyzers\roslyn4.3\cs\MessagePack.Analyzers.CodeFixes.dll" />
+    <None Include="Assets\Packages\System.Reactive.Linq.6.0.1\lib\netstandard2.0\System.Reactive.Linq.xml" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF Overlay.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Mobile.shader" />
     <None Include="Assets\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
+    <None Include="Assets\Packages\System.Reactive.6.0.1\lib\netstandard2.0\System.Reactive.xml" />
+    <None Include="Assets\Packages\System.Reactive.6.0.1\lib\netstandard2.0\System.Reactive.dll" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile.shader" />
+    <None Include="Assets\Packages\System.Collections.Immutable.8.0.0\lib\netstandard2.0\System.Collections.Immutable.xml" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Sprite.shader" />
+    <None Include="Assets\Packages\System.Collections.Immutable.8.0.0\THIRD-PARTY-NOTICES.TXT" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
@@ -475,12 +507,24 @@
       <HintPath>C:\Program Files\2022.3.31f1\Editor\Data\Managed\UnityEngine\UnityEditor.UnityConnectModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="MessagePack">
+      <HintPath>Assets\Packages\MessagePack.3.1.3\lib\netstandard2.1\MessagePack.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Collections.Immutable">
+      <HintPath>Assets\Packages\System.Collections.Immutable.8.0.0\lib\netstandard2.0\System.Collections.Immutable.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Unity.Collections.LowLevel.ILSupport">
       <HintPath>Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections.LowLevel.ILSupport\Unity.Collections.LowLevel.ILSupport.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System.Runtime.CompilerServices.Unsafe">
       <HintPath>Assets\Packages\System.Runtime.CompilerServices.Unsafe.6.1.0\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.NET.StringTools">
+      <HintPath>Assets\Packages\Microsoft.NET.StringTools.17.11.4\lib\netstandard2.0\Microsoft.NET.StringTools.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json">
@@ -491,8 +535,20 @@
       <HintPath>Assets\Plugins\Demigiant\DOTween\DOTween.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="System.Reactive.Linq">
+      <HintPath>Assets\Packages\System.Reactive.Linq.6.0.1\lib\netstandard2.0\System.Reactive.Linq.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Unity.VisualScripting.Antlr3.Runtime">
       <HintPath>Library\PackageCache\com.unity.visualscripting@1.9.4\Runtime\VisualScripting.Flow\Dependencies\NCalc\Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="MessagePack.Annotations">
+      <HintPath>Assets\Packages\MessagePack.Annotations.3.1.3\lib\netstandard2.0\MessagePack.Annotations.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Reactive">
+      <HintPath>Assets\Packages\System.Reactive.6.0.1\lib\netstandard2.0\System.Reactive.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.Android.Types">
@@ -1139,20 +1195,20 @@
       <HintPath>Library\ScriptAssemblies\Unity.2D.Animation.Runtime.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.VisualScripting.Core.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Core.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Unity.AdaptivePerformance.Profiler.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.AdaptivePerformance.Profiler.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.2D.Tilemap.Extras">
-      <HintPath>Library\ScriptAssemblies\Unity.2D.Tilemap.Extras.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.Core.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Core.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.2D.Tilemap.Extras">
+      <HintPath>Library\ScriptAssemblies\Unity.2D.Tilemap.Extras.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UniTask.Linq">
@@ -1253,10 +1309,6 @@
       <Project>{F2BF8207-D87F-6E79-B748-6A4C87C1968B}</Project>
       <Name>Assembly-CSharp-firstpass</Name>
     </ProjectReference>
-    <ProjectReference Include="MessagePack.csproj">
-      <Project>{9EFFEF3F-C39A-A20B-6315-F2BC3027D6F2}</Project>
-      <Name>MessagePack</Name>
-    </ProjectReference>
     <ProjectReference Include="UniRx.csproj">
       <Project>{3922F5C1-EAE5-C1D7-76E1-16796E1B3B0B}</Project>
       <Name>UniRx</Name>
@@ -1269,6 +1321,10 @@
       <Project>{D1CEB4FA-F353-340D-67D4-F3C7F04D23A7}</Project>
       <Name>com.Tivadar.Best.HTTP</Name>
     </ProjectReference>
+    <ProjectReference Include="com.Tivadar.Best.TLSSecurity.csproj">
+      <Project>{C49DD351-699B-0DA6-DE1E-6F0276E95804}</Project>
+      <Name>com.Tivadar.Best.TLSSecurity</Name>
+    </ProjectReference>
     <ProjectReference Include="com.Tivadar.Best.SignalR.csproj">
       <Project>{593389E0-CABD-DABF-825A-F229A700D613}</Project>
       <Name>com.Tivadar.Best.SignalR</Name>
@@ -1277,9 +1333,9 @@
       <Project>{A438230E-3BA0-36FA-AD6F-63DFEBEBFF97}</Project>
       <Name>spine-unity-editor</Name>
     </ProjectReference>
-    <ProjectReference Include="MessagePack.Annotations.csproj">
-      <Project>{FB0E0793-4211-74C2-25F7-B5366FFEB295}</Project>
-      <Name>MessagePack.Annotations</Name>
+    <ProjectReference Include="com.Tivadar.Best.WebSockets.csproj">
+      <Project>{CEF3DE08-43F3-43E0-A750-D273A5DA9970}</Project>
+      <Name>com.Tivadar.Best.WebSockets</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

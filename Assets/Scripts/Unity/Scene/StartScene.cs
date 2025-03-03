@@ -11,11 +11,14 @@ namespace Client
         // Start is called before the first frame update
         public Button startButton;
 
+        private void Awake()
+        {
+            CentralServerManager.Instance.Init();
+        }
+
         void Start()
         {
             startButton.OnClickAsObservable().Subscribe(_ => GameStart());
-
-            startButton.gameObject.SetActive(false);
         }
 
         // Update is called once per frame
@@ -26,7 +29,7 @@ namespace Client
 
         public void GameStart()
         {
-            Managers.Scene.LoadScene(Define.Scene.GameScene);
+            CentralServerManager.Instance.Login();
         }
     }
 }

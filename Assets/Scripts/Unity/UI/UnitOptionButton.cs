@@ -57,7 +57,16 @@ namespace Client
         {
             if (_unitData.CheckCanUnion(unionUID))
             {
-                Managers.Stage.unitManager.AddUnionData(Managers.Stage.GetCurrentTick() + (Define.OneSecondTick / 100), _unitData.GetUnitUnionData(unionUID));
+                var error = Managers.Stage.unitManager.AddUnionData(_unitData.GetUID(), unionUID, System.DateTime.UtcNow.Ticks + (Define.OneSecondTick / 100));
+
+                if(error != Define.Errors.S_OK)
+                {
+                    Debug.Log(error.ToString());
+                }
+                else
+                {
+                    //AddUnionDataPackit(UID ,targetUID,SetTick)
+                }
             }
             UnitSetting.gameObject.SetActive(false);
             gameObject.SetActive(false);
@@ -89,7 +98,7 @@ namespace Client
         {
             if(_activeUnitButton != null)
             {
-                _activeUnitButton.DeActiveUnit();
+                _activeUnitButton.DeactiveUnit();
             }
 
             UnitSetting.gameObject.SetActive(false);

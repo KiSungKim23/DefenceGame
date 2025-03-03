@@ -5,6 +5,8 @@ namespace Logic
 {
     public class Skill
     {
+        private StageLogic _stageLogic;
+
         SkillInfoScript _skillInfo;
 
         long _activeTick;
@@ -18,16 +20,18 @@ namespace Logic
 
         bool _acktive;
 
-        public Skill(SkillInfoScript skillInfo, long createTick, int range = 0)
+        public Skill(StageLogic stageLogic, SkillInfoScript skillInfo, long createTick, int range = 0)
         {
             _skillInfo = skillInfo;
             _acktive = false;
 
-            var skillBuffList = StageLogic.Instance.dataManager.GetSkillBuffInfoScriptListAll().FindAll(_ => _.skillUID == _skillInfo.skillUID);
+            _stageLogic = stageLogic;
+
+            var skillBuffList = _stageLogic.dataManager.GetSkillBuffInfoScriptListAll().FindAll(_ => _.skillUID == _skillInfo.skillUID);
 
             foreach (var buffInfo in skillBuffList)
             {
-                _buffInfoList.Add(StageLogic.Instance.dataManager.GetBuffInfoScriptDictionary(buffInfo.buffUID));
+                _buffInfoList.Add(_stageLogic.dataManager.GetBuffInfoScriptDictionary(buffInfo.buffUID));
             }
 
             _damage = skillInfo.baseDamage + 400;
@@ -62,7 +66,7 @@ namespace Logic
             sectionData.ActiveSkill.Invoke(this);
 
             var deadMonsterList = monsters.FindAll(_ => _.State == Define.MonsterState.dead);
-            StageLogic.Instance.monsterManager.MonsterDead(deadMonsterList);
+            _stageLogic.monsterManager.MonsterDead(deadMonsterList);
         }
 
         public bool CheckActive()

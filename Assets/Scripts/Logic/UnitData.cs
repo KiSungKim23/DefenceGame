@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace Logic
 {
@@ -56,6 +55,8 @@ namespace Logic
 
     public class UnitData
     {
+        StageLogic _stageLogic;
+
         private int _uid;
 
         private int _count;
@@ -64,13 +65,14 @@ namespace Logic
 
         private Dictionary<int, UnitUnionInfo> _unitUnionInfo = new Dictionary<int, UnitUnionInfo>();
 
-        public UnitData(int uid)
+        public UnitData(StageLogic stageLogic, int uid)
         {
+            _stageLogic = stageLogic;
             _uid = uid;
             _count = 1;
             _activeCount = 0;
 
-            var unionScriptList = StageLogic.Instance.dataManager.GetUnitUnionInfoScriptListAll().FindAll(_=>_.mainMaterialUID == _uid);
+            var unionScriptList = _stageLogic.dataManager.GetUnitUnionInfoScriptListAll().FindAll(_=>_.mainMaterialUID == _uid);
 
             foreach(var unionScript in unionScriptList)
             {
@@ -111,7 +113,6 @@ namespace Logic
             {
                 _count -= count;
                 int usedActiveUnits = count - inactiveUnits;
-                _activeCount -= usedActiveUnits;
                 return usedActiveUnits;
             }
         }
@@ -152,7 +153,7 @@ namespace Logic
         {
             if (_unitUnionInfo.TryGetValue(unionUID, out var ret))
             {
-                return StageLogic.Instance.unitManager.CheckUnitUnion(ret); ;
+                return _stageLogic.unitManager.CheckUnitUnion(ret); ;
             }
             return false;
 

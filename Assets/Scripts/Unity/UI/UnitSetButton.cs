@@ -96,18 +96,34 @@ namespace Client
 
                 if (_activeUnitButton == null)
                 {
-                    if (Managers.Stage.unitManager.SetUnit(_unitInfo, GetUnitSectionIndex(), Managers.Stage.GetCurrentTick()) == false)
+                    var error = Managers.Stage.unitManager.SetUnit(_unitInfo.GetUID(), GetUnitSectionIndex(), System.DateTime.UtcNow.Ticks + (Define.OneSecondTick / 100));
+                    if (error != Define.Errors.S_OK)
                     {
-                        Debug.LogError("이미 유닛 있음 나중에 팝업 띄우는 식으로 ㄱ");
+                        Debug.Log(error.ToString());
+                    }
+                    else
+                    {
+                        //SetUnitPackit(unitGUID, sectionIndex, setTick)
                     }
                 }
                 else
                 {
-                    var data = _activeUnitButton.GetUnitObject();
-                    _activeUnitButton.ResetUnitData();
-                    Managers.Stage.unitManager.MoveUnit(data.GetUnitData(), GetUnitSectionIndex());
-                    gameScene.SetUnitDataInUnitButton(GetUnitSectionIndex(), data);
-                    data.MoveUnitPosition();
+                    var data = _activeUnitButton.GetUnitObject(); 
+                    
+                    var error = Managers.Stage.unitManager.AddMoveUnit(data.GetUnitObjectIndex(), GetUnitSectionIndex(), System.DateTime.UtcNow.Ticks + (Define.OneSecondTick / 100));
+
+                    if (error != Define.Errors.S_OK)
+                    {
+                        Debug.Log(error.ToString());
+                    }
+                    else
+                    {
+                        _activeUnitButton.ResetUnitData();
+                        gameScene.SetUnitDataInUnitButton(GetUnitSectionIndex(), data);
+                        data.MoveUnitPosition();
+
+                        //AddMoveUnitPackit(int unitObjectIndex, (int, int) section, long setTick);
+                    }
                 }
                 gameScene.ResetTargetBtn();
             }

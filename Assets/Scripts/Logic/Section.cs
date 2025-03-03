@@ -8,6 +8,8 @@ namespace Logic
 {
     public class Section
     {
+        private StageLogic _stageLogic;
+
         List<Monster> _monsters;
         private (int, int) _sectionIndex;
         private Vector3 _worldPosition;
@@ -16,10 +18,11 @@ namespace Logic
         List<Unit> _attackWaitUnits;
         List<Skill> _activeWaitSkills;
 
-        public Action<Skill> ActiveSkill; 
+        public Action<Skill> ActiveSkill;
 
-        public Section((int, int) sectionIndex)
+        public Section(StageLogic stageLogic, (int, int) sectionIndex)
         {
+            _stageLogic = stageLogic;
             _monsters = new List<Monster>();
             _attackWaitUnits = new List<Unit>();
             _activeWaitSkills = new List<Skill>();
@@ -209,10 +212,10 @@ namespace Logic
         public Section GetNextSection()
         {
             (int, int) nextIndex = GetNextSectionIndex(_sectionIndex);
-            var nextSection = StageLogic.Instance.sectionManager.GetSectionData(nextIndex);
+            var nextSection = _stageLogic.sectionManager.GetSectionData(nextIndex);
             if (nextSection == null)
             {
-                StageLogic.Instance.errorOccurred.Invoke(Define.Errors.E_LogicError);
+                _stageLogic.errorOccurred.Invoke(Define.Errors.E_LogicError);
             }
             return nextSection;
         }
@@ -220,10 +223,10 @@ namespace Logic
         public Section GetPreviousSection()
         {
             (int, int) previousIndex = GetPreviousSectionIndex(_sectionIndex);
-            var previousSection = StageLogic.Instance.sectionManager.GetSectionData(previousIndex);
+            var previousSection = _stageLogic.sectionManager.GetSectionData(previousIndex);
             if (previousSection == null)
             {
-                StageLogic.Instance.errorOccurred.Invoke(Define.Errors.E_LogicError);
+                _stageLogic.errorOccurred.Invoke(Define.Errors.E_LogicError);
             }
             return previousSection;
         }
